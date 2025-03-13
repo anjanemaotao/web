@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灵验符咒查询系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="animate__animated animate__fadeIn">
+            <div class="title-container">
+                <div class="lantern left"></div>
+                <h1>灵验符咒查询系统</h1>
+                <div class="lantern right"></div>
+            </div>
+            <div class="clouds">
+                <div class="cloud cloud1"></div>
+                <div class="cloud cloud2"></div>
+                <div class="cloud cloud3"></div>
+            </div>
+        </header>
+        <main>
+            <section id="input-section" class="animate__animated animate__fadeInUp">
+                <div class="paper-scroll">
+                    <h2>输入您的阴历出生信息</h2>
+                    <div class="form-group">
+                        <label for="birth-year">出生年份:</label>
+                        <select id="birth-year" required>
+                            <option value="">请选择</option>
+                            <!-- 从1900年到2025年，生成所有年份选项 --></select>
+                    </div>
+                    <div class="form-group"><label for="birth-month">出生月份:</label>
+                        <select id="birth-month" required><option value="">请选择</option>
+                            <option value="1">正月</option><option value="2">二月</option>
+                            <option value="3">三月</option><option value="4">四月</option>
+                            <option value="5">五月</option><option value="6">六月</option>
+                            <option value="7">七月</option><option value="8">八月</option>
+                            <option value="9">九月</option><option value="10">十月</option>
+                            <option value="11">十一月</option>
+                            <option value="12">十二月</option></select>
+                    </div><div class="form-group">
+                        <label for="birth-time">出生时辰:</label><select id="birth-time" required><option value="">请选择</option>
+                            <option value="子">子时(23:00-1:00)</option>
+                            <option value="丑">丑时 (1:00-3:00)</option><option value="寅">寅时 (3:00-5:00)</option>
+                            <option value="卯">卯时 (5:00-7:00)</option>
+                            <option value="辰">辰时 (7:00-9:00)</option>
+                            <option value="巳">巳时 (9:00-11:00)</option><option value="午">午时 (11:00-13:00)</option>
+                            <option value="未">未时 (13:00-15:00)</option>
+                            <option value="申">申时 (15:00-17:00)</option>
+                            <option value="酉">酉时 (17:00-19:00)</option>
+                            <option value="戌">戌时 (19:00-21:00)</option>
+                            <option value="亥">亥时 (21:00-23:00)</option></select>
+                    </div><button id="query-btn" class="btn-query">查询灵验符咒</button>
+                </div>
+            </section>
+            
+            <section id="result-section" class="animate__animated animate__fadeInUp" style="display: none;">
+                <div class="result-container">
+                    <div class="result-paper">
+                        <h2>查询结果</h2>
+                        <div class="result-item">
+                            <h3>本命宫位</h3>
+                            <div id="bengong" class="result-content"></div>
+                        </div><div class="result-item">
+                            <h3>岁君</h3>
+                            <div id="suijun" class="result-content"></div>
+                        </div>
+                        <div class="result-item">
+                            <h3>灵验符咒</h3>
+                            <div id="fuzhou" class="result-content"><div id="fuzhou-name" class="fuzhou-name"></div>
+                                <div id="fuzhou-image" class="fuzhou-image"></div>
+                            </div></div>
+                        <div class="result-item">
+                            <h3>效用与用法</h3>
+                            <div id="usage" class="result-content"></div>
+                        </div><button id="back-btn" class="btn-back">返回重新查询</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="animate__animated animate__fadeIn">
+            <div class="seal"></div>
+            <p>© 2025 灵验符咒查询系统 - 东方玄学</p>
+        </footer>
+    </div>
+    
+    <div id="loading" class="loading-container">
+        <div class="loading-content">
+            <div class="yin-yang"></div>
+            <p>正在推算命理...</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
