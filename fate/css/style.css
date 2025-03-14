@@ -1,0 +1,692 @@
+/* 全局样式 */
+:root {
+    --primary-color: #8B0000;
+    --secondary-color: #FFD700;
+    --bg-color: #FFF8E1;
+    --text-color: #4A2511;
+    --scroll-bg: #F9E4B7;
+    --scroll-border: #8B4513;
+}
+
+/* 阴历命理查询系统样式 */
+:root {
+    --primary-color: #8e44ad;
+    --secondary-color: #9b59b6;
+    --accent-color: #e74c3c;
+    --text-color: #333;
+    --bg-color: #f5f5f5;
+    --card-bg: #fff;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --great-color: #27ae60;
+    --good-color: #2ecc71;
+    --bad-color: #e67e22;
+    --terrible-color: #e74c3c;
+    --extreme-color: #8e44ad;
+}
+
+/* 暗色主题 */
+body.dark-theme {
+    --primary-color: #9b59b6;
+    --secondary-color: #8e44ad;
+    --accent-color: #e74c3c;
+    --text-color: #f5f5f5;
+    --bg-color: #222;
+    --card-bg: #333;
+    --border-color: #444;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --great-color: #2ecc71;
+    --good-color: #27ae60;
+    --bad-color: #e67e22;
+    --terrible-color: #e74c3c;
+    --extreme-color: #9b59b6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* 输入区域样式 */
+.input-section {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+select, input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* 结果区域样式 */
+.result-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.result-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.result-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.query-date {
+    color: var(--secondary-color);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.result-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px var(--shadow-color);
+}
+
+.result-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* 符咒卡片样式 */
+.talisman-card {
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.talisman-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.talisman-level {
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.talisman-content {
+    display: flex;
+    padding: 15px;
+}
+
+.talisman-image {
+    flex: 0 0 120px;
+    margin-right: 15px;
+}
+
+.talisman-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.talisman-info {
+    flex: 1;
+}
+
+.talisman-description {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.talisman-effect h5, .talisman-usage h5 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.talisman-usage {
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.talisman-usage ol {
+    padding-left: 20px;
+}
+
+.talisman-usage li {
+    margin-bottom: 5px;
+}
+
+/* 符咒等级样式 */
+.level-great {
+    border-color: var(--great-color);
+}
+
+.level-great .talisman-header {
+    background-color: var(--great-color);
+}
+
+.level-good {
+    border-color: var(--good-color);
+}
+
+.level-good .talisman-header {
+    background-color: var(--good-color);
+}
+
+.level-bad {
+    border-color: var(--bad-color);
+}
+
+.level-bad .talisman-header {
+    background-color: var(--bad-color);
+}
+
+.level-terrible {
+    border-color: var(--terrible-color);
+}
+
+.level-terrible .talisman-header {
+    background-color: var(--terrible-color);
+}
+
+.level-extreme {
+    border-color: var(--extreme-color);
+}
+
+.level-extreme .talisman-header {
+    background-color: var(--extreme-color);
+}
+
+/* 本命宫位表格样式 */
+.gong-table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.gong-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.gong-table th, .gong-table td {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+    text-align: center;
+}
+
+.gong-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.highlight-cell {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+.highlight-text {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* 加载动画 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.loading-overlay p {
+    color: white;
+    font-size: 18px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 50px auto;
+    padding: 0;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    animation: modalFadeIn 0.3s;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.close-modal {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 打印样式 */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+    }
+    
+    header .theme-toggle,
+    .input-section,
+    .result-actions,
+    footer {
+        display: none !important;
+    }
+    
+    .result-section {
+        display: block !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .result-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+    }
+    
+    .talisman-card {
+        page-break-inside: avoid;
+    }
+    
+    .talisman-header {
+        color: black !important;
+        background-color: #f0f0f0 !important;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .talisman-level {
+        background-color: #ddd;
+        color: black;
+    }
+    
+    .highlight-text {
+        color: black;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    
+    .highlight-cell {
+        background-color: #f0f0f0;
+        color: black;
+        font-weight: bold;
+        border: 2px solid #000;
+    }
+    
+    .gong-table th {
+        background-color: #f0f0f0;
+        color: black;
+    }
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* 生肖图标样式 */
+.zodiac-display {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.zodiac-icon.子 { background-image: url('../images/zodiac/rat.png'); }
+.zodiac-icon.丑 { background-image: url('../images/zodiac/ox.png'); }
+.zodiac-icon.寅 { background-image: url('../images/zodiac/tiger.png'); }
+.zodiac-icon.卯 { background-image: url('../images/zodiac/rabbit.png'); }
+.zodiac-icon.辰 { background-image: url('../images/zodiac/dragon.png'); }
+.zodiac-icon.巳 { background-image: url('../images/zodiac/snake.png'); }
+.zodiac-icon.午 { background-image: url('../images/zodiac/horse.png'); }
+.zodiac-icon.未 { background-image: url('../images/zodiac/goat.png'); }
+.zodiac-icon.申 { background-image: url('../images/zodiac/monkey.png'); }
+.zodiac-icon.酉 { background-image: url('../images/zodiac/rooster.png'); }
+.zodiac-icon.戌 { background-image: url('../images/zodiac/dog.png'); }
+.zodiac-icon.亥 { background-image: url('../images/zodiac/pig.png'); }
+
+/* 注意事项样式 */
+.notes-section {
+    background-color: rgba(var(--primary-color-rgb), 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.notes-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.notes-section ul {
+    padding-left: 20px;
+}
+
+.notes-section li {
+    margin-bottom: 8px;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 卷轴风格 */
+.scroll-style {
+    background-color: var(--scroll-bg);
+    border: 2px solid var(--scroll-border);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.scroll-style:before,
+.scroll-style:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background-image: url('../images/scroll-edge.png');
+    background-repeat: repeat-x;
+    background-size: contain;
+}
+
+.scroll-style:before {
+    top: -10px;
+    left: 0;
+}
+
+.scroll-style:after {
+    bottom: -10px;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+/* 工具提示 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--text-color) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 添加传统中国风元素 */
+.chinese-pattern {
+    background-image: url('../images/chinese-pattern.png');
+    background-repeat: repeat;
+    opacity: 0.1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 添加RGB变量以支持透明度 */
+:root {
+    --primary-color-rgb: 142, 68, 173;
+    --secondary-color-rgb: 155, 89, 182;
+    --accent-color-rgb: 231, 76, 60;
+}
+
+body.dark-theme {
+    --primary-color-rgb: 155, 89, 182;
+    --secondary-color-rgb: 142, 68, 173;
+    --accent-color-rgb: 231, 76, 60;
+}
