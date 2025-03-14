@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>靈驗咒符查詢系統</title>
+    <title>灵验咒符查询系统</title>
     <style>
         :root {
             --primary-color: #a81c07;
@@ -530,32 +530,6 @@
             display: inline-block;
         }
         
-        .get-talisman-btn {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 8px 15px;
-            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
-            color: var(--text-color);
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-        
-        .get-talisman-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -584,13 +558,6 @@
             .language-switcher {
                 margin-top: 10px;
             }
-            
-            .get-talisman-btn {
-                display: block;
-                margin: 10px 0 0 0;
-                width: 100%;
-                text-align: center;
-            }
         }
     </style>
 </head>
@@ -605,8 +572,8 @@
     
     <div class="container">
         <header>
-            <h1 class="glow-effect" data-i18n="title">靈驗咒符查詢系統</h1>
-            <div class="subtitle" data-i18n="subtitle">探尋天機，解析命運，消災納福，趨吉避凶</div>
+            <h1 class="glow-effect" data-i18n="title">灵验咒符查询系统</h1>
+            <div class="subtitle" data-i18n="subtitle">探寻天机，解析命运，消灾纳福，趋吉避凶</div>
             <div class="language-switcher">
                 <select id="languageSelect">
                     <option value="zh-CN">简体中文</option>
@@ -621,17 +588,17 @@
         <section class="input-section">
             <div class="selections">
                 <div class="form-group">
-                    <label for="birthYear" data-i18n="birthYearLabel">陰曆出生年份</label>
+                    <label for="birthYear" data-i18n="birthYearLabel">阴历出生年份</label>
                     <select id="birthYear">
-                        <option value="" data-i18n="selectPlaceholder">請選擇</option>
+                        <option value="" data-i18n="selectPlaceholder">请选择</option>
                         <!-- Years will be dynamically added via JavaScript -->
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="birthMonth" data-i18n="birthMonthLabel">陰曆出生月份</label>
+                    <label for="birthMonth" data-i18n="birthMonthLabel">阴历出生月份</label>
                     <select id="birthMonth">
-                        <option value="" data-i18n="selectPlaceholder">請選擇</option>
+                        <option value="" data-i18n="selectPlaceholder">请选择</option>
                         <option value="1" data-i18n="month1">正月</option>
                         <option value="2" data-i18n="month2">二月</option>
                         <option value="3" data-i18n="month3">三月</option>
@@ -648,31 +615,31 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="birthTime" data-i18n="birthTimeLabel">出生時辰</label>
+                    <label for="birthTime" data-i18n="birthTimeLabel">出生时辰</label>
                     <select id="birthTime">
-                        <option value="" data-i18n="selectPlaceholder">請選擇</option>
-                        <option value="子" data-i18n="timeZi">子時 (23:00-01:00)</option>
-                        <option value="丑" data-i18n="timeChou">丑時 (01:00-03:00)</option>
-                        <option value="寅" data-i18n="timeYin">寅時 (03:00-05:00)</option>
-                        <option value="卯" data-i18n="timeMao">卯時 (05:00-07:00)</option>
-                        <option value="辰" data-i18n="timeChen">辰時 (07:00-09:00)</option>
-                        <option value="巳" data-i18n="timeSi">巳時 (09:00-11:00)</option>
-                        <option value="午" data-i18n="timeWu">午時 (11:00-13:00)</option>
-                        <option value="未" data-i18n="timeWei">未時 (13:00-15:00)</option>
-                        <option value="申" data-i18n="timeShen">申時 (15:00-17:00)</option>
-                        <option value="酉" data-i18n="timeYou">酉時 (17:00-19:00)</option>
-                        <option value="戌" data-i18n="timeXu">戌時 (19:00-21:00)</option>
-                        <option value="亥" data-i18n="timeHai">亥時 (21:00-23:00)</option>
+                        <option value="" data-i18n="selectPlaceholder">请选择</option>
+                        <option value="子" data-i18n="timeZi">子时 (23:00-01:00)</option>
+                        <option value="丑" data-i18n="timeChou">丑时 (01:00-03:00)</option>
+                        <option value="寅" data-i18n="timeYin">寅时 (03:00-05:00)</option>
+                        <option value="卯" data-i18n="timeMao">卯时 (05:00-07:00)</option>
+                        <option value="辰" data-i18n="timeChen">辰时 (07:00-09:00)</option>
+                        <option value="巳" data-i18n="timeSi">巳时 (09:00-11:00)</option>
+                        <option value="午" data-i18n="timeWu">午时 (11:00-13:00)</option>
+                        <option value="未" data-i18n="timeWei">未时 (13:00-15:00)</option>
+                        <option value="申" data-i18n="timeShen">申时 (15:00-17:00)</option>
+                        <option value="酉" data-i18n="timeYou">酉时 (17:00-19:00)</option>
+                        <option value="戌" data-i18n="timeXu">戌时 (19:00-21:00)</option>
+                        <option value="亥" data-i18n="timeHai">亥时 (21:00-23:00)</option>
                     </select>
                 </div>
             </div>
             
-            <button class="btn-query" id="queryBtn"><span data-i18n="queryButton">靈符查詢</span></button>
+            <button class="btn-query" id="queryBtn"><span data-i18n="queryButton">灵符查询</span></button>
         </section>
         
         <section class="result-section" id="resultSection">
             <div class="result-header">
-                <h2 data-i18n="resultTitle">靈符命理分析結果</h2>
+                <h2 data-i18n="resultTitle">灵符命理分析结果</h2>
             </div>
             
             <div class="input-summary" id="inputSummary">
@@ -681,12 +648,12 @@
             
             <div class="result-grid">
                 <div class="result-card">
-                    <h3 data-i18n="benMingTitle">本命宮位</h3>
+                    <h3 data-i18n="benMingTitle">本命宫位</h3>
                     <p id="bengMingResult">loading...</p>
                 </div>
                 
                 <div class="result-card">
-                    <h3 data-i18n="suiJunTitle">歲君</h3>
+                    <h3 data-i18n="suiJunTitle">岁君</h3>
                     <p id="suiJunResult">loading...</p>
                 </div>
                 
@@ -696,9 +663,8 @@
                 </div>
                 
                 <div class="result-card">
-                    <h3 data-i18n="lingFuTitle">靈符</h3>
+                    <h3 data-i18n="lingFuTitle">灵符</h3>
                     <p id="lingFuResult">loading...</p>
-                    <a href="https://easternmuse.com/products/10%E7%A8%AE%E9%9D%88%E9%A9%97%E5%92%92%E7%AC%A6-%E5%88%B6%E5%8C%962025%E6%B5%81%E5%B9%B4%E4%B8%8D%E5%88%A9%EF%BC%81" target="_blank" class="get-talisman-btn" data-i18n="getTalisman">去請靈符</a>
                 </div>
             </div>
             
@@ -708,24 +674,24 @@
             </div>
             
             <div class="usage-method">
-                <h3 data-i18n="usageTitle">靈符使用方法</h3>
+                <h3 data-i18n="usageTitle">灵符使用方法</h3>
                 <ol id="usageList">
-                    <li data-i18n="usage1">在佛堂或者乾淨的地方，於太陽出後至中午 13:00 之間進行，個別符咒使用非此時段。</li>
-                    <li data-i18n="usage2">折角：南無大慈悲父！（三遍）</li>
-                    <li data-i18n="usage3">請靈驗咒符的神靈、天人、護法神降臨！（三遍）</li>
-                    <li data-i18n="usage4">擺供：紅、香、花、果、茶、糕餅等，隨方便進行供養，本門子孫皆可供養。</li>
-                    <li data-i18n="usage5">祈請師父、本命、護法降臨！（遍）</li>
-                    <li data-i18n="usage6">祈請靈驗咒符的神靈、天人、護法護佑！（三遍）</li>
-                    <li data-i18n="usage7">把自己所要變的解除災難的事情說明，請求加持和護佑。</li>
-                    <li data-i18n="usage8">念念子大明咒 21 遍以上，回向靈驗咒符的神靈、天人、護法神，感恩他們。</li>
-                    <li data-i18n="usage9">將祈禱等花化，或化香，或焚紙於火，具體請參考靈符卷內的諭示文字。</li>
+                    <li data-i18n="usage1">在佛堂或者干净的地方，于太阳出后至中午 13:00 之间进行，个别符咒使用非此时段。</li>
+                    <li data-i18n="usage2">折角：南无大慈悲父！（三遍）</li>
+                    <li data-i18n="usage3">请灵验咒符的神灵、天人、护法神降临！（三遍）</li>
+                    <li data-i18n="usage4">摆供：红、香、花、果、茶、糕饼等，随方便进行供养，本门子孙皆可供养。</li>
+                    <li data-i18n="usage5">祈请师父、本命、护法降临！（遍）</li>
+                    <li data-i18n="usage6">祈请灵验咒符的神灵、天人、护法护佑！（三遍）</li>
+                    <li data-i18n="usage7">把自己所要变的解除灾难的事情说明，请求加持和护佑。</li>
+                    <li data-i18n="usage8">念念子大明咒 21 遍以上，回向灵验咒符的神灵、天人、护法神，感恩他们。</li>
+                    <li data-i18n="usage9">将祈祷等花化，或化香，或焚纸于火，具体请参考灵符卷内的谕示文字。</li>
                 </ol>
             </div>
         </section>
     </div>
     
     <footer data-i18n="footer">
-        靈驗咒符查詢系統 © 2025 | 趨吉避凶，消災納福
+        灵验咒符查询系统 © 2025 | 趋吉避凶，消灾纳福
     </footer>
 
     <script>
@@ -779,11 +745,7 @@
                 "usage7": "把自己所要变的解除灾难的事情说明，请求加持和护佑。",
                 "usage8": "念念子大明咒 21 遍以上，回向灵验咒符的神灵、天人、护法神，感恩他们。",
                 "usage9": "将祈祷等花化，或化香，或焚纸于火，具体请参考灵符卷内的谕示文字。",
-                "footer": "灵验咒符查询系统 © 2025 | 趋吉避凶，消灾纳福",
-                "getTalisman": "去请灵符",
-                "alertInput": "请完整填写阴历出生年月和时辰信息！",
-                "birthSummary": "阴历出生",
-                "currentYear": "当前年份"
+                "footer": "灵验咒符查询系统 © 2025 | 趋吉避凶，消灾纳福"
             },
             "zh-TW": {
                 "title": "靈驗咒符查詢系統",
@@ -833,11 +795,7 @@
                 "usage7": "把自己所要變的解除災難的事情說明，請求加持和護佑。",
                 "usage8": "念念子大明咒 21 遍以上，回向靈驗咒符的神靈、天人、護法神，感恩他們。",
                 "usage9": "將祈禱等花化，或化香，或焚紙於火，具體請參考靈符卷內的諭示文字。",
-                "footer": "靈驗咒符查詢系統 © 2025 | 趨吉避凶，消災納福",
-                "getTalisman": "去請靈符",
-                "alertInput": "請完整填寫陰曆出生年月和時辰資訊！",
-                "birthSummary": "陰曆出生",
-                "currentYear": "當前年份"
+                "footer": "靈驗咒符查詢系統 © 2025 | 趨吉避凶，消災納福"
             },
             "en": {
                 "title": "Talisman Inquiry System",
@@ -887,11 +845,7 @@
                 "usage7": "State the disaster you wish to resolve and request blessings and protection.",
                 "usage8": "Chant the Great Bright Mantra more than 21 times, dedicating it to the deities, celestial beings, and guardians of the talisman, thanking them.",
                 "usage9": "Transform the prayers into flowers, incense, or burn paper in fire; refer to the instructions within the talisman scroll for specifics.",
-                "footer": "Talisman Inquiry System © 2025 | Seek Good Fortune, Avoid Misfortune, Dispel Disasters, Attract Blessings",
-                "getTalisman": "Get Talisman",
-                "alertInput": "Please fill in all lunar birth year, month, and hour information!",
-                "birthSummary": "Lunar Birth",
-                "currentYear": "Current Year"
+                "footer": "Talisman Inquiry System © 2025 | Seek Good Fortune, Avoid Misfortune, Dispel Disasters, Attract Blessings"
             },
             "ja": {
                 "title": "霊符検索システム",
@@ -941,11 +895,7 @@
                 "usage7": "解消したい災難を説明し、加護と保護を求める。",
                 "usage8": "大明咒を21回以上唱え、霊符の神霊、天人、護法神に捧げ、感謝する。",
                 "usage9": "祈りを花に変えるか、香に変えるか、紙を火で燃やす。具体的な方法は霊符巻内の指示を参照。",
-                "footer": "霊符検索システム © 2025 | 吉を求め、凶を避け、災いを払い、福を招く",
-                "getTalisman": "霊符を取得",
-                "alertInput": "陰暦の出生年月と時刻情報をすべて入力してください！",
-                "birthSummary": "陰暦出生",
-                "currentYear": "現在の年"
+                "footer": "霊符検索システム © 2025 | 吉を求め、凶を避け、災いを払い、福を招く"
             },
             "ko": {
                 "title": "영험한 부적 조회 시스템",
@@ -986,20 +936,16 @@
                 "lingFuTitle": "부적",
                 "effectTitle": "효용",
                 "usageTitle": "부적 사용 방법",
-                "usage1": "불당 또는 깨끗한 장소에서 해가 뜬 후 정오 13:00 사이에 수행하며, 일부 부적은 다른 시간대를 사용함。",
+                "usage1": "불당 또는 깨끗한 장소에서 해가 뜬 후 정오 13:00 사이에 수행하며, 일부 부적은 다른 시간대를 사용함.",
                 "usage2": "모서리 접기: '남무 대자비부!' (3번)",
                 "usage3": "영험한 부적의 신령, 천인, 호법신에게 강림을 청하다! (3번)",
-                "usage4": "공양: 붉은 물건, 향, 꽃, 과일, 차, 과자 등 편리한 대로 공양하며, 본문의 자손 모두 공양 가능。",
+                "usage4": "공양: 붉은 물건, 향, 꽃, 과일, 차, 과자 등 편리한 대로 공양하며, 본문의 자손 모두 공양 가능.",
                 "usage5": "사부, 본명, 호법에게 강림을 기원하다! (1번)",
                 "usage6": "영험한 부적의 신령, 천인, 호법에게 보호를 기원하다! (3번)",
-                "usage7": "해소하고 싶은 재난을 설명하고 가호와 보호를 요청하다。",
-                "usage8": "대명주를 21번 이상 외우며, 영험한 부적의 신령, 천인, 호법신에게 헌정하고 감사하다。",
+                "usage7": "해소하고 싶은 재난을 설명하고 가호와 보호를 요청하다.",
+                "usage8": "대명주를 21번 이상 외우며, 영험한 부적의 신령, 천인, 호법신에게 헌정하고 감사하다.",
                 "usage9": "기도를 꽃으로 바꾸거나, 향으로 바꾸거나, 종이를 불에 태우다. 구체적인 방법은 부적 두루마리 안의 지시를 참조.",
-                "footer": "영험한 부적 조회 시스템 © 2025 | 길을 찾고 흉을 피하며, 재앙을 없애고 복을 불러오다",
-                "getTalisman": "부적 받기",
-                "alertInput": "음력 출생 연월과 시辰 정보를 모두 입력해주세요!",
-                "birthSummary": "음력 출생",
-                "currentYear": "현재 연도"
+                "footer": "영험한 부적 조회 시스템 © 2025 | 길을 찾고 흉을 피하며, 재앙을 없애고 복을 불러오다"
             }
         };
 
@@ -1109,112 +1055,131 @@
         const effectTable = {
             "驱邪缚魅符": "人逢此年，宜注意勿远行，守平安，否则易招倒霉、口舌、是非、损伤、受人陷害或环境职业上不良之改变，严重则有官讼牢之虑，故宜用驱邪缚魅符制化，方能避凶趋吉。",
             "除秽养神符": "人逢此年，宜注意卫生，不宜探病，小心愁闷身厄灾。勿入病人家，勿探病，勿食丧物品。犯者，则以此除秽养神符和药物化饮，病较快治愈。",
-            "白虎消灾符": "人逢此年，宜注意血光意外灾、家运、不和睦、伤人口、强烈破财、官事等不测凶事。有喜可破灾，无喜百事来。故犯者，宜用白虎消灾符及三牲祭送，可保安宁。",
-            "保命护身符": "人逢此年，宜注意勿观丧礼，勿探看病人，切恐易遭官灾、刑罚、诉讼、争斗、受伤、破财及精神上痛苦等之不吉事，宜用保命护身符及银纸焚化，确保平安无事。",
+            "白虎消灾符": "人逢此年，宜注意血光意外灾、家运、不和睦、伤人口、强烈破财、官事等不测凶事。有喜可破灾，无喜百事来。故犯者，宣用白虎消灾符及三性祭送，可保安宁。",
+            "保命护身符": "人逢此年，宜注意勿观丧礼，勿探看病人，切恐易遭官灾、刑罚、诉讼、争讼、争斗、受伤、破财及精神上痛苦等之不吉事，宜用保命护身符及银纸焚化，确保平安无事。",
             "太岁护佑符": "人逢此年，宜防欠安、破财、盗贼、火劫，凡事欠吉，麻烦多事，安分守己，忍耐谦让为美，宜用太岁护佑符制化，拜神叩祈，可保阖家平安。",
-            "五鬼卫护符": "人逢此年，宜注意小人是非，无故平地风波起，易招阴邪、怪疾、官讼、牢狱、破财之灾，交友谨慎防暗害，故须以五鬼卫护符合银纸焚化，反有五鬼助财运并带来好运。",
+            "五鬼卫护符": "人逢此年，宜注意小人是非，无故平地风波起，易招阴邪、怪疾、官讼、牢狱、破财之灾，交友谨慎防暗害，故须以五鬼卫护符合同银纸焚化，反有五鬼助财运并带来好运。",
             "金光神卫符": "人逢此年，虚花不聚财，宜注意人物之走失，休管他人事，与人冲突不和，是非破财，并防家庭风波，宜用金光神卫符合金纸焚化，每月二十七日白天，向东方叩拜太阳星君，即可保平安。",
-            "祛邪保真符": "人逢此年，宜注意孝服临身，勿探病，勿观丧礼，有破财及亲友重疾、伤亡之坏消息。为防灾祸，宜用祛邪保真符制化，保平安。",
-            "太阴纳福符": "人逢此年，宜注意欠安、口舌、仇恨、风波、深夜不走暗路，且事多纠缠，尤其要注意因异性引起破财、纠纷事，故宜用太阴纳福符合金纸焚化，每月阴历二十六日夜晚，向西叩拜太阴符，可保平安纳福。",
-            "太岁符": "人逢此年，犯太岁，宜注意意外、病痛、破财、是非、官司等灾厄，凡事小心谨慎，宜用太岁符镇压，方可化解太岁之凶，保一年平安。",
-            "福德符": "人逢此年，宜注意吉星高照，福德齐聚，财运亨通，事业顺利，家庭和睦，宜用福德符加持，可增福增寿。",
-            "龙德符": "人逢此年，龙德星照命，贵人相助，事业有成，财源广进，宜用龙德符加持，可保全年顺利，福禄双全。"
+            "祛邪保真符": "人逢此年，宣注意孝服临身，勿探病，勿观丧礼，有破财及亲友重疾、伤亡之坏消息。为防灾祸，宜用祛邪保真符制化，保平安。",
+            "太阴纳福符": "人逢此年，宜注意欠安、口舌、仇恨、风波、深夜不走暗路，且事多纠缠，尤其要注意因异性引起破财、纠纷事，故宜用太阴纳福符合金纸焚化，每月阴历二十六日夜晚，向西叩拜太阴星君，保平安。",
+            "太岁符": "人逢此年，需请此太岁符供奉，以求平安无事，工商利兴，五谷丰收，六畜兴旺，万事如意，福运亨通。",
+            "福德符": "人逢此年，用此符可得福德与善缘，趋吉避凶。",
+            "龙德符": "人逢此年，用此符可得龙神护佑，消灾纳福，万事如意。"
         };
-
-        // Helper functions
-        function populateYears() {
-            const select = document.getElementById('birthYear');
-            const currentYear = new Date().getFullYear();
-            for (let year = currentYear - 100; year <= currentYear; year++) {
-                const option = document.createElement('option');
-                option.value = year;
-                option.textContent = `${year}年`;
-                select.appendChild(option);
-            }
-        }
-
+        
+        // Chinese zodiac conversion
+        const zodiacSigns = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
+        const heavenlyStems = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const earthlyBranches = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+        
+        // Get zodiac sign from year
         function getZodiacSign(year) {
-            const zodiacs = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"];
-            return zodiacs[(year - 4) % 12];
+            return zodiacSigns[(year - 4) % 12];
         }
-
+        
+        // Get chinese year name (e.g., "子年")
         function getChineseYearName(year) {
-            const earthlyBranches = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
-            return `${earthlyBranches[(year - 4) % 12]}年`;
+            return earthlyBranches[(year - 4) % 12] + "年";
         }
-
+        
+        // Add floating symbols
         function addFloatingSymbols() {
-            const container = document.querySelector('.floating-elements');
-            const symbols = ['卦', '符', '命', '運', '道', '法', '靈', '德'];
-            for (let i = 0; i < 20; i++) {
+            const floatingElements = document.querySelector('.floating-elements');
+            const symbols = ['卦', '符', '命', '运', '道', '法', '灵', '德', '佑', '福', '吉', '祥'];
+            
+            for (let i = 0; i < 24; i++) {
                 const symbol = document.createElement('div');
                 symbol.className = 'floating-symbol';
                 symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-                symbol.style.left = `${Math.random() * 100}%`;
-                symbol.style.animationDuration = `${Math.random() * 20 + 10}s`;
-                symbol.style.animationDelay = `${Math.random() * 5}s`;
-                container.appendChild(symbol);
+                
+                const size = Math.random() * 2 + 1;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 40 + 20;
+                const delay = Math.random() * 40;
+                
+                symbol.style.left = `${left}%`;
+                symbol.style.fontSize = `${size}rem`;
+                symbol.style.opacity = `${0.1 - size * 0.02}`;
+                symbol.style.animationDuration = `${duration}s`;
+                symbol.style.animationDelay = `${delay}s`;
+                
+                floatingElements.appendChild(symbol);
             }
         }
-
+        
+        // Populate years dropdown
+        function populateYears() {
+            const yearSelect = document.getElementById('birthYear');
+            const currentYear = new Date().getFullYear();
+            
+            for (let year = currentYear - 100; year <= currentYear; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = `${year}年 (${getZodiacSign(year)}年)`;
+                yearSelect.appendChild(option);
+            }
+        }
+        
+        // Play animation
         function playAnimation() {
             const container = document.getElementById('animationContainer');
-            container.innerHTML = '';
             container.style.display = 'block';
-
-            // Create talisman
+            container.innerHTML = '';
+            
+            // Create central talisman
             const talisman = document.createElement('div');
             talisman.className = 'talisman';
             talisman.style.left = '50%';
-            talisman.style.top = '50%';
+            talisman.style.top
+                    '50%';
             container.appendChild(talisman);
-
+            
             // Create particles
             for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
                     particle.className = 'energy-particle';
-
+                    
                     const startX = window.innerWidth / 2;
                     const startY = window.innerHeight / 2;
                     const tx = (Math.random() - 0.5) * window.innerWidth;
                     const ty = (Math.random() - 0.5) * window.innerHeight;
-
+                    
                     particle.style.left = `${startX}px`;
                     particle.style.top = `${startY}px`;
                     particle.style.setProperty('--tx', `${tx}px`);
                     particle.style.setProperty('--ty', `${ty}px`);
-
+                    
                     particle.style.animation = `particleAnimation ${Math.random() * 2 + 1}s linear forwards`;
-
+                    
                     container.appendChild(particle);
                 }, i * 20);
             }
-
+            
             // Create flying symbols
-            const symbols = ['卦', '符', '命', '運', '道', '法', '靈', '德'];
+            const symbols = ['卦', '符', '命', '运', '道', '法', '灵', '德'];
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
                     const symbol = document.createElement('div');
                     symbol.className = 'flying-symbol';
                     symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-
+                    
                     symbol.style.left = `${window.innerWidth / 2}px`;
                     symbol.style.top = `${window.innerHeight / 2}px`;
                     symbol.style.setProperty('--rotate', `${Math.random() * 360}deg`);
-
+                    
                     symbol.style.animation = `symbolAnimation ${Math.random() * 1.5 + 1}s linear forwards`;
-
+                    
                     container.appendChild(symbol);
                 }, i * 100 + 500);
             }
-
+            
             // Hide animation container after animation completes
             setTimeout(() => {
                 container.style.display = 'none';
             }, 3000);
         }
-
+        
         // Function to get fortune class
         function getFortuneClass(fortune) {
             switch(fortune) {
@@ -1226,103 +1191,125 @@
                 default: return "";
             }
         }
-
+        
         // Main query function
         function performQuery() {
             const birthYear = document.getElementById('birthYear').value;
             const birthMonth = document.getElementById('birthMonth').value;
             const birthTime = document.getElementById('birthTime').value;
             const currentLang = document.getElementById('languageSelect').value;
-
+            
             // Validate inputs
             if (!birthYear || !birthMonth || !birthTime) {
                 alert(translations[currentLang]["alertInput"]);
                 return;
             }
-
+            
             // Show animation
             playAnimation();
-
+            
             // After a delay to show the animation, process the results
             setTimeout(() => {
                 // Get current year
                 const currentYear = new Date().getFullYear();
-
+                
                 // Get birth zodiac and current year zodiac
                 const birthZodiac = getZodiacSign(birthYear);
                 const currentYearZodiac = getZodiacSign(currentYear);
-
+                
                 // Get current year's Chinese name (e.g., "子年")
                 const currentYearChineseName = getChineseYearName(currentYear);
-
+                
                 // Convert month number to Chinese month name
                 const monthNames = ["", "正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
                 const birthMonthChinese = monthNames[birthMonth];
-
-                // Step 1: Find Ben Ming (本命宮位)
+                
+                // Step 1: Find Ben Ming (本命宫位)
                 const benMing = bengMingTable[birthMonthChinese][birthTime];
-
-                // Step 2: Find Sui Jun (歲君)
+                
+                // Step 2: Find Sui Jun (岁君)
                 const suiJun = suiJunTable[benMing][currentYearChineseName];
-
+                
                 // Step 3: Find Fortune (吉凶)
                 const fortune = fortuneTable[suiJun];
-
-                // Step 4: Determine Ling Fu name (靈符)
+                
+                // Step 4: Determine Ling Fu name (灵符)
                 let lingFu = suiJun;
                 if (!lingFu.endsWith("符")) {
                     lingFu += "符";
                 }
-
+                
                 // Step 5: Get effect (效用)
                 const effect = effectTable[lingFu];
-
+                
                 // Update input summary
                 document.getElementById('inputSummary').innerHTML = `
-                    ${translations[currentLang]["birthSummary"]}: ${birthYear}年（${birthZodiac}年）${birthMonthChinese}${birthTime}時 | 
+                    ${translations[currentLang]["birthSummary"]}: ${birthYear}年（${birthZodiac}年）${birthMonthChinese}${birthTime}时 | 
                     ${translations[currentLang]["currentYear"]}: ${currentYear}年（${currentYearZodiac}年）
                 `;
-
+                
                 // Update result cards
                 document.getElementById('bengMingResult').textContent = benMing;
                 document.getElementById('suiJunResult').textContent = suiJun;
-
+                
                 // Set fortune with appropriate styling
                 const fortuneElement = document.getElementById('fortuneResult');
                 fortuneElement.innerHTML = `${fortune} <span class="fortune-level ${getFortuneClass(fortune)}">${fortune}</span>`;
-
+                
                 document.getElementById('lingFuResult').textContent = lingFu;
                 document.getElementById('effectResult').textContent = effect;
-
+                
                 // Show result section
                 document.getElementById('resultSection').style.display = 'block';
-
+                
                 // Scroll to results
                 document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
             }, 3000);
         }
-
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             // Populate years dropdown
             populateYears();
-
+            
             // Add floating symbols
             addFloatingSymbols();
-
+            
             // Add event listener to query button
             document.getElementById('queryBtn').addEventListener('click', performQuery);
 
             // Language switcher
             const langSelect = document.getElementById('languageSelect');
-            langSelect.value = 'zh-TW'; // Set default to zh-TW
             langSelect.addEventListener('change', (e) => {
                 updateLanguage(e.target.value);
             });
-
-            // Set initial language to zh-TW
-            updateLanguage('zh-TW');
+            
+            // Set initial language
+            updateLanguage('zh-CN');
         });
+        
+        // Add missing translations for dynamic content
+        translations["zh-CN"]["alertInput"] = "请完整填写阴历出生年月和时辰信息！";
+        translations["zh-CN"]["birthSummary"] = "阴历出生";
+        translations["zh-CN"]["currentYear"] = "当前年份";
+        
+        translations["zh-TW"]["alertInput"] = "請完整填寫陰曆出生年月和時辰資訊！";
+        translations["zh-TW"]["birthSummary"] = "陰曆出生";
+        translations["zh-TW"]["currentYear"] = "當前年份";
+        
+        translations["en"]["alertInput"] = "Please fill in all lunar birth year, month, and hour information!";
+        translations["en"]["birthSummary"] = "Lunar Birth";
+        translations["en"]["currentYear"] = "Current Year";
+        
+        translations["ja"]["alertInput"] = "陰暦の出生年月と時刻情報をすべて入力してください！";
+        translations["ja"]["birthSummary"] = "陰暦出生";
+        translations["ja"]["currentYear"] = "現在の年";
+        
+        translations["ko"]["alertInput"] = "음력 출생 연월과 시辰 정보를 모두 입력해주세요!";
+        translations["ko"]["birthSummary"] = "음력 출생";
+        translations["ko"]["currentYear"] = "현재 연도";
     </script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9204abf9b8c7454b',t:'MTc0MTk2NDc1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
