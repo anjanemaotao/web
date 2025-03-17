@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="title">八字格局分析</title>
+    <style>
+        :root {
+            --primary-color: #3c1053;
+            --secondary-color: #ad5389;
+            --text-color: #f1e7fa;
+            --accent-color: #e8b923;
+            --bg-dark: #120727;
+            --bg-light: #23084d;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Ma Shan Zheng', 'STKaiti', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin: 10px 0;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(232, 185, 35, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .form-container {
+            background: rgba(60, 16, 83, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+            border: 1px solid rgba(232, 185, 35, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(232, 185, 35, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(232, 185, 35, 0.5);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(232, 185, 35, 0.5);
+        }
+        
+        button {
+            grid-column: 1 / -1;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-color);
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+        
+        button::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        
+        button:hover {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        button:hover::after {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .result-container {
+            display: none;
+            background: rgba(60, 16, 83, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(232, 185, 35, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(232, 185, 35, 0.1) 0%, transparent 70%);
+            animation: rotateSlower 30s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotateSlower {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .bazi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .bazi-item {
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px 10px;
+            border: 1px solid rgba(232, 185, 35, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite alternate;
+            opacity: 0; /* 初始透明，用于fadeIn动画 */
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(232, 185, 35, 0.2); }
+            100% { box-shadow: 0 0 15px rgba(232, 185, 35, 0.5); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bazi-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .bazi-item h3 {
+            margin: 0 0 10px 0;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .bazi-character {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--text-color);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .element {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-top: 5px;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: "✧";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-light);
+            padding: 0 15px;
+            color: var(--accent-color);
+        }
+        
+        .pattern-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(232, 185, 35, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px rgba(232, 185, 35, 0.5); }
+            100% { text-shadow: 0 0 15px rgba(232, 185, 35, 0.8), 0 0 20px rgba(232, 185, 35, 0.5); }
+        }
+        
+        .pattern-description {
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            border: 1px solid rgba(232, 185, 35, 0.3);
+        }
+        
+        .analysis-section {
+            margin-top: 30px;
+        }
+        
+        .analysis-section h3 {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(232, 185, 35, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .analysis-section p {
+            line-height: 1.8;
+        }
+        
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .element-symbol {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(232, 185, 35, 0.2);
+            animation: float 20s linear infinite;
+            text-shadow: 0 0 5px rgba(232, 185, 35, 0.2);
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 新增炫酷加载动画样式 */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loading-circle {
+            width: 100px;
+            height: 100px;
+            border: 5px solid var(--accent-color);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: particleMove 2s ease-in-out infinite;
+        }
+        
+        @keyframes particleMove {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(50px, 50px); opacity: 0; }
+        }
+        
+        .loading-text {
+            margin-top: 20px;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px var(--accent-color);
+            animation: textGlow 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes textGlow {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* 修改样式：语言选择器 */
+        #languageSelect {
+            width: 100px; /* 缩短长度 */
+            padding: 8px;
+            border-radius: 5px;
+            background: rgba(60, 16, 83, 0.5);
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .form-container, .result-container {
+                padding: 20px;
+            }
+            
+            .bazi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .bazi-character {
+                font-size: 2rem;
+            }
+            
+            #languageSelect {
+                width: 80px; /* 小屏幕下进一步缩短 */
+            }
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <!-- 新增炫酷加载动画 -->
+    <div class="loading" id="loadingScreen">
+        <div class="loading-circle">
+            <div class="loading-particle" style="top: 10px; left: 10px;"></div>
+            <div class="loading-particle" style="top: 10px; right: 10px;"></div>
+            <div class="loading-particle" style="bottom: 10px; left: 10px;"></div>
+            <div class="loading-particle" style="bottom: 10px; right: 10px;"></div>
+        </div>
+        <div class="loading-text" data-translate="loadingText">正在推算命格，請稍候...</div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1 data-translate="title">八字格局分析</h1>
+            <select id="languageSelect" onchange="setLanguage(this.value)">
+                <option value="zh-TW" data-translate="langZhTW">繁體</option>
+                <option value="zh-CN" data-translate="langZhCN">简体</option>
+                <option value="ja" data-translate="langJa">日文</option>
+                <option value="ko" data-translate="langKo">韓文</option>
+            </select>
+        </header>
+        
+        <div class="form-container">
+            <form id="baziForm">
+                <div class="form-group">
+                    <label for="year" data-translate="yearLabel">出生年份</label>
+                    <select id="year" required>
+                        <option value="" data-translate="selectOption">請選擇</option>
+                        <option value="1940">1940年</option>
+                        <option value="1941">1941年</option>
+                        <option value="1942">1942年</option>
+                        <option value="1943">1943年</option>
+                        <option value="1944">1944年</option>
+                        <option value="1945">1945年</option>
+                        <option value="1946">1946年</option>
+                        <option value="1947">1947年</option>
+                        <option value="1948">1948年</option>
+                        <option value="1949">1949年</option>
+                        <option value="1950">1950年</option>
+                        <option value="1951">1951年</option>
+                        <option value="1952">1952年</option>
+                        <option value="1953">1953年</option>
+                        <option value="1954">1954年</option>
+                        <option value="1955">1955年</option>
+                        <option value="1956">1956年</option>
+                        <option value="1957">1957年</option>
+                        <option value="1958">1958年</option>
+                        <option value="1959">1959年</option>
+                        <option value="1960">1960年</option>
+                        <option value="1961">1961年</option>
+                        <option value="1962">1962年</option>
+                        <option value="1963">1963年</option>
+                        <option value="1964">1964年</option>
+                        <option value="1965">1965年</option>
+                        <option value="1966">1966年</option>
+                        <option value="1967">1967年</option>
+                        <option value="1968">1968年</option>
+                        <option value="1969">1969年</option>
+                        <option value="1970">1970年</option>
+                        <option value="1971">1971年</option>
+                        <option value="1972">1972年</option>
+                        <option value="1973">1973年</option>
+                        <option value="1974">1974年</option>
+                        <option value="1975">1975年</option>
+                        <option value="1976">1976年</option>
+                        <option value="1977">1977年</option>
+                        <option value="1978">1978年</option>
+                        <option value="1979">1979年</option>
+                        <option value="1980">1980年</option>
+                        <option value="1981">1981年</option>
+                        <option value="1982">1982年</option>
+                        <option value="1983">1983年</option>
+                        <option value="1984">1984年</option>
+                        <option value="1985">1985年</option>
+                        <option value="1986">1986年</option>
+                        <option value="1987">1987年</option>
+                        <option value="1988">1988年</option>
+                        <option value="1989">1989年</option>
+                        <option value="1990">1990年</option>
+                        <option value="1991">1991年</option>
+                        <option value="1992">1992年</option>
+                        <option value="1993">1993年</option>
+                        <option value="1994">1994年</option>
+                        <option value="1995">1995年</option>
+                        <option value="1996">1996年</option>
+                        <option value="1997">1997年</option>
+                        <option value="1998">1998年</option>
+                        <option value="1999">1999年</option>
+                        <option value="2000">2000年</option>
+                        <option value="2001">2001年</option>
+                        <option value="2002">2002年</option>
+                        <option value="2003">2003年</option>
+                        <option value="2004">2004年</option>
+                        <option value="2005">2005年</option>
+                        <option value="2006">2006年</option>
+                        <option value="2007">2007年</option>
+                        <option value="2008">2008年</option>
+                        <option value="2009">2009年</option>
+                        <option value="2010">2010年</option>
+                        <option value="2011">2011年</option>
+                        <option value="2012">2012年</option>
+                        <option value="2013">2013年</option>
+                        <option value="2014">2014年</option>
+                        <option value="2015">2015年</option>
+                        <option value="2016">2016年</option>
+                        <option value="2017">2017年</option>
+                        <option value="2018">2018年</option>
+                        <option value="2019">2019年</option>
+                        <option value="2020">2020年</option>
+                        <option value="2021">2021年</option>
+                        <option value="2022">2022年</option>
+                        <option value="2023">2023年</option>
+                        <option value="2024">2024年</option>
+                        <option value="2025">2025年</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="month" data-translate="monthLabel">出生月份</label>
+                    <select id="month" required>
+                        <option value="" data-translate="selectOption">請選擇</option>
+                        <option value="1" data-translate="month1">正月</option>
+                        <option value="2" data-translate="month2">二月</option>
+                        <option value="3" data-translate="month3">三月</option>
+                        <option value="4" data-translate="month4">四月</option>
+                        <option value="5" data-translate="month5">五月</option>
+                        <option value="6" data-translate="month6">六月</option>
+                        <option value="7" data-translate="month7">七月</option>
+                        <option value="8" data-translate="month8">八月</option>
+                        <option value="9" data-translate="month9">九月</option>
+                        <option value="10" data-translate="month10">十月</option>
+                        <option value="11" data-translate="month11">十一月</option>
+                        <option value="12" data-translate="month12">十二月</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="day" data-translate="dayLabel">出生日</label>
+                    <select id="day" required>
+                        <option value="" data-translate="selectOption">請選擇</option>
+                        <option value="1" data-translate="day1">初一</option>
+                        <option value="2" data-translate="day2">初二</option>
+                        <option value="3" data-translate="day3">初三</option>
+                        <option value="4" data-translate="day4">初四</option>
+                        <option value="5" data-translate="day5">初五</option>
+                        <option value="6" data-translate="day6">初六</option>
+                        <option value="7" data-translate="day7">初七</option>
+                        <option value="8" data-translate="day8">初八</option>
+                        <option value="9" data-translate="day9">初九</option>
+                        <option value="10" data-translate="day10">初十</option>
+                        <option value="11" data-translate="day11">十一</option>
+                        <option value="12" data-translate="day12">十二</option>
+                        <option value="13" data-translate="day13">十三</option>
+                        <option value="14" data-translate="day14">十四</option>
+                        <option value="15" data-translate="day15">十五</option>
+                        <option value="16" data-translate="day16">十六</option>
+                        <option value="17" data-translate="day17">十七</option>
+                        <option value="18" data-translate="day18">十八</option>
+                        <option value="19" data-translate="day19">十九</option>
+                        <option value="20" data-translate="day20">二十</option>
+                        <option value="21" data-translate="day21">廿一</option>
+                        <option value="22" data-translate="day22">廿二</option>
+                        <option value="23" data-translate="day23">廿三</option>
+                        <option value="24" data-translate="day24">廿四</option>
+                        <option value="25" data-translate="day25">廿五</option>
+                        <option value="26" data-translate="day26">廿六</option>
+                        <option value="27" data-translate="day27">廿七</option>
+                        <option value="28" data-translate="day28">廿八</option>
+                        <option value="29" data-translate="day29">廿九</option>
+                        <option value="30" data-translate="day30">三十</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hour" data-translate="hourLabel">出生時辰</label>
+                    <select id="hour" required>
+                        <option value="" data-translate="selectOption">請選擇</option>
+                        <option value="1" data-translate="hour1">子時 (23:00-00:59)</option>
+                        <option value="2" data-translate="hour2">丑時 (01:00-02:59)</option>
+                        <option value="3" data-translate="hour3">寅時 (03:00-04:59)</option>
+                        <option value="4" data-translate="hour4">卯時 (05:00-06:59)</option>
+                        <option value="5" data-translate="hour5">辰時 (07:00-08:59)</option>
+                        <option value="6" data-translate="hour6">巳時 (09:00-10:59)</option>
+                        <option value="7" data-translate="hour7">午時 (11:00-12:59)</option>
+                        <option value="8" data-translate="hour8">未時 (13:00-14:59)</option>
+                        <option value="9" data-translate="hour9">申時 (15:00-16:59)</option>
+                        <option value="10" data-translate="hour10">酉時 (17:00-18:59)</option>
+                        <option value="11" data-translate="hour11">戌時 (19:00-20:59)</option>
+                        <option value="12" data-translate="hour12">亥時 (21:00-22:59)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" data-translate="submitButton">推算八字格局</button>
+            </form>
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="bazi-grid" id="baziGrid">
+                <!-- 八字內容將由JavaScript動態生成 -->
+            </div>
+            
+            <div class="divider"></div>
+            
+            <h2 class="pattern-title" id="patternTitle" data-translate="patternTitle">命局分析結果</h2>
+            
+            <div class="pattern-description" id="patternDescription" data-translate="patternDescriptionPlaceholder">
+                <!-- 格局描述將由JavaScript動態生成 -->
+            </div>
+            
+            <div class="analysis-section">
+                <h3 data-translate="elementAnalysisTitle">五行分析</h3>
+                <p id="elementAnalysis" data-translate="elementAnalysisPlaceholder"></p>
+            </div>
+            
+            <div class="analysis-section">
+                <h3 data-translate="dayMasterAnalysisTitle">日主強弱</h3>
+                <p id="dayMasterAnalysis" data-translate="dayMasterAnalysisPlaceholder"></p>
+            </div>
+            
+            <div class="analysis-section">
+                <h3 data-translate="godAnalysisTitle">十神組合</h3>
+                <p id="godAnalysis" data-translate="godAnalysisPlaceholder"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 多语言翻译对象，完整覆盖所有文本
+        const translations = {
+            'zh-TW': {
+                'title': '八字格局分析',
+                'langZhTW': '繁體',
+                'langZhCN': '简体',
+                'langJa': '日文',
+                'langKo': '韓文',
+                'yearLabel': '出生年份',
+                'monthLabel': '出生月份',
+                'dayLabel': '出生日',
+                'hourLabel': '出生時辰',
+                'selectOption': '請選擇',
+                'submitButton': '推算八字格局',
+                'loadingText': '正在推算命格，請稍候...',
+                'patternTitle': '命局分析結果',
+                'elementAnalysisTitle': '五行分析',
+                'dayMasterAnalysisTitle': '日主強弱',
+                'godAnalysisTitle': '十神組合',
+                'month1': '正月', 'month2': '二月', 'month3': '三月', 'month4': '四月', 'month5': '五月', 'month6': '六月',
+                'month7': '七月', 'month8': '八月', 'month9': '九月', 'month10': '十月', 'month11': '十一月', 'month12': '十二月',
+                'day1': '初一', 'day2': '初二', 'day3': '初三', 'day4': '初四', 'day5': '初五', 'day6': '初六', 'day7': '初七',
+                'day8': '初八', 'day9': '初九', 'day10': '初十', 'day11': '十一', 'day12': '十二', 'day13': '十三', 'day14': '十四',
+                'day15': '十五', 'day16': '十六', 'day17': '十七', 'day18': '十八', 'day19': '十九', 'day20': '二十', 'day21': '廿一',
+                'day22': '廿二', 'day23': '廿三', 'day24': '廿四', 'day25': '廿五', 'day26': '廿六', 'day27': '廿七', 'day28': '廿八',
+                'day29': '廿九', 'day30': '三十',
+                'hour1': '子時 (23:00-00:59)', 'hour2': '丑時 (01:00-02:59)', 'hour3': '寅時 (03:00-04:59)', 'hour4': '卯時 (05:00-06:59)',
+                'hour5': '辰時 (07:00-08:59)', 'hour6': '巳時 (09:00-10:59)', 'hour7': '午時 (11:00-12:59)', 'hour8': '未時 (13:00-14:59)',
+                'hour9': '申時 (15:00-16:59)', 'hour10': '酉時 (17:00-18:59)', 'hour11': '戌時 (19:00-20:59)', 'hour12': '亥時 (21:00-22:59)',
+                'yearPillar': '年柱', 'monthPillar': '月柱', 'dayPillar': '日柱', 'hourPillar': '時柱',
+                'patternDescriptionPlaceholder': '請輸入出生資訊以查看命局描述',
+                'elementAnalysisPlaceholder': '請輸入出生資訊以查看五行分析',
+                'dayMasterAnalysisPlaceholder': '請輸入出生資訊以查看日主強弱',
+                'godAnalysisPlaceholder': '請輸入出生資訊以查看十神組合',
+                'patternShangGuan': '傷官局',
+                'patternYinZhong': '印中局',
+                'patternBiJian': '比肩局',
+                'patternShaZhong': '煞重局',
+                'patternCaiWang': '財旺局',
+                'descShangGuan': '傷官局的人感性多於理性，思維活躍，富有藝術家氣質。他們對他人有很強的同理心和理解能力，善於觀察世界以及人與人之間的關係，熱衷於感受美好的事物。',
+                'descYinZhong': '印中局的人理性占主導，喜歡講道理，性格較為固執，不太容易聽取他人的意見，自我意識很強。',
+                'descBiJian': '比肩局的人重義氣，朋友通常較多，在團隊中往往是兜底的角色，不怕辛苦，勇於擔當。',
+                'descShaZhong': '煞重局的人風險意識強，做事情注重細節。他們往往有很強的執行力，對潛在問題有敏銳的洞察力。',
+                'descCaiWang': '財旺局的人執行能力強，他們將事業成功視為衡量自己的標準，同時也用這一標準去評判他人。在"想了再做"和"做了再想"之間，他們通常會選擇後者。',
+                'elementDist': '您的八字中五行分佈為：',
+                'elementMost': '其中{0}最旺，{1}較弱。',
+                'elementShangGuan': '傷官格的人需平衡{0}與{1}的發展，過分偏向任一方皆會影響運勢。',
+                'elementYinZhong': '印中格的人需保持{0}的穩定，{1}對您有輔助作用。',
+                'elementBiJian': '比肩格的您{0}過旺，適當引入{1}或{2}以求平衡。',
+                'elementShaZhong': '煞重格的您受{0}制約，適當引入{1}可改善運勢。',
+                'elementCaiWang': '財旺格的您需平衡{0}與{1}的關係，避免過度追求物質而失衡。',
+                'dayMasterText': '您的日主{0}屬{1}，強度為{2}。{3}',
+                'dayMasterVeryStrong': '極強',
+                'dayMasterStrong': '強',
+                'dayMasterBalanced': '中和',
+                'dayMasterVeryWeak': '極弱',
+                'dayMasterWeak': '弱',
+                'dayMasterDescVeryStrong': '日主旺盛，根基穩固，有魄力與領導氣質。',
+                'dayMasterDescStrong': '日主較強，個性堅定，有主見，適合擔當重任。',
+                'dayMasterDescBalanced': '日主中和，性格平穩，能權衡利弊，適應性強。',
+                'dayMasterDescVeryWeak': '日主虛弱，需他人扶助，性格敏感，易受環境影響。',
+                'dayMasterDescWeak': '日主偏弱，性格溫和，有韌性，擅長合作。',
+                'godText': '您的八字中，年干為{0}，月干為{1}，時干為{2}。',
+                'godShangGuan': '傷官格局中，傷官與食神的出現使您思維活躍，具創新能力，適合從事藝術、設計、創意等工作。',
+                'godYinZhong': '印中格局下，正印與偏印的存在使您思維嚴謹，知識淵博，適合從事教育、研究、顧問等需專業知識的工作。',
+                'godBiJian': '比肩格局中，比肩與劫財的組合使您獨立自主，合作精神強，適合團隊工作或領導職位。',
+                'godShaZhong': '煞重格局中，七殺與正官的存在使您紀律性強，具執行力，適合從事規範化、制度化的工作。',
+                'godCaiWang': '財旺格局下，正財與偏財的出現使您具經濟頭腦，擅把握機會，適合從事商業、投資等工作。'
+            },
+            'zh-CN': {
+                'title': '八字格局分析',
+                'langZhTW': '繁体',
+                'langZhCN': '简体',
+                'langJa': '日文',
+                'langKo': '韩文',
+                'yearLabel': '出生年份',
+                'monthLabel': '出生月份',
+                'dayLabel': '出生日',
+                'hourLabel': '出生时辰',
+                'selectOption': '请选择',
+                'submitButton': '推算八字格局',
+                'loadingText': '正在推算命格，请稍候...',
+                'patternTitle': '命局分析结果',
+                'elementAnalysisTitle': '五行分析',
+                'dayMasterAnalysisTitle': '日主强弱',
+                'godAnalysisTitle': '十神组合',
+                'month1': '正月', 'month2': '二月', 'month3': '三月', 'month4': '四月', 'month5': '五月', 'month6': '六月',
+                'month7': '七月', 'month8': '八月', 'month9': '九月', 'month10': '十月', 'month11': '十一月', 'month12': '十二月',
+                'day1': '初一', 'day2': '初二', 'day3': '初三', 'day4': '初四', 'day5': '初五', 'day6': '初六', 'day7': '初七',
+                'day8': '初八', 'day9': '初九', 'day10': '初十', 'day11': '十一', 'day12': '十二', 'day13': '十三', 'day14': '十四',
+                'day15': '十五', 'day16': '十六', 'day17': '十七', 'day18': '十八', 'day19': '十九', 'day20': '二十', 'day21': '廿一',
+                'day22': '廿二', 'day23': '廿三', 'day24': '廿四', 'day25': '廿五', 'day26': '廿六', 'day27': '廿七', 'day28': '廿八',
+                'day29': '廿九', 'day30': '三十',
+                'hour1': '子时 (23:00-00:59)', 'hour2': '丑时 (01:00-02:59)', 'hour3': '寅时 (03:00-04:59)', 'hour4': '卯时 (05:00-06:59)',
+                'hour5': '辰时 (07:00-08:59)', 'hour6': '巳时 (09:00-10:59)', 'hour7': '午时 (11:00-12:59)', 'hour8': '未时 (13:00-14:59)',
+                'hour9': '申时 (15:00-16:59)', 'hour10': '酉时 (17:00-18:59)', 'hour11': '戌时 (19:00-20:59)', 'hour12': '亥时 (21:00-22:59)',
+                'yearPillar': '年柱', 'monthPillar': '月柱', 'dayPillar': '日柱', 'hourPillar': '时柱',
+                'patternDescriptionPlaceholder': '请输入出生信息以查看命局描述',
+                'elementAnalysisPlaceholder': '请输入出生信息以查看五行分析',
+                'dayMasterAnalysisPlaceholder': '请输入出生信息以查看日主强弱',
+                'godAnalysisPlaceholder': '请输入出生信息以查看十神组合',
+                'patternShangGuan': '伤官局',
+                'patternYinZhong': '印中局',
+                'patternBiJian': '比肩局',
+                'patternShaZhong': '煞重局',
+                'patternCaiWang': '财旺局',
+                'descShangGuan': '伤官局的人感性多于理性，思维活跃，富有艺术家气质。他们对他有很强的同理心和理解能力，善于观察世界以及人与人之间的关系，热衷于感受美好的事物。',
+                'descYinZhong': '印中局的人理性占主导，喜欢讲道理，性格较为固执，不太容易听取他人的意见，自我意识很强。',
+                'descBiJian': '比肩局的人重义气，朋友通常较多，在团队中往往是兜底的角色，不怕辛苦，勇于担当。',
+                'descShaZhong': '煞重局的人风险意识强，做事情注重细节。他们往往有很强的执行力，对潜在问题有敏锐的洞察力。',
+                'descCaiWang': '财旺局的人执行能力强，他们将事业成功视为衡量自己的标准，同时也用这一标准去评判他人。在“想了再做”和“做了再想”之间，他们通常会选择后者。',
+                'elementDist': '您的八字中五行分布为：',
+                'elementMost': '其中{0}最为旺盛，{1}较为薄弱。',
+                'elementShangGuan': '伤官格的人需要{0}、{1}平衡发展，过分偏向任何一方都会影响运势。',
+                'elementYinZhong': '印中格的人需要保持{0}的稳定，{1}对您有辅助作用。',
+                'elementBiJian': '比肩格的您{0}气过旺，适当引入{1}或{2}来平衡。',
+                'elementShaZhong': '煞重格的您受到{0}的制约，适当引入{1}可以改善运势。',
+                'elementCaiWang': '财旺格的您需要平衡{0}和{1}之间的关系，避免过度追求物质导致失衡。',
+                'dayMasterText': '您的日主{0}属{1}，强度为{2}。{3}',
+                'dayMasterVeryStrong': '极强',
+                'dayMasterStrong': '强',
+                'dayMasterBalanced': '中和',
+                'dayMasterVeryWeak': '极弱',
+                'dayMasterWeak': '弱',
+                'dayMasterDescVeryStrong': '日主旺盛，根基稳固，有魄力和领导气质。',
+                'dayMasterDescStrong': '日主较强，个性坚定，有主见，适合担当重任。',
+                'dayMasterDescBalanced': '日主中和，性格平稳，能权衡利弊，适应性强。',
+                'dayMasterDescVeryWeak': '日主虚弱，需要扶助，性格敏感，易受环境影响。',
+                'dayMasterDescWeak': '日主偏弱，性格温和，有韧性，善于合作。',
+                'godText': '您的八字中，年干为{0}，月干为{1}，时干为{2}。',
+                'godShangGuan': '伤官格局中，伤官和食神的出现使您思维活跃，具有创新能力，适合从事艺术、设计、创意等工作。',
+                'godYinZhong': '印中格局下，正印和偏印的存在使您思维严谨，知识渊博，适合从事教育、研究、顾问等需要专业知识的工作。',
+                'godBiJian': '比肩格局中，比肩和劫财的组合使您独立自主，合作精神强，适合团队工作或领导职位。',
+                'godShaZhong': '煞重格局中，七杀和正官的存在使您纪律性强，具有执行力，适合从事规范化、制度化的工作。',
+                'godCaiWang': '财旺格局下，正财和偏财的出现使您有经济头脑，善于把握机会，适合从事商业、投资等工作。'
+            },
+            'ja': {
+                'title': '八字パターン分析',
+                'langZhTW': '繁体',
+                'langZhCN': '簡体',
+                'langJa': '日本語',
+                'langKo': '韓国語',
+                'yearLabel': '出生年',
+                'monthLabel': '出生月',
+                'dayLabel': '出生日',
+                'hourLabel': '出生時刻',
+                'selectOption': '選択してください',
+                'submitButton': '八字パターンを推算する',
+                'loadingText': '命格を推算中です。しばらくお待ちください…',
+                'patternTitle': '命局分析結果',
+                'elementAnalysisTitle': '五行分析',
+                'dayMasterAnalysisTitle': '日主の強弱',
+                'godAnalysisTitle': '十神の組み合わせ',
+                'month1': '1月', 'month2': '2月', 'month3': '3月', 'month4': '4月', 'month5': '5月', 'month6': '6月',
+                'month7': '7月', 'month8': '8月', 'month9': '9月', 'month10': '10月', 'month11': '11月', 'month12': '12月',
+                'day1': '1日', 'day2': '2日', 'day3': '3日', 'day4': '4日', 'day5': '5日', 'day6': '6日', 'day7': '7日',
+                'day8': '8日', 'day9': '9日', 'day10': '10日', 'day11': '11日', 'day12': '12日', 'day13': '13日', 'day14': '14日',
+                'day15': '15日', 'day16': '16日', 'day17': '17日', 'day18': '18日', 'day19': '19日', 'day20': '20日', 'day21': '21日',
+                'day22': '22日', 'day23': '23日', 'day24': '24日', 'day25': '25日', 'day26': '26日', 'day27': '27日', 'day28': '28日',
+                'day29': '29日', 'day30': '30日',
+                'hour1': '子時 (23:00-00:59)', 'hour2': '丑時 (01:00-02:59)', 'hour3': '寅時 (03:00-04:59)', 'hour4': '卯時 (05:00-06:59)',
+                'hour5': '辰時 (07:00-08:59)', 'hour6': '巳時 (09:00-10:59)', 'hour7': '午時 (11:00-12:59)', 'hour8': '未時 (13:00-14:59)',
+                'hour9': '申時 (15:00-16:59)', 'hour10': '酉時 (17:00-18:59)', 'hour11': '戌時 (19:00-20:59)', 'hour12': '亥時 (21:00-22:59)',
+                'yearPillar': '年柱', 'monthPillar': '月柱', 'dayPillar': '日柱', 'hourPillar': '時柱',
+                'patternDescriptionPlaceholder': '出生情報を入力して命局の説明をご覧ください',
+                'elementAnalysisPlaceholder': '出生情報を入力して五行分析をご覧ください',
+                'dayMasterAnalysisPlaceholder': '出生情報を入力して日主の強弱をご覧ください',
+                'godAnalysisPlaceholder': '出生情報を入力して十神の組み合わせをご覧ください',
+                'patternShangGuan': '傷官局',
+                'patternYinZhong': '印中局',
+                'patternBiJian': '比肩局',
+                'patternShaZhong': '煞重局',
+                'patternCaiWang': '財旺局',
+                'descShangGuan': '傷官局の人は感性が理性よりも強く、思考が活発で芸術家的気質を持っています。他人への共感力と理解力が高く、世界や人間関係を観察することに優れ、美しいものに強く惹かれます。',
+                'descYinZhong': '印中局の人は理性が主導的で、道理を重んじる性格です。頑固な一面があり、他人の意見を聞き入れるのが苦手で、自己意識が強い傾向があります。',
+                'descBiJian': '比肩局の人は義理を大切にし、友人が多く、チームでは支える役割を担うことが多いです。苦労を恐れず、責任感が強い性格です。',
+                'descShaZhong': '煞重局の人はリスク意識が高く、細部にまで注意を払います。実行力があり、潜在的な問題に対する鋭い洞察力を持っています。',
+                'descCaiWang': '財旺局の人は実行力があり、キャリアの成功を自己評価の基準とします。同時に他人もこの基準で判断します。「考えてから行動する」より「行動してから考える」を選ぶ傾向があります。',
+                'elementDist': 'あなたの八字における五行の分布は次の通りです：',
+                'elementMost': 'その中で{0}が最も強く、{1}がやや弱いです。',
+                'elementShangGuan': '傷官格の人は{0}と{1}のバランスが重要です。どちらかに偏りすぎると運勢に影響します。',
+                'elementYinZhong': '印中格の人は{0}の安定を保つ必要があります。{1}はあなたを補佐します。',
+                'elementBiJian': '比肩格のあなたは{0}が強すぎるため、{1}や{2}を適度に取り入れてバランスを調整してください。',
+                'elementShaZhong': '煞重格のあなたは{0}に制約されています。{1}を適度に取り入れると運勢が改善します。',
+                'elementCaiWang': '財旺格のあなたは{0}と{1}の関係を調整し、物質的な追求が過度にならないよう注意してください。',
+                'dayMasterText': 'あなたの日の主{0}は{1}に属し、強度は{2}です。{3}',
+                'dayMasterVeryStrong': '非常に強い',
+                'dayMasterStrong': '強い',
+                'dayMasterBalanced': '中和',
+                'dayMasterVeryWeak': '非常に弱い',
+                'dayMasterWeak': '弱い',
+                'dayMasterDescVeryStrong': '日主が非常に強く、基盤がしっかりしており、リーダーシップと決断力があります。',
+                'dayMasterDescStrong': '日主が強く、個性がしっかりしていて意見が明確で、重責を担うのに適しています。',
+                'dayMasterDescBalanced': '日主が中和で、性格が穏やかで利害をバランスよく判断でき、適応力があります。',
+                'dayMasterDescVeryWeak': '日主が非常に弱く、サポートが必要で、感受性が強く環境に影響されやすいです。',
+                'dayMasterDescWeak': '日主がやや弱く、穏やかな性格で粘り強さがあり、協力に優れています。',
+                'godText': 'あなたの八字では、年干が{0}、月干が{1}、時干が{2}です。',
+                'godShangGuan': '傷官格局では、傷官と食神が現れることで思考が活発になり、創造力が高く、芸術、デザイン、クリエイティブな仕事に適しています。',
+                'godYinZhong': '印中格局では、正印と偏印があることで思考が厳密で知識が豊富、教育、研究、コンサルタントなどの専門職に適しています。',
+                'godBiJian': '比肩格局では、比肩と劫財の組み合わせにより自立心が強く、協力的な精神があり、チームワークやリーダー役に適しています。',
+                'godShaZhong': '煞重格局では、七殺と正官があることで規律が強く、実行力があり、規範的で制度的な仕事に適しています。',
+                'godCaiWang': '財旺格局では、正財と偏財が現れることで経済的センスがあり、機会を掴むのが得意で、商業や投資に適しています。'
+            },
+            'ko': {
+                'title': '팔자 패턴 분석',
+                'langZhTW': '번체',
+                'langZhCN': '간체',
+                'langJa': '일본어',
+                'langKo': '한국어',
+                'yearLabel': '출생 연도',
+                'monthLabel': '출생 월',
+                'dayLabel': '출생 일',
+                'hourLabel': '출생 시辰',
+                'selectOption': '선택하세요',
+                'submitButton': '팔자 패턴 계산',
+                'loadingText': '명격을 계산 중입니다, 잠시 기다려 주세요...',
+                'patternTitle': '명국 분석 결과',
+                'elementAnalysisTitle': '오행 분석',
+                'dayMasterAnalysisTitle': '일주 강약',
+                'godAnalysisTitle': '십신 조합',
+                'month1': '1월', 'month2': '2월', 'month3': '3월', 'month4': '4월', 'month5': '5월', 'month6': '6월',
+                'month7': '7월', 'month8': '8월', 'month9': '9월', 'month10': '10월', 'month11': '11월', 'month12': '12월',
+                'day1': '1일', 'day2': '2일', 'day3': '3일', 'day4': '4일', 'day5': '5일', 'day6': '6일', 'day7': '7일',
+                'day8': '8일', 'day9': '9일', 'day10': '10일', 'day11': '11일', 'day12': '12일', 'day13': '13일', 'day14': '14일',
+                'day15': '15일', 'day16': '16일', 'day17': '17일', 'day18': '18일', 'day19': '19일', 'day20': '20일', 'day21': '21일',
+                'day22': '22일', 'day23': '23일', 'day24': '24일', 'day25': '25일', 'day26': '26일', 'day27': '27일', 'day28': '28일',
+                'day29': '29일', 'day30': '30일',
+                'hour1': '자시 (23:00-00:59)', 'hour2': '축시 (01:00-02:59)', 'hour3': '인시 (03:00-04:59)', 'hour4': '묘시 (05:00-06:59)',
+                'hour5': '진시 (07:00-08:59)', 'hour6': '사시 (09:00-10:59)', 'hour7': '오시 (11:00-12:59)', 'hour8': '미시 (13:00-14:59)',
+                'hour9': '신시 (15:00-16:59)', 'hour10': '유시 (17:00-18:59)', 'hour11': '술시 (19:00-20:59)', 'hour12': '해시 (21:00-22:59)',
+                'yearPillar': '년주', 'monthPillar': '월주', 'dayPillar': '일주', 'hourPillar': '시주',
+                'patternDescriptionPlaceholder': '출생 정보를 입력하여 명국 설명을 확인하세요',
+                'elementAnalysisPlaceholder': '출생 정보를 입력하여 오행 분석을 확인하세요',
+                'dayMasterAnalysisPlaceholder': '출생 정보를 입력하여 일주 강약을 확인하세요',
+                'godAnalysisPlaceholder': '출생 정보를 입력하여 십신 조합을 확인하세요',
+                'patternShangGuan': '상관국',
+                'patternYinZhong': '인지국',
+                'patternBiJian': '비견국',
+                'patternShaZhong': '살중국',
+                'patternCaiWang': '재왕국',
+                'descShangGuan': '상관국의 사람은 감성이 이성보다 강하며, 사고가 활발하고 예술가적 기질을 가지고 있습니다. 타인에 대한 강한 공감력과 이해 능력이 있으며, 세상과 사람들 간의 관계를 관찰하는 데 능숙하고 아름다운 것을 느끼는 데 열중합니다。',
+                'descYinZhong': '인지국의 사람은 이성이 주도적이며, 이치를 따지는 것을 좋아하고 성격이 고집스러워 타인의 의견을 잘 받아들이지 않으며, 자아 의식이 강합니다。',
+                'descBiJian': '비견국의 사람은 의리를 중시하며, 친구가 많고 팀 내에서 받쳐주는 역할을 맡는 경우가 많으며, 고난을 두려워하지 않고 책임감이 강합니다。',
+                'descShaZhong': '살중국의 사람은 위험 의식이 강하고, 세부 사항에 주의를 기울입니다. 실행력이 매우 강하며 잠재적 문제에 대한 예리한 통찰력을 가지고 있습니다。',
+                'descCaiWang': '재왕국의 사람은 실행력이 강하며, 사업 성공을 자신의 기준으로 삼고, 타인도 이 기준으로 평가합니다. "생각한 후 행동"과 "행동한 후 생각" 중에서 보통 후자를 선택합니다。',
+                'elementDist': '당신의 팔자에서 오행 분포는 다음과 같습니다:',
+                'elementMost': '그중 {0}가 가장 강하고, {1}가 비교적 약합니다。',
+                'elementShangGuan': '상관격의 사람은 {0}와 {1}의 균형이 필요하며, 어느 한쪽으로 너무 치우치면 운세에 영향을 미칩니다。',
+                'elementYinZhong': '인지격의 사람은 {0}의 안정성을 유지해야 하며, {1}이 당신을 보조합니다。',
+                'elementBiJian': '비견격의 당신은 {0}가 너무 강하므로, {1} 또는 {2}를 적절히 도입해 균형을 맞추는 것이 필요합니다。',
+                'elementShaZhong': '살중격의 당신은 {0}에 의해 제약을 받으며, {1}을 적절히 도입하면 운세를 개선할 수 있습니다。',
+                'elementCaiWang': '재왕격의 당신은 {0}와 {1} 간의 관계를 균형 있게 유지해야 하며, 물질 추구가 과도해 불균형이 되지 않도록 주의해야 합니다。',
+                'dayMasterText': '당신의 일주 {0}는 {1}에 속하며, 강도는 {2}입니다. {3}',
+                'dayMasterVeryStrong': '매우 강함',
+                'dayMasterStrong': '강함',
+                'dayMasterBalanced': '중화',
+                'dayMasterVeryWeak': '매우 약함',
+                'dayMasterWeak': '약함',
+                'dayMasterDescVeryStrong': '일주가 왕성하며, 기반이 튼튼하고, 패기와 리더십이 있습니다。',
+                'dayMasterDescStrong': '일주가 강하며, 성격이 확고하고 주관이 뚜렷해 중책을 맡기에 적합합니다。',
+                'dayMasterDescBalanced': '일주가 중화되어 성격이 안정적이고, 이해득실을 잘 따질 수 있으며 적응력이 강합니다。',
+                'dayMasterDescVeryWeak': '일주가 허약해 도움이 필요하며, 성격이 민감하고 환경에 영향을 받기 쉽습니다。',
+                'dayMasterDescWeak': '일주가 약하며, 성격이 온화하고 인내심이 있으며 협력에 능합니다。',
+                'godText': '당신의 팔자에서 년간은 {0}, 월간은 {1}, 시간은 {2}입니다。',
+                'godShangGuan': '상관격에서는 상관과 식신의 출현으로 사고가 활발하고 혁신 능력이 있어 예술, 디자인, 창의적인 일에 적합합니다。',
+                'godYinZhong': '인지격에서는 정인과 편인의 존재로 사고가 치밀하고 지식이 풍부해 교육, 연구, 컨설턴트 등 전문 지식이 필요한 일에 적합합니다。',
+                'godBiJian': '비견격에서는 비견과 겁재의 조합으로 독립심이 강하고 협력 정신이 있어 팀워크나 리더 직책에 적합합니다。',
+                'godShaZhong': '살중격에서는 칠살과 정관의 존재로 규율이 강하고 실행력이 있어 규범화된 제도적 일에 적합합니다。',
+                'godCaiWang': '재왕격에서는 정재와 편재의 출현으로 경제적 두뇌가 있고 기회를 잘 잡아 상업, 투자 일에 적합합니다。'
+            }
+        };
+
+        // 设置语言函数，确保翻译生效
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            document.documentElement.lang = lang;
+            document.getElementById('languageSelect').value = lang; // 同步下拉框选择
+        }
+
+        // 天干地支數據
+        const heavenlyStems = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const earthlyBranches = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+        const hoursNames = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+        
+        // 五行屬性
+        const elements = {
+            "甲": "木", "乙": "木",
+            "丙": "火", "丁": "火",
+            "戊": "土", "己": "土",
+            "庚": "金", "辛": "金",
+            "壬": "水", "癸": "水",
+            "子": "水", "丑": "土",
+            "寅": "木", "卯": "木",
+            "辰": "土", "巳": "火",
+            "午": "火", "未": "土",
+            "申": "金", "酉": "金",
+            "戌": "土", "亥": "水"
+        };
+        
+        // 五行生克關係
+        const elementRelations = {
+            "木": { "生": "火", "克": "土", "被生": "水", "被克": "金" },
+            "火": { "生": "土", "克": "金", "被生": "木", "被克": "水" },
+            "土": { "生": "金", "克": "水", "被生": "火", "被克": "木" },
+            "金": { "生": "水", "克": "木", "被生": "土", "被克": "火" },
+            "水": { "生": "木", "克": "火", "被生": "金", "被克": "土" }
+        };
+        
+        // 十神名稱
+        const tenGods = {
+            "甲": { "甲": "比肩", "乙": "劫財", "丙": "食神", "丁": "傷官", "戊": "偏財", "己": "正財", "庚": "七殺", "辛": "正官", "壬": "偏印", "癸": "正印" },
+            "乙": { "甲": "劫財", "乙": "比肩", "丙": "傷官", "丁": "食神", "戊": "正財", "己": "偏財", "庚": "正官", "辛": "七殺", "壬": "正印", "癸": "偏印" },
+            "丙": { "甲": "偏印", "乙": "正印", "丙": "比肩", "丁": "劫財", "戊": "食神", "己": "傷官", "庚": "偏財", "辛": "正財", "壬": "七殺", "癸": "正官" },
+            "丁": { "甲": "正印", "乙": "偏印", "丙": "劫財", "丁": "比肩", "戊": "傷官", "己": "食神", "庚": "正財", "辛": "偏財", "壬": "正官", "癸": "七殺" },
+            "戊": { "甲": "七殺", "乙": "正官", "丙": "偏印", "丁": "正印", "戊": "比肩", "己": "劫財", "庚": "食神", "辛": "傷官", "壬": "偏財", "癸": "正財" },
+            "己": { "甲": "正官", "乙": "七殺", "丙": "正印", "丁": "偏印", "戊": "劫財", "己": "比肩", "庚": "傷官", "辛": "食神", "壬": "正財", "癸": "偏財" },
+            "庚": { "甲": "偏財", "乙": "正財", "丙": "七殺", "丁": "正官", "戊": "偏印", "己": "正印", "庚": "比肩", "辛": "劫財", "壬": "食神", "癸": "傷官" },
+            "辛": { "甲": "正財", "乙": "偏財", "丙": "正官", "丁": "七殺", "戊": "正印", "己": "偏印", "庚": "劫財", "辛": "比肩", "壬": "傷官", "癸": "食神" },
+            "壬": { "甲": "食神", "乙": "傷官", "丙": "偏財", "丁": "正財", "戊": "七殺", "己": "正官", "庚": "偏印", "辛": "正印", "壬": "比肩", "癸": "劫財" },
+            "癸": { "甲": "傷官", "乙": "食神", "丙": "正財", "丁": "偏財", "戊": "正官", "己": "七殺", "庚": "正印", "辛": "偏印", "壬": "劫財", "癸": "比肩" }
+        };
+        
+        // 更新農曆月份對應的日期選項
+        function updateDayOptions(month) {
+            const daySelect = document.getElementById('day');
+            const options = daySelect.querySelectorAll('option');
+            let maxDays = 30; // 默認大月
+            if ([2, 4, 6, 9, 11].includes(parseInt(month))) {
+                maxDays = 29; // 小月
+            }
+            for (let i = 1; i < options.length; i++) {
+                const day = parseInt(options[i].value);
+                options[i].style.display = day <= maxDays ? '' : 'none';
+            }
+        }
+        
+        // 計算農曆年的天干地支（簡化版，建議使用專業農曆庫）
+        function getLunarYearGanZhi(year) {
+            const baseYear = 1900; // 1900年為庚子年
+            const ganIndex = (year - baseYear) % 10;
+            const zhiIndex = (year - baseYear) % 12;
+            return {
+                gan: heavenlyStems[(ganIndex + 6) % 10], // 庚為第7天干
+                zhi: earthlyBranches[(zhiIndex + 0) % 12] // 子為第1地支
+            };
+        }
+        
+        // 簡化的農曆月干支計算（建議使用專業農曆庫）
+        function getLunarMonthGanZhi(year, month) {
+            const yearGan = getLunarYearGanZhi(year).gan;
+            const ganStartIndex = heavenlyStems.indexOf(yearGan);
+            let ganIndex = (ganStartIndex * 2 + parseInt(month) + 2) % 10;
+            let zhiIndex = (parseInt(month) + 2 - 1) % 12;
+            return {
+                gan: heavenlyStems[ganIndex],
+                zhi: earthlyBranches[zhiIndex]
+            };
+        }
+        
+        // 簡化的農曆日干支計算（建議使用專業農曆庫）
+        function getLunarDayGanZhi(year, month, day) {
+            const baseDate = new Date(1900, 0, 1); // 1900年1月1日為甲子日
+            const targetDate = new Date(year, month - 1, day);
+            const diffDays = Math.floor((targetDate - baseDate) / (24 * 60 * 60 * 1000));
+            const ganIndex = diffDays % 10;
+            const zhiIndex = diffDays % 12;
+            return {
+                gan: heavenlyStems[ganIndex],
+                zhi: earthlyBranches[zhiIndex]
+            };
+        }
+        
+        // 獲取時辰干支
+        function getHourGanZhi(dayGan, hour) {
+            let startGan;
+            switch (dayGan) {
+                case "甲": case "己": startGan = 0; break; // 甲
+                case "乙": case "庚": startGan = 2; break; // 丙
+                case "丙": case "辛": startGan = 4; break; // 戊
+                case "丁": case "壬": startGan = 6; break; // 庚
+                case "戊": case "癸": startGan = 8; break; // 壬
+                default: startGan = 0;
+            }
+            const ganIndex = (startGan + Math.floor((hour - 1) / 2)) % 10;
+            const zhiIndex = hour - 1; // hour從1到12對應子到亥
+            return {
+                gan: heavenlyStems[ganIndex],
+                zhi: earthlyBranches[zhiIndex]
+            };
+        }
+        
+                // 計算八字
+        function calculateBazi(year, month, day, hour) {
+            const yearGanZhi = getLunarYearGanZhi(year);
+            const monthGanZhi = getLunarMonthGanZhi(year, month);
+            const dayGanZhi = getLunarDayGanZhi(year, month, day);
+            const hourGanZhi = getHourGanZhi(dayGanZhi.gan, hour);
+
+            return {
+                year: { gan: yearGanZhi.gan, zhi: yearGanZhi.zhi },
+                month: { gan: monthGanZhi.gan, zhi: monthGanZhi.zhi },
+                day: { gan: dayGanZhi.gan, zhi: dayGanZhi.zhi },
+                hour: { gan: hourGanZhi.gan, zhi: hourGanZhi.zhi }
+            };
+        }
+
+        // 分析五行分佈
+        function analyzeElements(bazi) {
+            const elementCount = { "木": 0, "火": 0, "土": 0, "金": 0, "水": 0 };
+            const pillars = [bazi.year, bazi.month, bazi.day, bazi.hour];
+            pillars.forEach(pillar => {
+                elementCount[elements[pillar.gan]]++;
+                elementCount[elements[pillar.zhi]]++;
+            });
+            return elementCount;
+        }
+
+        // 確定格局（簡化版）
+        function determinePattern(bazi, elementCount) {
+            const dayMaster = bazi.day.gan;
+            const gods = [
+                tenGods[dayMaster][bazi.year.gan],
+                tenGods[dayMaster][bazi.month.gan],
+                tenGods[dayMaster][bazi.hour.gan]
+            ];
+
+            if (gods.includes("傷官") || gods.includes("食神")) return "patternShangGuan";
+            if (gods.includes("正印") || gods.includes("偏印")) return "patternYinZhong";
+            if (gods.includes("比肩") || gods.includes("劫財")) return "patternBiJian";
+            if (gods.includes("七殺") || gods.includes("正官")) return "patternShaZhong";
+            if (gods.includes("正財") || gods.includes("偏財")) return "patternCaiWang";
+            return "patternShangGuan"; // 默認
+        }
+
+        // 分析日主強弱（簡化版）
+        function analyzeDayMasterStrength(bazi, elementCount) {
+            const dayMasterElement = elements[bazi.day.gan];
+            let strengthScore = elementCount[dayMasterElement];
+            const supportingElement = elementRelations[dayMasterElement].被生;
+            const opposingElement = elementRelations[dayMasterElement].被克;
+            strengthScore += elementCount[supportingElement] * 0.5;
+            strengthScore -= elementCount[opposingElement] * 0.5;
+
+            if (strengthScore >= 4) return "dayMasterVeryStrong";
+            if (strengthScore >= 3) return "dayMasterStrong";
+            if (strengthScore >= 2) return "dayMasterBalanced";
+            if (strengthScore >= 1) return "dayMasterWeak";
+            return "dayMasterVeryWeak";
+        }
+
+        // 生成結果
+        function displayResult(bazi) {
+            const currentLang = document.getElementById('languageSelect').value;
+            const baziGrid = document.getElementById('baziGrid');
+            baziGrid.innerHTML = '';
+            const pillars = [
+                { title: translations[currentLang].yearPillar, gan: bazi.year.gan, zhi: bazi.year.zhi },
+                { title: translations[currentLang].monthPillar, gan: bazi.month.gan, zhi: bazi.month.zhi },
+                { title: translations[currentLang].dayPillar, gan: bazi.day.gan, zhi: bazi.day.zhi },
+                { title: translations[currentLang].hourPillar, gan: bazi.hour.gan, zhi: bazi.hour.zhi }
+            ];
+
+            pillars.forEach((pillar, index) => {
+                const item = document.createElement('div');
+                item.className = 'bazi-item';
+                item.innerHTML = `
+                    <h3>${pillar.title}</h3>
+                    <p class="bazi-character">${pillar.gan}</p>
+                    <p class="bazi-character">${pillar.zhi}</p>
+                    <p class="element">${elements[pillar.gan]} - ${elements[pillar.zhi]}</p>
+                `;
+                baziGrid.appendChild(item);
+                setTimeout(() => {
+                    item.style.animation = 'pulse 2s infinite alternate, fadeIn 0.5s ease-out forwards';
+                }, index * 100);
+            });
+
+            const elementCount = analyzeElements(bazi);
+            const pattern = determinePattern(bazi, elementCount);
+            const dayMasterStrength = analyzeDayMasterStrength(bazi, elementCount);
+
+            // 五行分析
+            const maxElement = Object.keys(elementCount).reduce((a, b) => elementCount[a] > elementCount[b] ? a : b);
+            const minElement = Object.keys(elementCount).reduce((a, b) => elementCount[a] < elementCount[b] ? a : b);
+            const elementDist = `${translations[currentLang].elementDist} 木: ${elementCount["木"]}, 火: ${elementCount["火"]}, 土: ${elementCount["土"]}, 金: ${elementCount["金"]}, 水: ${elementCount["水"]}`;
+            const elementMost = translations[currentLang].elementMost.replace("{0}", maxElement).replace("{1}", minElement);
+            const elementAnalysisText = `${elementDist}<br>${elementMost}<br>${translations[currentLang][`element${pattern.replace("pattern", "")}`].replace("{0}", maxElement).replace("{1}", minElement).replace("{2}", elementRelations[maxElement].生)}`;
+            document.getElementById('elementAnalysis').innerHTML = elementAnalysisText;
+
+            // 日主強弱
+            const dayMasterText = translations[currentLang].dayMasterText
+                .replace("{0}", bazi.day.gan)
+                .replace("{1}", elements[bazi.day.gan])
+                .replace("{2}", translations[currentLang][dayMasterStrength])
+                .replace("{3}", translations[currentLang][`dayMasterDesc${dayMasterStrength.replace("dayMaster", "")}`]);
+            document.getElementById('dayMasterAnalysis').innerHTML = dayMasterText;
+
+            // 十神分析
+            const gods = [
+                tenGods[bazi.day.gan][bazi.year.gan],
+                tenGods[bazi.day.gan][bazi.month.gan],
+                tenGods[bazi.day.gan][bazi.hour.gan]
+            ];
+            const godText = translations[currentLang].godText
+                .replace("{0}", gods[0])
+                .replace("{1}", gods[1])
+                .replace("{2}", gods[2]);
+            document.getElementById('godAnalysis').innerHTML = `${godText}<br>${translations[currentLang][`god${pattern.replace("pattern", "")}`]}`;
+
+            // 格局描述
+            document.getElementById('patternTitle').textContent = translations[currentLang][pattern];
+            document.getElementById('patternDescription').textContent = translations[currentLang][`desc${pattern.replace("pattern", "")}`];
+
+            document.getElementById('resultContainer').style.display = 'block';
+            document.getElementById('loadingScreen').style.display = 'none';
+        }
+
+        // 表單提交處理
+        document.getElementById('baziForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const year = parseInt(document.getElementById('year').value);
+            const month = parseInt(document.getElementById('month').value);
+            const day = parseInt(document.getElementById('day').value);
+            const hour = parseInt(document.getElementById('hour').value);
+
+            if (!year || !month || !day || !hour) {
+                alert("請填寫所有欄位！");
+                return;
+            }
+
+            document.getElementById('loadingScreen').style.display = 'flex';
+            setTimeout(() => {
+                const bazi = calculateBazi(year, month, day, hour);
+                displayResult(bazi);
+            }, 1500); // 模擬計算延遲
+        });
+
+        // 動態更新日期選項
+        document.getElementById('month').addEventListener('change', function() {
+            updateDayOptions(this.value);
+        });
+
+        // 浮動元素動畫
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const symbols = ["木", "火", "土", "金", "水"];
+            for (let i = 0; i < 20; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'element-symbol';
+                symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.style.left = `${Math.random() * 100}vw`;
+                symbol.style.animationDuration = `${15 + Math.random() * 10}s`;
+                symbol.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(symbol);
+            }
+        }
+
+        // 初始化
+        window.onload = function() {
+            setLanguage('zh-TW'); // 默認繁體中文
+            createFloatingElements();
+            updateDayOptions(document.getElementById('month').value);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,2393 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八字命盤推算系統</title>
+    <link rel="stylesheet" href="styles.css">
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft JhengHei", "微軟正黑體", "SimHei", "STHeiti", "STXihei", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%2310002b" width="100" height="100"/><circle fill="%23ffffff" opacity="0.05" cx="10" cy="10" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="30" cy="20" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="50" cy="30" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="70" cy="40" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="90" cy="50" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="10" cy="60" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="30" cy="70" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="50" cy="80" r="1"/><circle fill="%23ffffff" opacity="0.05" cx="70" cy="90" r="1"/></svg>');
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            text-shadow: 0 0 10px rgba(247, 37, 133, 0.7);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(247, 37, 133, 0.7);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(247, 37, 133, 1), 0 0 30px rgba(247, 37, 133, 0.8);
+            }
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(58, 12, 163, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn.active {
+            background-color: var(--accent-color);
+        }
+
+        .language-btn:hover {
+            background-color: rgba(114, 9, 183, 0.5);
+        }
+
+        .form-container {
+            background-color: rgba(58, 12, 163, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(114, 9, 183, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--success-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: rgba(10, 0, 43, 0.7);
+            border: 1px solid rgba(114, 9, 183, 0.5);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(247, 37, 133, 0.5);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border: none;
+            padding: 1rem 2rem;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto;
+            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(247, 37, 133, 0.6);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .results {
+            background-color: rgba(58, 12, 163, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(114, 9, 183, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, var(--bg-color) 70%);
+            opacity: 0.1;
+            animation: ripple 15s linear infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-header h2 {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .bazi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bazi-cell {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(114, 9, 183, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(114, 9, 183, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bazi-cell:hover {
+            transform: scale(1.05);
+            background-color: rgba(114, 9, 183, 0.3);
+        }
+
+        .bazi-cell::after {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at center, rgba(76, 201, 240, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .bazi-cell:hover::after {
+            opacity: 1;
+        }
+
+        .bazi-label {
+            font-size: 1.1rem;
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .bazi-value {
+            font-size: 2rem;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .bazi-subvalue {
+            font-size: 1rem;
+            color: rgba(233, 236, 239, 0.7);
+            margin-top: 0.3rem;
+        }
+
+        .wuxing-chart {
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .wuxing-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+
+        .wuxing-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .wuxing-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .wuxing-label {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .wuxing-bar {
+            height: 120px;
+            background-color: rgba(76, 201, 240, 0.1);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(114, 9, 183, 0.3);
+        }
+
+        .wuxing-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, var(--accent-color), var(--secondary-color));
+            transition: height 1s ease-out;
+        }
+
+        .wuxing-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text-color);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .geju-result {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .geju-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .geju-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+        }
+
+        .geju-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: left;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+            color: rgba(233, 236, 239, 0.9);
+        }
+
+        .element-chart {
+            width: 100%;
+            height: 250px;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: rgba(233, 236, 239, 0.6);
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(16, 0, 43, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loader {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 1rem;
+        }
+
+        .loader:before, .loader:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid transparent;
+            border-top-color: var(--secondary-color);
+        }
+
+        .loader:before {
+            animation: spin 2s linear infinite;
+            z-index: 100;
+        }
+
+        .loader:after {
+            border-top-color: var(--accent-color);
+            animation: spin 3s linear infinite;
+        }
+
+        .loading-text {
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .floating-symbols {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .symbol {
+            position: absolute;
+            color: rgba(114, 9, 183, 0.2);
+            font-size: 2rem;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .shishen-analysis {
+            margin-top: 2rem;
+            border-top: 1px solid rgba(114, 9, 183, 0.3);
+            padding-top: 1.5rem;
+        }
+
+        .shishen-title {
+            font-size: 1.5rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .shishen-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .shishen-item {
+            background-color: rgba(76, 201, 240, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid rgba(114, 9, 183, 0.3);
+        }
+
+        .shishen-name {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .shishen-count {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .shishen-desc {
+            font-size: 0.9rem;
+            color: rgba(233, 236, 239, 0.8);
+        }
+
+        .details-section {
+            margin-top: 2rem;
+        }
+
+        .details-title {
+            font-size: 1.5rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .detail-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba(114, 9, 183, 0.3);
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-active {
+            display: block;
+        }
+
+        .year-selector {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .year-selector select {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .language-selector {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+
+            .bazi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-container, .results {
+                padding: 1.5rem;
+            }
+
+            .wuxing-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .shishen-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wuxing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bazi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-symbols" id="floatingSymbols"></div>
+    <div class="loading" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <div class="loading-text" id="loadingText">計算八字命盤中...</div>
+        </div>
+    </div>
+    <div class="container">
+        <header>
+            <h1 id="mainTitle">八字命盤推算系統</h1>
+            <div class="language-selector">
+                <button class="language-btn active" data-lang="zh-Hant">繁體中文</button>
+                <button class="language-btn" data-lang="zh-Hans">简体中文</button>
+                <button class="language-btn" data-lang="en">English</button>
+                <button class="language-btn" data-lang="ja">日本語</button>
+                <button class="language-btn" data-lang="ko">한국어</button>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <div class="form-group">
+                <label id="labelYear">出生年份：</label>
+                <select id="lunarYear">
+                    <!-- 将通过JavaScript动态填充 -->
+                </select>
+                <div id="yearError" class="error-message">請選擇有效的出生年份</div>
+            </div>
+            <div class="form-group">
+                <label id="labelMonth">出生月份：</label>
+                <select id="lunarMonth">
+                    <option value="1">正月</option>
+                    <option value="2">二月</option>
+                    <option value="3">三月</option>
+                    <option value="4">四月</option>
+                    <option value="5">五月</option>
+                    <option value="6">六月</option>
+                    <option value="7">七月</option>
+                    <option value="8">八月</option>
+                    <option value="9">九月</option>
+                    <option value="10">十月</option>
+                    <option value="11">十一月</option>
+                    <option value="12">十二月</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="labelDay">出生日期：</label>
+                <select id="lunarDay">
+                    <!-- 将通过JavaScript动态更新 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="labelHour">出生時辰：</label>
+                <select id="lunarHour">
+                    <option value="1">子時 (23:00-01:00)</option>
+                    <option value="2">丑時 (01:00-03:00)</option>
+                    <option value="3">寅時 (03:00-05:00)</option>
+                    <option value="4">卯時 (05:00-07:00)</option>
+                    <option value="5">辰時 (07:00-09:00)</option>
+                    <option value="6">巳時 (09:00-11:00)</option>
+                    <option value="7">午時 (11:00-13:00)</option>
+                    <option value="8">未時 (13:00-15:00)</option>
+                    <option value="9">申時 (15:00-17:00)</option>
+                    <option value="10">酉時 (17:00-19:00)</option>
+                    <option value="11">戌時 (19:00-21:00)</option>
+                    <option value="12">亥時 (21:00-23:00)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="labelGender">性別：</label>
+                <select id="gender">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+            </div>
+            <button id="calculateBtn">推算命盤</button>
+        </div>
+
+        <div class="results" id="resultsContainer">
+            <div class="result-header">
+                <h2 id="resultTitle">您的八字命盤</h2>
+            </div>
+            <div class="bazi-grid">
+                <div class="bazi-cell">
+                    <div class="bazi-label" id="yearLabel">年柱</div>
+                    <div class="bazi-value" id="yearStem">甲</div>
+                    <div class="bazi-value" id="yearBranch">子</div>
+                    <div class="bazi-subvalue" id="yearHidden">癸水</div>
+                </div>
+                <div class="bazi-cell">
+                    <div class="bazi-label" id="monthLabel">月柱</div>
+                    <div class="bazi-value" id="monthStem">乙</div>
+                    <div class="bazi-value" id="monthBranch">丑</div>
+                    <div class="bazi-subvalue" id="monthHidden">癸水 己土 辛金</div>
+                </div>
+                <div class="bazi-cell">
+                    <div class="bazi-label" id="dayLabel">日柱</div>
+                    <div class="bazi-value" id="dayStem">丙</div>
+                    <div class="bazi-value" id="dayBranch">寅</div>
+                    <div class="bazi-subvalue" id="dayHidden">甲木 丙火 戊土</div>
+                </div>
+                <div class="bazi-cell">
+                    <div class="bazi-label" id="hourLabel">時柱</div>
+                    <div class="bazi-value" id="hourStem">丁</div>
+                    <div class="bazi-value" id="hourBranch">卯</div>
+                    <div class="bazi-subvalue" id="hourHidden">乙木</div>
+                </div>
+            </div>
+
+            <div class="wuxing-chart">
+                <div class="wuxing-title" id="wuxingTitle">五行分佈圖</div>
+                <div class="wuxing-grid">
+                    <div class="wuxing-item">
+                        <div class="wuxing-label" id="woodLabel">木</div>
+                        <div class="wuxing-bar">
+                            <div class="wuxing-fill" id="woodFill" style="height: 0%;"></div>
+                            <div class="wuxing-value" id="woodValue">0</div>
+                        </div>
+                    </div>
+                    <div class="wuxing-item">
+                        <div class="wuxing-label" id="fireLabel">火</div>
+                        <div class="wuxing-bar">
+                            <div class="wuxing-fill" id="fireFill" style="height: 0%;"></div>
+                            <div class="wuxing-value" id="fireValue">0</div>
+                        </div>
+                    </div>
+                    <div class="wuxing-item">
+                        <div class="wuxing-label" id="earthLabel">土</div>
+                        <div class="wuxing-bar">
+                            <div class="wuxing-fill" id="earthFill" style="height: 0%;"></div>
+                            <div class="wuxing-value" id="earthValue">0</div>
+                        </div>
+                    </div>
+                    <div class="wuxing-item">
+                        <div class="wuxing-label" id="metalLabel">金</div>
+                        <div class="wuxing-bar">
+                            <div class="wuxing-fill" id="metalFill" style="height: 0%;"></div>
+                            <div class="wuxing-value" id="metalValue">0</div>
+                        </div>
+                    </div>
+                    <div class="wuxing-item">
+                        <div class="wuxing-label" id="waterLabel">水</div>
+                        <div class="wuxing-bar">
+                            <div class="wuxing-fill" id="waterFill" style="height: 0%;"></div>
+                            <div class="wuxing-value" id="waterValue">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shishen-analysis">
+                <div class="shishen-title" id="shishenTitle">十神分析</div>
+                <div class="shishen-grid" id="shishenGrid">
+                    <!-- Will be filled dynamically -->
+                </div>
+            </div>
+
+            <div class="geju-result">
+                <div class="geju-title" id="gejuTitle">你的格局：<span id="gejuType">印中格局</span></div>
+                <div class="geju-description" id="gejuDescription">
+                    印中格局的人理性占主導，喜歡講道理，性格較為固執，不太容易聽取他人的意見，自我意識很強。
+                </div>
+            </div>
+
+            <div class="details-section">
+                <div class="details-title" id="detailsTitle">詳細分析</div>
+                <div id="detailsList">
+                    <!-- Will be filled dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p id="footerText">© 2025 八字命盤推算系統 - 專業八字分析工具</p>
+        </footer>
+    </div>
+
+    <script>
+        // 全局变量
+        let currentLang = 'zh-Hant';
+        
+        // 多语言支持
+        const translations = {
+            'zh-Hant': {
+                mainTitle: '八字命盤推算系統',
+                labelYear: '出生年份：',
+                labelMonth: '出生月份：',
+                labelDay: '出生日期：',
+                labelHour: '出生時辰：',
+                labelGender: '性別：',
+                male: '男',
+                female: '女',
+                calculateBtn: '推算命盤',
+                resultTitle: '您的八字命盤',
+                yearLabel: '年柱',
+                monthLabel: '月柱',
+                dayLabel: '日柱',
+                hourLabel: '時柱',
+                wuxingTitle: '五行分佈圖',
+                shishenTitle: '十神分析',
+                detailsTitle: '詳細分析',
+                gejuTitle: '你的格局：',
+                footerText: '© 2025 八字命盤推算系統 - 專業八字分析工具',
+                loadingText: '計算八字命盤中...',
+                yearError: '請選擇有效的出生年份',
+                shangguan: '傷官格局',
+                yinzhong: '印中格局',
+                bixian: '比肩格局',
+                shazhong: '煞重格局',
+                caiwang: '財旺格局',
+                shanguanDesc: '傷官格局的人感性多於理性，思維活躍，富有藝術家氣質。他們對他人有很強的同理心和理解能力，善於觀察世界以及人與人之間的關係，熱衷於感受美好的事物。',
+                yinzhongDesc: '印中格局的人理性占主導，喜歡講道理，性格較為固執，不太容易聽取他人的意見，自我意識很強。',
+                bixianDesc: '比肩格局的人重義氣，朋友通常較多，在團隊中往往是兜底的角色，不怕辛苦，勇於擔當。',
+                shazhongDesc: '煞重格局的人風險意識強，做事情注重細節。',
+                caiwangDesc: '財旺格局的人執行能力強。財旺格局的人執行能力很強，他們將事業成功視為衡量自己的標準，同時也用這一標準去評判他人。在"想了再做"和"做了再想"之間，他們通常會選擇後者。',
+                wood: '木',
+                fire: '火',
+                earth: '土',
+                metal: '金',
+                water: '水',
+                bijian: '比肩',
+                jiecai: '劫財',
+                zhengyin: '正印',
+                pianyin: '偏印',
+                zhengguan: '正官',
+                pianguan: '偏官',
+                zhengcai: '正財',
+                piancai: '偏財',
+                shangguan: '傷官',
+                shishen: '食神',
+                bijianDesc: '比肩：代表兄弟姐妹、朋友、競爭者',
+                jiecaiDesc: '劫財：代表奪取財物的人、損耗',
+                zhengyinDesc: '正印：代表母親、學問、文憑',
+                pianyinDesc: '偏印：代表智慧、創意、靈感',
+                zhengguanDesc: '正官：代表權威、規則、長輩',
+                pianguanDesc: '偏官：代表權力、暴力、官非',
+                zhengcaiDesc: '正財：代表錢財、收入',
+                piancaiDesc: '偏財：代表意外之財、橫財',
+                shangguanDesc: '傷官：代表藝術才能、口才',
+                shishenDesc: '食神：代表食物、享受、愛好',
+                dayMasterStrong: '日主強',
+                dayMasterWeak: '日主弱',
+                seasonMatch: '月令得令',
+                seasonNotMatch: '月令失令',
+                dayMasterStrongDetail: '您的日主較強，可以承受更多克制，需要有制約以達平衡。',
+                dayMasterWeakDetail: '您的日主較弱，需要扶助日主，避免過多克制。',
+                seasonMatchDetail: '您出生在五行得令之時，日主根基穩固。',
+                seasonNotMatchDetail: '您出生在五行失令之時，日主氣勢較弱。',
+                monthEarthBranch: '月支藏',
+                yearEarthBranch: '年支藏',
+                dayEarthBranch: '日支藏',
+                hourEarthBranch: '時支藏',
+                month1: '正月',
+                month2: '二月',
+                month3: '三月',
+                month4: '四月',
+                month5: '五月',
+                month6: '六月',
+                month7: '七月',
+                month8: '八月',
+                month9: '九月',
+                month10: '十月',
+                month11: '十一月',
+                month12: '十二月',
+                day1: '初一',
+                day2: '初二',
+                day3: '初三',
+                day4: '初四',
+                day5: '初五',
+                day6: '初六',
+                day7: '初七',
+                day8: '初八',
+                day9: '初九',
+                day10: '初十',
+                day11: '十一',
+                day12: '十二',
+                day13: '十三',
+                day14: '十四',
+                day15: '十五',
+                day16: '十六',
+                day17: '十七',
+                day18: '十八',
+                day19: '十九',
+                day20: '二十',
+                day21: '廿一',
+                day22: '廿二',
+                day23: '廿三',
+                day24: '廿四',
+                day25: '廿五',
+                day26: '廿六',
+                day27: '廿七',
+                day28: '廿八',
+                day29: '廿九',
+                day30: '三十'
+            },
+            'zh-Hans': {
+                mainTitle: '八字命盘推算系统',
+                labelYear: '出生年份：',
+                labelMonth: '出生月份：',
+                labelDay: '出生日期：',
+                labelHour: '出生时辰：',
+                labelGender: '性别：',
+                male: '男',
+                female: '女',
+                calculateBtn: '推算命盘',
+                resultTitle: '您的八字命盘',
+                yearLabel: '年柱',
+                monthLabel: '月柱',
+                dayLabel: '日柱',
+                hourLabel: '时柱',
+                wuxingTitle: '五行分布图',
+                shishenTitle: '十神分析',
+                detailsTitle: '详细分析',
+                gejuTitle: '你的格局：',
+                footerText: '© 2025 八字命盘推算系统 - 专业八字分析工具',
+                loadingText: '计算八字命盘中...',
+                yearError: '请选择有效的出生年份',
+                shangguan: '伤官格局',
+                yinzhong: '印中格局',
+                bixian: '比肩格局',
+                shazhong: '煞重格局',
+                caiwang: '财旺格局',
+                shanguanDesc: '伤官格局的人感性多于理性，思维活跃，富有艺术家气质。他们对他人有很强的同理心和理解能力，善于观察世界以及人与人之间的关系，热衷于感受美好的事物。',
+                yinzhongDesc: '印中格局的人理性占主导，喜欢讲道理，性格较为固执，不太容易听取他人的意见，自我意识很强。',
+                bixianDesc: '比肩格局的人重义气，朋友通常较多，在团队中往往是兜底的角色，不怕辛苦，勇于担当。',
+                shazhongDesc: '煞重格局的人风险意识强，做事情注重细节。',
+                caiwangDesc: '财旺格局的人执行能力强。财旺格局的人执行能力很强，他们将事业成功视为衡量自己的标准，同时也用这一标准去评判他人。在"想了再做"和"做了再想"之间，他们通常会选择后者。',
+                wood: '木',
+                fire: '火',
+                earth: '土',
+                metal: '金',
+                water: '水',
+                bijian: '比肩',
+                jiecai: '劫财',
+                zhengyin: '正印',
+                pianyin: '偏印',
+                zhengguan: '正官',
+                pianguan: '偏官',
+                zhengcai: '正财',
+                piancai: '偏财',
+                shangguan: '伤官',
+                shishen: '食神',
+                bijianDesc: '比肩：代表兄弟姐妹、朋友、竞争者',
+                jiecaiDesc: '劫财：代表夺取财物的人、损耗',
+                zhengyinDesc: '正印：代表母亲、学问、文凭',
+                pianyinDesc: '偏印：代表智慧、创意、灵感',
+                zhengguanDesc: '正官：代表权威、规则、长辈',
+                pianguanDesc: '偏官：代表权力、暴力、官非',
+                zhengcaiDesc: '正财：代表钱财、收入',
+                piancaiDesc: '偏财：代表意外之财、横财',
+                shangguanDesc: '伤官：代表艺术才能、口才',
+                shishenDesc: '食神：代表食物、享受、爱好',
+                dayMasterStrong: '日主强',
+                dayMasterWeak: '日主弱',
+                seasonMatch: '月令得令',
+                seasonNotMatch: '月令失令',
+                dayMasterStrongDetail: '您的日主较强，可以承受更多克制，需要有制约以达平衡。',
+                dayMasterWeakDetail: '您的日主较弱，需要扶助日主，避免过多克制。',
+                seasonMatchDetail: '您出生在五行得令之时，日主根基稳固。',
+                seasonNotMatchDetail: '您出生在五行失令之时，日主气势较弱。',
+                monthEarthBranch: '月支藏',
+                yearEarthBranch: '年支藏',
+                dayEarthBranch: '日支藏',
+                hourEarthBranch: '时支藏',
+                month1: '正月',
+                month2: '二月',
+                month3: '三月',
+                month4: '四月',
+                month5: '五月',
+                month6: '六月',
+                month7: '七月',
+                month8: '八月',
+                month9: '九月',
+                month10: '十月',
+                month11: '十一月',
+                month12: '十二月',
+                day1: '初一',
+                day2: '初二',
+                day3: '初三',
+                day4: '初四',
+                day5: '初五',
+                day6: '初六',
+                day7: '初七',
+                day8: '初八',
+                day9: '初九',
+                day10: '初十',
+                day11: '十一',
+                day12: '十二',
+                day13: '十三',
+                day14: '十四',
+                day15: '十五',
+                day16: '十六',
+                day17: '十七',
+                day18: '十八',
+                day19: '十九',
+                day20: '二十',
+                day21: '廿一',
+                day22: '廿二',
+                day23: '廿三',
+                day24: '廿四',
+                day25: '廿五',
+                day26: '廿六',
+                day27: '廿七',
+                day28: '廿八',
+                day29: '廿九',
+                day30: '三十'
+            },
+            'en': {
+                mainTitle: 'Bazi Fortune Calculation System',
+                labelYear: 'Birth Year:',
+                labelMonth: 'Birth Month:',
+                labelDay: 'Birth Day:',
+                labelHour: 'Birth Hour:',
+                labelGender: 'Gender:',
+                male: 'Male',
+                female: 'Female',
+                calculateBtn: 'Calculate Fortune',
+                resultTitle: 'Your Bazi Chart',
+                yearLabel: 'Year Pillar',
+                monthLabel: 'Month Pillar',
+                dayLabel: 'Day Pillar',
+                hourLabel: 'Hour Pillar',
+                wuxingTitle: 'Five Elements Distribution',
+                shishenTitle: 'Ten Gods Analysis',
+                detailsTitle: 'Detailed Analysis',
+                gejuTitle: 'Your Pattern: ',
+                footerText: '© 2025 Bazi Fortune Calculation System - Professional Bazi Analysis Tool',
+                loadingText: 'Calculating your Bazi chart...',
+                yearError: 'Please select a valid birth year',
+                shangguan: 'Creative Pattern',
+                yinzhong: 'Authority Pattern',
+                bixian: 'Friendship Pattern',
+                shazhong: 'Detail-oriented Pattern',
+                caiwang: 'Wealth Pattern',
+                shanguanDesc: 'People with the Creative Pattern are more emotional than rational, with active thinking and artistic temperament. They have strong empathy and understanding of others, are good at observing the world and relationships between people, and are passionate about experiencing beautiful things.',
+                yinzhongDesc: 'People with the Authority Pattern are dominated by rationality, like to reason, are stubborn in character, not easy to listen to others\' opinions, and have strong self-awareness.',
+                bixianDesc: 'People with the Friendship Pattern value loyalty, usually have many friends, and often play a supporting role in teams. They are not afraid of hardship and are willing to take responsibility.',
+                shazhongDesc: 'People with the Detail-oriented Pattern have a strong sense of risk and pay attention to details when doing things.',
+                caiwangDesc: 'People with the Wealth Pattern have strong execution ability. They regard career success as a standard to measure themselves, and also use this standard to judge others. Between "think before you act" and "act before you think", they usually choose the latter.',
+                wood: 'Wood',
+                fire: 'Fire',
+                earth: 'Earth',
+                metal: 'Metal',
+                water: 'Water',
+                bijian: 'Direct Resource',
+                jiecai: 'Indirect Resource',
+                zhengyin: 'Direct Print',
+                pianyin: 'Indirect Print',
+                zhengguan: 'Direct Officer',
+                pianguan: 'Indirect Officer',
+                zhengcai: 'Direct Wealth',
+                piancai: 'Indirect Wealth',
+                shangguan: 'Direct Harm',
+                shishen: 'Indirect Harm',
+                bijianDesc: 'Direct Resource: Represents siblings, friends, competitors',
+                jiecaiDesc: 'Indirect Resource: Represents those who take away your wealth, consumption',
+                zhengyinDesc: 'Direct Print: Represents mother, knowledge, diploma',
+                pianyinDesc: 'Indirect Print: Represents wisdom, creativity, inspiration',
+                zhengguanDesc: 'Direct Officer: Represents authority, rules, elders',
+                pianguanDesc: 'Indirect Officer: Represents power, violence, legal issues',
+                zhengcaiDesc: 'Direct Wealth: Represents money, income',
+                piancaiDesc: 'Indirect Wealth: Represents unexpected wealth, windfall',
+                shangguanDesc: 'Direct Harm: Represents artistic talent, eloquence',
+                shishenDesc: 'Indirect Harm: Represents food, enjoyment, hobbies',
+                dayMasterStrong: 'Strong Day Master',
+                dayMasterWeak: 'Weak Day Master',
+                seasonMatch: 'Season Support',
+                seasonNotMatch: 'Season Mismatch',
+                dayMasterStrongDetail: 'Your day master is relatively strong, can withstand more control, and needs constraints to achieve balance.',
+                dayMasterWeakDetail: 'Your day master is relatively weak, needs support, and should avoid excessive control.',
+                seasonMatchDetail: 'You were born in a season that supports your day master, giving you a solid foundation.',
+                seasonNotMatchDetail: 'You were born in a season that does not support your day master, making your energy weaker.',
+                monthEarthBranch: 'Month Branch Hidden',
+                yearEarthBranch: 'Year Branch Hidden',
+                dayEarthBranch: 'Day Branch Hidden',
+                hourEarthBranch: 'Hour Branch Hidden',
+                month1: 'First Month',
+                month2: 'Second Month',
+                month3: 'Third Month',
+                month4: 'Fourth Month',
+                month5: 'Fifth Month',
+                month6: 'Sixth Month',
+                month7: 'Seventh Month',
+                month8: 'Eighth Month',
+                month9: 'Ninth Month',
+                month10: 'Tenth Month',
+                month11: 'Eleventh Month',
+                month12: 'Twelfth Month',
+                day1: '1st',
+                day2: '2nd',
+                day3: '3rd',
+                day4: '4th',
+                day5: '5th',
+                day6: '6th',
+                day7: '7th',
+                day8: '8th',
+                day9: '9th',
+                day10: '10th',
+                day11: '11th',
+                day12: '12th',
+                day13: '13th',
+                day14: '14th',
+                day15: '15th',
+                day16: '16th',
+                day17: '17th',
+                day18: '18th',
+                day19: '19th',
+                day20: '20th',
+                day21: '21st',
+                day22: '22nd',
+                day23: '23rd',
+                day24: '24th',
+                day25: '25th',
+                day26: '26th',
+                day27: '27th',
+                day28: '28th',
+                day29: '29th',
+                day30: '30th'
+            },
+            'ja': {
+                mainTitle: '八字運命推算システム',
+                labelYear: '生まれ年：',
+                labelMonth: '生まれ月：',
+                labelDay: '生まれ日：',
+                labelHour: '生まれ時間：',
+                labelGender: '性別：',
+                male: '男性',
+                female: '女性',
+                calculateBtn: '運命を推算',
+                resultTitle: 'あなたの八字チャート',
+                yearLabel: '年柱',
+                monthLabel: '月柱',
+                dayLabel: '日柱',
+                hourLabel: '時柱',
+                wuxingTitle: '五行分布図',
+                shishenTitle: '十神分析',
+                detailsTitle: '詳細分析',
+                gejuTitle: 'あなたのパターン：',
+                footerText: '© 2025 八字運命推算システム - プロフェッショナル八字分析ツール',
+                loadingText: '八字チャートを計算中...',
+                yearError: '有効な生まれ年を選択してください',
+                shangguan: '傷官パターン',
+                yinzhong: '印中パターン',
+                bixian: '比肩パターン',
+                shazhong: '煞重パターン',
+                caiwang: '財旺パターン',
+                shanguanDesc: '傷官パターンの人は理性よりも感性が強く、思考が活発で、芸術家的な気質を持っています。他者に対する強い共感性と理解力を持ち、世界や人間関係をよく観察し、美しいものを感じることに情熱を注ぎます。',
+                yinzhongDesc: '印中パターンの人は理性が主導的で、道理を説くのが好きで、性格がやや頑固で、他人の意見を聞き入れることが難しく、自我意識が強いです。',
+                bixianDesc: '比肩パターンの人は義理人情を重んじ、友人が通常多く、チームでは支える役割を果たすことが多く、苦労を恐れず、責任を担う勇気があります。',
+                shazhongDesc: '煞重パターンの人はリスク意識が強く、物事を行う際に細部に注意を払います。',
+                caiwangDesc: '財旺パターンの人は実行力が強いです。彼らは事業の成功を自分を測る基準とし、また他人を判断する際にもこの基準を使います。「考えてから行動する」と「行動してから考える」の間で、彼らは通常後者を選びます。',
+                wood: '木',
+                fire: '火',
+                earth: '土',
+                metal: '金',
+                water: '水',
+                bijian: '比肩',
+                jiecai: '劫財',
+                zhengyin: '正印',
+                pianyin: '偏印',
+                zhengguan: '正官',
+                pianguan: '偏官',
+                zhengcai: '正財',
+                piancai: '偏財',
+                shangguan: '傷官',
+                shishen: '食神',
+                bijianDesc: '比肩：兄弟姉妹、友人、競争相手を表します',
+                jiecaiDesc: '劫財：財産を奪う人、消費を表します',
+                zhengyinDesc: '正印：母親、知識、学位を表します',
+                pianyinDesc: '偏印：知恵、創造性、インスピレーションを表します',
+                zhengguanDesc: '正官：権威、ルール、年長者を表します',
+                pianguanDesc: '偏官：権力、暴力、法的問題を表します',
+                zhengcaiDesc: '正財：お金、収入を表します',
+                piancaiDesc: '偏財：予期せぬ富、臨時収入を表します',
+                shangguanDesc: '傷官：芸術的才能、雄弁さを表します',
+                shishenDesc: '食神：食べ物、楽しみ、趣味を表します',
+                dayMasterStrong: '日主が強い',
+                dayMasterWeak: '日主が弱い',
+                seasonMatch: '季節が合っている',
+                seasonNotMatch: '季節が合っていない',
+                dayMasterStrongDetail: 'あなたの日主は比較的強く、より多くの制御に耐えることができ、バランスを達成するために制約が必要です。',
+                dayMasterWeakDetail: 'あなたの日主は比較的弱く、サポートが必要で、過度の制御を避けるべきです。',
+                seasonMatchDetail: 'あなたは日主をサポートする季節に生まれ、強固な基盤を持っています。',
+                seasonNotMatchDetail: 'あなたは日主をサポートしない季節に生まれ、エネルギーが弱くなっています。',
+                monthEarthBranch: '月支蔵',
+                yearEarthBranch: '年支蔵',
+                dayEarthBranch: '日支蔵',
+                hourEarthBranch: '時支蔵',
+                month1: '正月',
+                month2: '二月',
+                month3: '三月',
+                month4: '四月',
+                month5: '五月',
+                month6: '六月',
+                month7: '七月',
+                month8: '八月',
+                month9: '九月',
+                month10: '十月',
+                month11: '十一月',
+                month12: '十二月',
+                day1: '一日',
+                day2: '二日',
+                day3: '三日',
+                day4: '四日',
+                day5: '五日',
+                day6: '六日',
+                day7: '七日',
+                day8: '八日',
+                day9: '九日',
+                day10: '十日',
+                day11: '十一日',
+                day12: '十二日',
+                day13: '十三日',
+                day14: '十四日',
+                day15: '十五日',
+                day16: '十六日',
+                day17: '十七日',
+                day18: '十八日',
+                day19: '十九日',
+                day20: '二十日',
+                day21: '二十一日',
+                day22: '二十二日',
+                day23: '二十三日',
+                day24: '二十四日',
+                day25: '二十五日',
+                day26: '二十六日',
+                day27: '二十七日',
+                day28: '二十八日',
+                day29: '二十九日',
+                day30: '三十日'
+            },
+            'ko': {
+                mainTitle: '팔자 운명 계산 시스템',
+                labelYear: '출생년도:',
+                labelMonth: '출생월:',
+                labelDay: '출생일:',
+                labelHour: '출생시간:',
+                labelGender: '성별:',
+                male: '남성',
+                female: '여성',
+                calculateBtn: '운명 계산하기',
+                resultTitle: '당신의 팔자 차트',
+                yearLabel: '년주',
+                monthLabel: '월주',
+                dayLabel: '일주',
+                hourLabel: '시주',
+                wuxingTitle: '오행 분포도',
+                shishenTitle: '십신 분석',
+                detailsTitle: '상세 분석',
+                gejuTitle: '당신의 패턴: ',
+                footerText: '© 2025 팔자 운명 계산 시스템 - 전문 팔자 분석 도구',
+                loadingText: '팔자 차트 계산 중...',
+                yearError: '유효한 출생년도를 선택하세요',
+                shangguan: '상관 패턴',
+                yinzhong: '인중 패턴',
+                bixian: '비견 패턴',
+                shazhong: '살중 패턴',
+                caiwang: '재왕 패턴',
+                shanguanDesc: '상관 패턴의 사람들은 이성보다 감성이 많고, 사고가 활발하며, 예술가적 기질을 가지고 있습니다. 그들은 타인에 대한 강한 공감 능력과 이해력을 갖추고 있으며, 세계와 사람들 간의 관계를 관찰하는 데 능숙하고, 아름다운 것을 경험하는 데 열정적입니다.',
+                yinzhongDesc: '인중 패턴의 사람들은 이성이 주도적이며, 이치를 따지는 것을 좋아하고, 성격이 고집스러우며, 타인의 의견을 쉽게 받아들이지 않고, 자아 의식이 강합니다.',
+                bixianDesc: '비견 패턴의 사람들은 의리를 중요시하고, 보통 친구가 많으며, 팀에서 종종 뒷받침하는 역할을 하고, 어려움을 두려워하지 않으며, 책임을 질 용기가 있습니다.',
+                shazhongDesc: '살중 패턴의 사람들은 위험 의식이 강하고, 일을 할 때 세부 사항에 주의를 기울입니다.',
+                caiwangDesc: '재왕 패턴의 사람들은 실행력이 강합니다. 그들은 사업 성공을 자신을 측정하는 기준으로 삼고, 또한 이 기준으로 타인을 판단합니다. "생각한 후 행동"과 "행동한 후 생각" 사이에서, 그들은 보통 후자를 선택합니다.',
+                wood: '목',
+                fire: '화',
+                earth: '토',
+                metal: '금',
+                water: '수',
+                bijian: '비견',
+                jiecai: '겁재',
+                zhengyin: '정인',
+                pianyin: '편인',
+                zhengguan: '정관',
+                pianguan: '편관',
+                zhengcai: '정재',
+                piancai: '편재',
+                shangguan: '상관',
+                shishen: '식신',
+                bijianDesc: '비견: 형제자매, 친구, 경쟁자를 나타냅니다',
+                jiecaiDesc: '겁재: 재물을 빼앗는 사람, 소비를 나타냅니다',
+                zhengyinDesc: '정인: 어머니, 지식, 학위를 나타냅니다',
+                pianyinDesc: '편인: 지혜, 창의성, 영감을 나타냅니다',
+                zhengguanDesc: '정관: 권위, 규칙, 어른을 나타냅니다',
+                pianguanDesc: '편관: 권력, 폭력, 법적 문제를 나타냅니다',
+                zhengcaiDesc: '정재: 돈, 수입을 나타냅니다',
+                piancaiDesc: '편재: 예상치 못한 부, 횡재를 나타냅니다',
+                shangguanDesc: '상관: 예술적 재능, 달변을 나타냅니다',
+                shishenDesc: '식신: 음식, 즐거움, 취미를 나타냅니다',
+                dayMasterStrong: '일주가 강함',
+                dayMasterWeak: '일주가 약함',
+                seasonMatch: '계절 조화',
+                seasonNotMatch: '계절 부조화',
+                dayMasterStrongDetail: '당신의 일주는 비교적 강해서 더 많은 제어를 견딜 수 있으며, 균형을 이루기 위해 제약이 필요합니다.',
+                dayMasterWeakDetail: '당신의 일주는 비교적 약해서 지원이 필요하며, 과도한 제어를 피해야 합니다.',
+                seasonMatchDetail: '당신은 일주를 지원하는 계절에 태어나 견고한 기반을 가지고 있습니다.',
+                seasonNotMatchDetail: '당신은 일주를 지원하지 않는 계절에 태어나 에너지가 약합니다.',
+                monthEarthBranch: '월지장',
+                yearEarthBranch: '년지장',
+                dayEarthBranch: '일지장',
+                hourEarthBranch: '시지장',
+                month1: '정월',
+                month2: '이월',
+                month3: '삼월',
+                month4: '사월',
+                month5: '오월',
+                month6: '유월',
+                month7: '칠월',
+                month8: '팔월',
+                month9: '구월',
+                month10: '시월',
+                month11: '십일월',
+                month12: '십이월',
+                day1: '초하루',
+                day2: '이틀',
+                day3: '사흘',
+                day4: '나흘',
+                day5: '닷새',
+                day6: '엿새',
+                day7: '이레',
+                day8: '여드레',
+                day9: '아흐레',
+                day10: '열흘',
+                day11: '열하루',
+                day12: '열이틀',
+                day13: '열사흘',
+                day14: '열나흘',
+                day15: '보름',
+                day16: '열엿새',
+                day17: '열이레',
+                day18: '열여드레',
+                day19: '열아흐레',
+                day20: '스무날',
+                day21: '스물하루',
+                day22: '스물이틀',
+                day23: '스물사흘',
+                day24: '스물나흘',
+                day25: '스물닷새',
+                day26: '스물엿새',
+                day27: '스물이레',
+                day28: '스물여드레',
+                day29: '스물아흐레',
+                day30: '서른날'
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化年份选择器
+            initYearSelector();
+            
+            // 初始化日期选择器
+            updateDaySelector();
+            
+            // 初始化语言
+            updateLanguage('zh-Hant');
+            
+            // 初始化浮动符号
+            createFloatingSymbols();
+            
+            // 注册事件
+            document.getElementById('calculateBtn').addEventListener('click', calculateBazi);
+            document.getElementById('lunarMonth').addEventListener('change', updateDaySelector);
+            
+            // 语言切换
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    updateLanguage(lang);
+                    
+                    // 更新按钮激活状态
+                    document.querySelectorAll('.language-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        // 初始化年份选择器
+        function initYearSelector() {
+            const yearSelect = document.getElementById('lunarYear');
+            const currentYear = new Date().getFullYear();
+            
+            // 清空现有选项
+            yearSelect.innerHTML = '';
+            
+            // 添加默认选项
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = '--';
+            defaultOption.selected = true;
+            defaultOption.disabled = true;
+            yearSelect.appendChild(defaultOption);
+            
+            // 添加年份选项（1900-当前年份）
+            for (let year = 1900; year <= currentYear; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            }
+        }
+
+        // 更新日期选择器
+        function updateDaySelector() {
+            const monthSelect = document.getElementById('lunarMonth');
+            const daySelect = document.getElementById('lunarDay');
+            const selectedMonth = parseInt(monthSelect.value);
+            
+            // 确定每月天数（简化，实际应考虑农历大小月）
+            let daysInMonth = 30;
+            if (selectedMonth === 2) {
+                daysInMonth = 29; // 二月通常为小月
+            }
+            
+            // 保存当前选中的日期
+            const currentSelectedDay = daySelect.value;
+            
+            // 清空现有选项
+            daySelect.innerHTML = '';
+            
+            // 添加日期选项
+            for (let day = 1; day <= daysInMonth; day++) {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = translations[currentLang][`day${day}`] || `${day}`;
+                daySelect.appendChild(option);
+            }
+            
+            // 尝试恢复之前选中的日期，如果超出范围则选择月末
+            if (currentSelectedDay && currentSelectedDay <= daysInMonth) {
+                daySelect.value = currentSelectedDay;
+            } else {
+                daySelect.value = 1;
+            }
+        }
+
+        // 更新语言
+        function updateLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            // 更新页面文本
+            document.getElementById('mainTitle').textContent = t.mainTitle;
+            document.getElementById('labelYear').textContent = t.labelYear;
+            document.getElementById('labelMonth').textContent = t.labelMonth;
+            document.getElementById('labelDay').textContent = t.labelDay;
+            document.getElementById('labelHour').textContent = t.labelHour;
+            document.getElementById('labelGender').textContent = t.labelGender;
+            document.getElementById('calculateBtn').textContent = t.calculateBtn;
+            document.getElementById('resultTitle').textContent = t.resultTitle;
+            document.getElementById('yearLabel').textContent = t.yearLabel;
+            document.getElementById('monthLabel').textContent = t.monthLabel;
+            document.getElementById('dayLabel').textContent = t.dayLabel;
+            document.getElementById('hourLabel').textContent = t.hourLabel;
+            document.getElementById('wuxingTitle').textContent = t.wuxingTitle;
+            document.getElementById('shishenTitle').textContent = t.shishenTitle;
+            document.getElementById('detailsTitle').textContent = t.detailsTitle;
+            document.getElementById('gejuTitle').textContent = t.gejuTitle;
+            document.getElementById('footerText').textContent = t.footerText;
+            document.getElementById('loadingText').textContent = t.loadingText;
+            document.getElementById('yearError').textContent = t.yearError;
+            document.getElementById('woodLabel').textContent = t.wood;
+            document.getElementById('fireLabel').textContent = t.fire;
+            document.getElementById('earthLabel').textContent = t.earth;
+            document.getElementById('metalLabel').textContent = t.metal;
+            document.getElementById('waterLabel').textContent = t.water;
+            
+            // 更新月份选项
+            const monthSelect = document.getElementById('lunarMonth');
+            for (let i = 0; i < monthSelect.options.length; i++) {
+                const month = i + 1;
+                if (t[`month${month}`]) {
+                    monthSelect.options[i].textContent = t[`month${month}`];
+                }
+            }
+            
+            // 更新日期选项
+            const daySelect = document.getElementById('lunarDay');
+            for (let i = 0; i < daySelect.options.length; i++) {
+                const day = i + 1;
+                if (t[`day${day}`]) {
+                    daySelect.options[i].textContent = t[`day${day}`];
+                }
+            }
+            
+            // 更新下拉选项
+            const genderSelect = document.getElementById('gender');
+            genderSelect.options[0].text = t.male;
+            genderSelect.options[1].text = t.female;
+            
+            // 如果结果已显示，也更新结果部分
+            if (document.getElementById('resultsContainer').style.display === 'block') {
+                const gejuType = document.getElementById('gejuType').getAttribute('data-type');
+                document.getElementById('gejuType').textContent = t[gejuType];
+                
+                const gejuDescription = document.getElementById('gejuDescription');
+                gejuDescription.textContent = t[gejuType + 'Desc'];
+                
+                // 更新十神分析
+                updateShishenDisplay();
+                
+                // 更新详细分析
+                updateDetailsDisplay();
+            }
+        }
+
+        // 创建浮动符号
+        function createFloatingSymbols() {
+            const container = document.getElementById('floatingSymbols');
+            const symbols = ['☰', '☱', '☲', '☳', '☴', '☵', '☶', '☷', '卍', '卐', '♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
+            
+            for (let i = 0; i < 30; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'symbol';
+                symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                // 随机位置
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100 + 100;
+                symbol.style.left = `${posX}%`;
+                symbol.style.top = `${posY}%`;
+                
+                // 随机大小
+                const size = Math.random() * 3 + 1;
+                symbol.style.fontSize = `${size}rem`;
+                
+                // 随机动画持续时间
+                const duration = Math.random() * 40 + 20;
+                symbol.style.animationDuration = `${duration}s`;
+                
+                // 随机动画延迟
+                const delay = Math.random() * 40;
+                symbol.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(symbol);
+            }
+        }
+
+        // 计算八字
+        function calculateBazi() {
+            // 验证输入
+            const yearSelect = document.getElementById('lunarYear');
+            const year = parseInt(yearSelect.value);
+            
+            if (!year) {
+                document.getElementById('yearError').classList.add('error-active');
+                yearSelect.focus();
+                return;
+            } else {
+                document.getElementById('yearError').classList.remove('error-active');
+            }
+            
+            // 显示加载动画
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.classList.add('active');
+            
+            // 获取其他表单数据
+            const lunarMonth = parseInt(document.getElementById('lunarMonth').value) || 1;
+            const lunarDay = parseInt(document.getElementById('lunarDay').value) || 1;
+            const lunarHour = parseInt(document.getElementById('lunarHour').value) || 1;
+            const gender = document.getElementById('gender').value;
+            
+            // 设置计算超时
+            const timeout = setTimeout(() => {
+                loadingScreen.classList.remove('active');
+                alert('计算超时，请重试');
+            }, 10000);
+            
+            try {
+                // 计算八字
+                const bazi = calculateRealBazi(year, lunarMonth, lunarDay, lunarHour);
+                
+                // 计算格局
+                const geju = determineGeju(bazi, gender);
+                
+                // 清除超时
+                clearTimeout(timeout);
+                
+                // 更新界面显示结果
+                updateResults(bazi, geju);
+                
+                // 隐藏加载动画
+                loadingScreen.classList.remove('active');
+                
+                // 显示结果部分
+                document.getElementById('resultsContainer').style.display = 'block';
+                
+                // 滚动到结果部分
+                document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('计算出错:', error);
+                loadingScreen.classList.remove('active');
+                alert('计算出错，请重试');
+                clearTimeout(timeout);
+            }
+        }
+
+        // 计算真实八字
+        function calculateRealBazi(year, month, day, hour) {
+            // 天干
+            const stems = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+            // 地支
+            const branches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+            // 五行对应
+            const stemElements = {
+                '甲': '木', '乙': '木',
+                '丙': '火', '丁': '火',
+                '戊': '土', '己': '土',
+                '庚': '金', '辛': '金',
+                '壬': '水', '癸': '水'
+            };
+            // 地支藏干对应
+            const hiddenStems = {
+                '子': ['癸'],
+                '丑': ['己', '癸', '辛'],
+                '寅': ['甲', '丙', '戊'],
+                '卯': ['乙'],
+                '辰': ['戊', '乙', '癸'],
+                '巳': ['丙', '庚', '戊'],
+                '午': ['丁', '己'],
+                '未': ['己', '丁', '乙'],
+                '申': ['庚', '壬', '戊'],
+                '酉': ['辛'],
+                '戌': ['戊', '辛', '丁'],
+                '亥': ['壬', '甲']
+            };
+            
+            // 地支五行对应
+            const branchElements = {
+                '子': '水', '丑': '土', '寅': '木', '卯': '木',
+                '辰': '土', '巳': '火', '午': '火', '未': '土',
+                '申': '金', '酉': '金', '戌': '土', '亥': '水'
+            };
+            
+            // 月令得令对应表
+            const seasonMatch = {
+                '木': [1, 2, 3, 4], // 木旺于春季（寅、卯、辰）月
+                '火': [4, 5, 6, 7], // 火旺于夏季（巳、午、未）月
+                '土': [1, 4, 7, 10], // 土旺于四季末（辰、未、戌、丑）月
+                '金': [7, 8, 9, 10], // 金旺于秋季（申、酉、戌）月
+                '水': [10, 11, 12, 1] // 水旺于冬季（亥、子、丑）月
+            };
+            
+            // 计算年柱
+            const yearStemIndex = (year - 4) % 10;
+            const yearBranchIndex = (year - 4) % 12;
+            const yearStem = stems[yearStemIndex];
+            const yearBranch = branches[yearBranchIndex];
+            
+            // 计算月柱（按农历正月起寅月）
+            const monthStemBase = {
+                '甲': 0, '己': 0,
+                '乙': 2, '庚': 2,
+                '丙': 4, '辛': 4,
+                '丁': 6, '壬': 6,
+                '戊': 8, '癸': 8
+            }[yearStem];
+            
+            // 寅月为正月，月支索引为月份+2（如果大于12需要减12）
+            const monthBranchIndex = (month + 2) % 12;
+            const monthBranch = branches[monthBranchIndex];
+            
+            // 月干 = 年干对应的起始月干 + (月份-1)，超过10需要取余
+            const monthStemIndex = (monthStemBase + month - 1) % 10;
+            const monthStem = stems[monthStemIndex];
+            
+            // 计算日柱（使用精确的干支纪日公式）
+            // 使用节气修正的农历历法算法
+            const baseYear = 1900; // 基准年份
+            const baseDay = 30; // 1900年1月1日的干支序号
+            const yearDiff = year - baseYear;
+            const leapYears = Math.floor((yearDiff - 1) / 4); // 计算闰年数
+            
+            // 计算月份天数偏移
+            const monthDays = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+            const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+            let dayOffset = monthDays[month - 1] + day - 1;
+            if (isLeapYear && month > 2) dayOffset++;
+            
+            // 计算总天数
+            const totalDays = yearDiff * 365 + leapYears + dayOffset;
+            const dayIndex = (baseDay + totalDays) % 60;
+            const dayStemIndex = dayIndex % 10;
+            const dayBranchIndex = dayIndex % 12;
+            const dayStem = stems[dayStemIndex];
+            const dayBranch = branches[dayBranchIndex];
+            
+            // 计算时柱
+            const hourStemBase = (dayStemIndex % 5) * 2;
+            const hourStemIndex = (hourStemBase + Math.floor((hour + 1) / 2) - 1) % 10;
+            const hourStem = stems[hourStemIndex];
+            const hourBranch = branches[hour - 1];
+            
+            // 计算地支藏干（各地支藏干的天干元素）
+            const yearHiddenStems = hiddenStems[yearBranch].map(stem => `${stem}${stemElements[stem]}`);
+            const monthHiddenStems = hiddenStems[monthBranch].map(stem => `${stem}${stemElements[stem]}`);
+            const dayHiddenStems = hiddenStems[dayBranch].map(stem => `${stem}${stemElements[stem]}`);
+            const hourHiddenStems = hiddenStems[hourBranch].map(stem => `${stem}${stemElements[stem]}`);
+            
+            // 计算日元五行（日主五行）
+            const dayStemElement = stemElements[dayStem];
+            
+            // 计算月令是否得令
+            const isSeasonMatch = seasonMatch[dayStemElement].includes(month);
+            
+            // 计算五行生克关系并统计各五行数量
+            const elementCounts = countElements(yearStem, yearBranch, monthStem, monthBranch, dayStem, dayBranch, hourStem, hourBranch);
+            
+            // 计算十神
+            const shishen = calculateShishen(dayStem, yearStem, monthStem, hourStem, yearBranch, monthBranch, dayBranch, hourBranch);
+            
+            // 判断日主强弱
+            const dayMasterStrength = judgeDayMasterStrength(dayStemElement, elementCounts, isSeasonMatch);
+            
+            return {
+                year: { 
+                    stem: yearStem, 
+                    branch: yearBranch, 
+                    hidden: yearHiddenStems.join(' '),
+                    element: stemElements[yearStem]
+                },
+                month: { 
+                    stem: monthStem, 
+                    branch: monthBranch, 
+                    hidden: monthHiddenStems.join(' '),
+                    element: stemElements[monthStem]
+                },
+                day: { 
+                    stem: dayStem, 
+                    branch: dayBranch, 
+                    hidden: dayHiddenStems.join(' '),
+                    element: stemElements[dayStem]
+                },
+                hour: { 
+                    stem: hourStem, 
+                    branch: hourBranch, 
+                    hidden: hourHiddenStems.join(' '),
+                    element: stemElements[hourStem]
+                },
+                dayStemElement: dayStemElement,
+                elementCounts: elementCounts,
+                isSeasonMatch: isSeasonMatch,
+                dayMasterStrength: dayMasterStrength,
+                shishen: shishen
+            };
+        }
+
+        // 统计五行数量
+        function countElements(yearStem, yearBranch, monthStem, monthBranch, dayStem, dayBranch, hourStem, hourBranch) {
+            // 地支
+            const branches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+            
+            // 天干对应五行
+            const stemElements = {
+                '甲': '木', '乙': '木',
+                '丙': '火', '丁': '火',
+                '戊': '土', '己': '土',
+                '庚': '金', '辛': '金',
+                '壬': '水', '癸': '水'
+            };
+            
+            // 地支藏干
+            const hiddenStems = {
+                '子': ['癸'],
+                '丑': ['己', '癸', '辛'],
+                '寅': ['甲', '丙', '戊'],
+                '卯': ['乙'],
+                '辰': ['戊', '乙', '癸'],
+                '巳': ['丙', '庚', '戊'],
+                '午': ['丁', '己'],
+                '未': ['己', '丁', '乙'],
+                '申': ['庚', '壬', '戊'],
+                '酉': ['辛'],
+                '戌': ['戊', '辛', '丁'],
+                '亥': ['壬', '甲']
+            };
+            
+            // 五行计数
+            let counts = {
+                '木': 0,
+                '火': 0,
+                '土': 0,
+                '金': 0,
+                '水': 0
+            };
+            
+            // 计算天干五行
+            counts[stemElements[yearStem]]++;
+            counts[stemElements[monthStem]]++;
+            counts[stemElements[dayStem]]++;
+            counts[stemElements[hourStem]]++;
+            
+            // 计算地支藏干五行（根据长生十二宫位和月令调整权重）
+            const monthBranchIndex = branches.indexOf(monthBranch);
+            
+            // 计算年支藏干
+            for (let i = 0; i < hiddenStems[yearBranch].length; i++) {
+                const stem = hiddenStems[yearBranch][i];
+                const weight = i === 0 ? 0.7 : (i === 1 ? 0.5 : 0.3); // 根据藏干顺序调整权重
+                counts[stemElements[stem]] += weight;
+            }
+            
+            // 计算月支藏干（权重受月令影响）
+            for (let i = 0; i < hiddenStems[monthBranch].length; i++) {
+                const stem = hiddenStems[monthBranch][i];
+                const baseWeight = i === 0 ? 0.9 : (i === 1 ? 0.7 : 0.5);
+                const monthFactor = Math.abs(monthBranchIndex - branches.indexOf(monthBranch)) <= 1 ? 1.2 : 1.0;
+                counts[stemElements[stem]] += baseWeight * monthFactor;
+            }
+            
+            // 计算日支藏干
+            for (let i = 0; i < hiddenStems[dayBranch].length; i++) {
+                const stem = hiddenStems[dayBranch][i];
+                const weight = i === 0 ? 0.8 : (i === 1 ? 0.6 : 0.4);
+                counts[stemElements[stem]] += weight;
+            }
+            
+            // 计算时支藏干
+            for (let i = 0; i < hiddenStems[hourBranch].length; i++) {
+                const stem = hiddenStems[hourBranch][i];
+                const weight = i === 0 ? 0.6 : (i === 1 ? 0.4 : 0.2);
+                counts[stemElements[stem]] += weight;
+            }
+            
+            // 转换为数组格式
+            return [
+                counts['木'],
+                counts['火'],
+                counts['土'],
+                counts['金'],
+                counts['水']
+            ];
+        }
+
+        // 计算十神
+        function calculateShishen(dayStem, yearStem, monthStem, hourStem, yearBranch, monthBranch, dayBranch, hourBranch) {
+            // 天干十神对应表
+            const shishenMap = {
+                '甲': { '甲': '比肩', '乙': '劫財', '丙': '食神', '丁': '傷官', '戊': '偏財', '己': '正財', '庚': '七殺', '辛': '正官', '壬': '偏印', '癸': '正印' },
+                '乙': { '甲': '劫財', '乙': '比肩', '丙': '食神', '丁': '傷官', '戊': '偏財', '己': '正財', '庚': '七殺', '辛': '正官', '壬': '偏印', '癸': '正印' },
+                '丙': { '甲': '偏印', '乙': '正印', '丙': '比肩', '丁': '劫財', '戊': '食神', '己': '傷官', '庚': '偏財', '辛': '正財', '壬': '七殺', '癸': '正官' },
+                '丁': { '甲': '偏印', '乙': '正印', '丙': '劫財', '丁': '比肩', '戊': '食神', '己': '傷官', '庚': '偏財', '辛': '正財', '壬': '七殺', '癸': '正官' },
+                '戊': { '甲': '七殺', '乙': '正官', '丙': '偏印', '丁': '正印', '戊': '比肩', '己': '劫財', '庚': '食神', '辛': '傷官', '壬': '偏財', '癸': '正財' },
+                '己': { '甲': '七殺', '乙': '正官', '丙': '偏印', '丁': '正印', '戊': '劫財', '己': '比肩', '庚': '食神', '辛': '傷官', '壬': '偏財', '癸': '正財' },
+                '庚': { '甲': '正財', '乙': '偏財', '丙': '七殺', '丁': '正官', '戊': '偏印', '己': '正印', '庚': '比肩', '辛': '劫財', '壬': '食神', '癸': '傷官' },
+                '辛': { '甲': '正財', '乙': '偏財', '丙': '七殺', '丁': '正官', '戊': '偏印', '己': '正印', '庚': '劫財', '辛': '比肩', '壬': '食神', '癸': '傷官' },
+                '壬': { '甲': '傷官', '乙': '食神', '丙': '正財', '丁': '偏財', '戊': '七殺', '己': '正官', '庚': '偏印', '辛': '正印', '壬': '比肩', '癸': '劫財' },
+                '癸': { '甲': '傷官', '乙': '食神', '丙': '正財', '丁': '偏財', '戊': '七殺', '己': '正官', '庚': '偏印', '辛': '正印', '壬': '劫財', '癸': '比肩' }
+            };
+            
+            // 简化十神名称
+            const simplifiedNames = {
+                '比肩': 'bijian',
+                '劫財': 'jiecai',
+                '食神': 'shishen',
+                '傷官': 'shangguan',
+                '偏財': 'piancai',
+                '正財': 'zhengcai',
+                '七殺': 'pianguan',
+                '正官': 'zhengguan',
+                '偏印': 'pianyin',
+                '正印': 'zhengyin'
+            };
+            
+            // 地支藏干
+            const hiddenStems = {
+                '子': ['癸'],
+                '丑': ['己', '癸', '辛'],
+                '寅': ['甲', '丙', '戊'],
+                '卯': ['乙'],
+                '辰': ['戊', '乙', '癸'],
+                '巳': ['丙', '庚', '戊'],
+                '午': ['丁', '己'],
+                '未': ['己', '丁', '乙'],
+                '申': ['庚', '壬', '戊'],
+                '酉': ['辛'],
+                '戌': ['戊', '辛', '丁'],
+                '亥': ['壬', '甲']
+            };
+            
+            // 计算天干十神
+            const yearShishen = shishenMap[dayStem][yearStem];
+            const monthShishen = shishenMap[dayStem][monthStem];
+            const hourShishen = shishenMap[dayStem][hourStem];
+            
+            // 计算地支藏干十神
+            const yearHiddenShishen = hiddenStems[yearBranch].map(stem => shishenMap[dayStem][stem]);
+            const monthHiddenShishen = hiddenStems[monthBranch].map(stem => shishenMap[dayStem][stem]);
+            const dayHiddenShishen = hiddenStems[dayBranch].map(stem => shishenMap[dayStem][stem]);
+            const hourHiddenShishen = hiddenStems[hourBranch].map(stem => shishenMap[dayStem][stem]);
+            
+            // 统计十神次数
+            const shishenCount = {};
+            for (const type of Object.keys(simplifiedNames)) {
+                shishenCount[simplifiedNames[type]] = 0;
+            }
+            
+            // 加入天干十神
+            shishenCount[simplifiedNames[yearShishen]]++;
+            shishenCount[simplifiedNames[monthShishen]]++;
+            shishenCount[simplifiedNames[hourShishen]]++;
+            
+            // 加入地支藏干十神（权重较低）
+            for (const shishen of yearHiddenShishen) {
+                shishenCount[simplifiedNames[shishen]] += 0.5;
+            }
+            
+            for (const shishen of monthHiddenShishen) {
+                shishenCount[simplifiedNames[shishen]] += 0.7;
+            }
+            
+            for (const shishen of dayHiddenShishen) {
+                shishenCount[simplifiedNames[shishen]] += 0.5;
+            }
+            
+            for (const shishen of hourHiddenShishen) {
+                shishenCount[simplifiedNames[shishen]] += 0.5;
+            }
+            
+            return {
+                yearStem: simplifiedNames[yearShishen],
+                monthStem: simplifiedNames[monthShishen],
+                hourStem: simplifiedNames[hourShishen],
+                yearHidden: yearHiddenShishen.map(s => simplifiedNames[s]),
+                monthHidden: monthHiddenShishen.map(s => simplifiedNames[s]),
+                dayHidden: dayHiddenShishen.map(s => simplifiedNames[s]),
+                hourHidden: hourHiddenShishen.map(s => simplifiedNames[s]),
+                counts: shishenCount
+            };
+        }
+
+        // 判断日主强弱
+        function judgeDayMasterStrength(dayStemElement, elementCounts, isSeasonMatch) {
+            // 五行索引
+            const elementIndex = {
+                '木': 0,
+                '火': 1,
+                '土': 2,
+                '金': 3,
+                '水': 4
+            };
+            
+            // 五行生克关系
+            // 0木, 1火, 2土, 3金, 4水
+            // 木生火，火生土，土生金，金生水，水生木
+            // 木克土，火克金，土克水，金克木，水克火
+            const promotes = {
+                '木': '火', // 木生火
+                '火': '土', // 火生土
+                '土': '金', // 土生金
+                '金': '水', // 金生水
+                '水': '木'  // 水生木
+            };
+            
+            const restrains = {
+                '木': '土', // 木克土
+                '火': '金', // 火克金
+                '土': '水', // 土克水
+                '金': '木', // 金克木
+                '水': '火'  // 水克火
+            };
+            
+            // 被生者（谁生我）
+            const promotedBy = {
+                '木': '水', // 水生木
+                '火': '木', // 木生火
+                '土': '火', // 火生土
+                '金': '土', // 土生金
+                '水': '金'  // 金生水
+            };
+            
+            // 被克者（谁克我）
+            const restrainedBy = {
+                '木': '金', // 金克木
+                '火': '水', // 水克火
+                '土': '木', // 木克土
+                '金': '火', // 火克金
+                '水': '土'  // 土克水
+            };
+            
+            const dayElementIndex = elementIndex[dayStemElement];
+            
+            // 计算得分
+            let score = elementCounts[dayElementIndex] * 2; // 同类得分
+            
+            // 加上我生的元素
+            const promoteElement = promotes[dayStemElement];
+            score += elementCounts[elementIndex[promoteElement]] * 0.5;
+            
+            // 加上生我的元素
+            const promotedByElement = promotedBy[dayStemElement];
+            score += elementCounts[elementIndex[promotedByElement]] * 1.5;
+            
+            // 减去克我的元素
+            const restrainedByElement = restrainedBy[dayStemElement];
+            score -= elementCounts[elementIndex[restrainedByElement]] * 1.5;
+            
+            // 减去我克的元素
+            const restrainElement = restrains[dayStemElement];
+            score -= elementCounts[elementIndex[restrainElement]] * 0.5;
+            
+            // 月令得令加分
+            if (isSeasonMatch) {
+                score += 2;
+            }
+            
+            // 判断强弱
+            return score > 0;
+        }
+
+        // 确定格局
+        function determineGeju(bazi, gender) {
+            // 日主五行
+            const dayStemElement = bazi.dayStemElement;
+            
+            // 五行计数
+            const elementCounts = bazi.elementCounts;
+            
+            // 日主强弱
+            const dayMasterStrong = bazi.dayMasterStrength;
+            
+            // 十神计数
+            const shishenCounts = bazi.shishen.counts;
+            
+            // 格局判断规则（综合考虑日主强弱、五行分布、十神组合、月令）
+            let gejuType = '';
+            let gejuScore = {};
+            
+            // 计算各格局得分
+            // 1. 比肩格局：日主强，且比肩劫财较多
+            gejuScore.bixian = (dayMasterStrong ? 2 : -1) + 
+                              (shishenCounts.bijian + shishenCounts.jiecai) * 1.5;
+            
+            // 2. 印中格局：日主弱，且印星较多
+            gejuScore.yinzhong = (!dayMasterStrong ? 2 : -1) + 
+                                (shishenCounts.zhengyin + shishenCounts.pianyin) * 1.8;
+            
+            // 3. 财旺格局：正偏财配合合适
+            gejuScore.caiwang = (shishenCounts.zhengcai * 1.2 + shishenCounts.piancai) * 
+                               (dayMasterStrong ? 1.5 : 0.8);
+            
+            // 4. 煞重格局：七杀和正官较多，且有制化
+            const hasControl = shishenCounts.shangguan > 0.5 || shishenCounts.zhengyin > 0.5;
+            gejuScore.shazhong = (shishenCounts.zhengguan + shishenCounts.pianguan) * 
+                                (hasControl ? 1.5 : 0.7) * 
+                                (dayMasterStrong ? 1.2 : 0.8);
+            
+            // 5. 伤官格局：伤官和食神配合
+            gejuScore.shangguan = (shishenCounts.shangguan + shishenCounts.shishen) * 
+                                 (dayMasterStrong ? 1.3 : 0.9);
+            
+            // 考虑五行组合
+            const woodFire = elementCounts[0] + elementCounts[1]; // 木火（阳）
+            const metalWater = elementCounts[3] + elementCounts[4]; // 金水（阴）
+            
+            // 调整格局得分
+            if (woodFire > metalWater + 1.5) {
+                gejuScore.shangguan += 1.5;
+                gejuScore.bixian += 1;
+            }
+            if (metalWater > woodFire + 1.5) {
+                gejuScore.shazhong += 1.5;
+                gejuScore.yinzhong += 1;
+            }
+            if (elementCounts[2] > 2.5) {
+                gejuScore.caiwang += 1.5;
+            }
+            
+            // 根据性别调整
+            if (gender === 'male') {
+                gejuScore.bixian *= 1.2;
+                gejuScore.shazhong *= 1.1;
+            } else {
+                gejuScore.shangguan *= 1.2;
+                gejuScore.caiwang *= 1.1;
+            }
+            
+            // 选择得分最高的格局
+            gejuType = Object.entries(gejuScore).reduce((a, b) => b[1] > a[1] ? b : a)[0];
+            
+            return {
+                type: gejuType,
+                elementCounts: elementCounts,
+                dayMasterStrong: dayMasterStrong,
+                shishenCounts: shishenCounts
+            };
+        }
+
+        // 更新结果显示
+        function updateResults(bazi, geju) {
+            try {
+                // 检查输入参数
+                if (!bazi || !geju) {
+                    console.error('Invalid input parameters for updateResults');
+                    return;
+                }
+
+                // 更新八字
+                const updateElement = (id, value) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = value;
+                    } else {
+                        console.warn(`Element with id ${id} not found`);
+                    }
+                };
+
+                // 更新年柱
+                updateElement('yearStem', bazi.year.stem);
+                updateElement('yearBranch', bazi.year.branch);
+                updateElement('yearHidden', bazi.year.hidden);
+                
+                // 更新月柱
+                updateElement('monthStem', bazi.month.stem);
+                updateElement('monthBranch', bazi.month.branch);
+                updateElement('monthHidden', bazi.month.hidden);
+                
+                // 更新日柱
+                updateElement('dayStem', bazi.day.stem);
+                updateElement('dayBranch', bazi.day.branch);
+                updateElement('dayHidden', bazi.day.hidden);
+                
+                // 更新时柱
+                updateElement('hourStem', bazi.hour.stem);
+                updateElement('hourBranch', bazi.hour.branch);
+                updateElement('hourHidden', bazi.hour.hidden);
+                
+                // 更新五行图表
+                if (geju.elementCounts) {
+                    updateWuxingChart(geju.elementCounts);
+                }
+                
+                // 更新十神分析
+                if (bazi.shishen) {
+                    updateShishenGrid(bazi.shishen);
+                }
+                
+                // 更新格局
+                const t = translations[currentLang] || {};
+                const gejuType = document.getElementById('gejuType');
+                if (gejuType) {
+                    gejuType.textContent = t[geju.type] || geju.type;
+                    gejuType.setAttribute('data-type', geju.type);
+                }
+
+                const gejuDescription = document.getElementById('gejuDescription');
+                if (gejuDescription) {
+                    gejuDescription.textContent = t[geju.type + 'Desc'] || '';
+                }
+                
+                // 更新详细分析
+                updateDetailsSection(bazi, geju);
+            } catch (error) {
+                console.error('Error in updateResults:', error);
+            }
+        }
+
+        // 更新五行图表
+        function updateWuxingChart(elementCounts) {
+            try {
+                if (!Array.isArray(elementCounts) || elementCounts.length !== 5) {
+                    console.error('Invalid elementCounts array');
+                    return;
+                }
+
+                const maxCount = Math.max(...elementCounts);
+                const normalizedCounts = elementCounts.map(count => (count / maxCount) * 100);
+                
+                const updateWuxingElement = (type, value, normalizedValue) => {
+                    const fillElement = document.getElementById(`${type}Fill`);
+                    const valueElement = document.getElementById(`${type}Value`);
+                    
+                    if (fillElement) {
+                        fillElement.style.height = '0%';
+                    }
+                    if (valueElement) {
+                        valueElement.textContent = value.toFixed(1);
+                    }
+                };
+                
+                // 更新五行元素
+                const elements = ['wood', 'fire', 'earth', 'metal', 'water'];
+                elements.forEach((element, index) => {
+                    updateWuxingElement(element, elementCounts[index], normalizedCounts[index]);
+                });
+                
+                // 动画效果
+                setTimeout(() => {
+                    elements.forEach((element, index) => {
+                        const fillElement = document.getElementById(`${element}Fill`);
+                        if (fillElement) {
+                            fillElement.style.height = normalizedCounts[index] + '%';
+                        }
+                    });
+                }, 100);
+            } catch (error) {
+                console.error('Error in updateWuxingChart:', error);
+            }
+        }
+
+        // 更新十神分析
+        function updateShishenGrid(shishen) {
+            try {
+                if (!shishen || !shishen.counts) {
+                    console.warn('Invalid shishen data');
+                    return;
+                }
+                
+                const t = translations[currentLang] || {};
+                const container = document.getElementById('shishenGrid');
+                if (!container) {
+                    console.warn('Shishen grid container not found');
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                // 十神排序（按照计数从高到低）
+                const shishenTypes = Object.keys(shishen.counts).sort((a, b) => shishen.counts[b] - shishen.counts[a]);
+                
+                // 显示前4个主要十神
+                for (let i = 0; i < 4; i++) {
+                    if (i < shishenTypes.length) {
+                        const type = shishenTypes[i];
+                        const count = shishen.counts[type];
+                        
+                        if (count > 0) {
+                            const div = document.createElement('div');
+                            div.className = 'shishen-item';
+                            
+                            div.innerHTML = `
+                                <div class="shishen-name">${t[type] || type}</div>
+                                <div class="shishen-count">${count.toFixed(1)}</div>
+                                <div class="shishen-desc">${t[type + 'Desc'] || ''}</div>
+                            `;
+                            
+                            container.appendChild(div);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error in updateShishenGrid:', error);
+            }
+        }
+
+        // 更新详细分析部分
+        function updateDetailsSection(bazi, geju) {
+            try {
+                if (!bazi || !geju) {
+                    console.warn('Invalid input parameters for updateDetailsSection');
+                    return;
+                }
+
+                const t = translations[currentLang] || {};
+                const container = document.getElementById('detailsList');
+                if (!container) {
+                    console.warn('Details list container not found');
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                // 1. 日主强弱分析
+                const detail1 = document.createElement('div');
+                detail1.className = 'detail-item';
+                detail1.innerHTML = `
+                    <div class="detail-label">${geju.dayMasterStrong ? t.dayMasterStrong : t.dayMasterWeak}</div>
+                    <div>${geju.dayMasterStrong ? t.dayMasterStrongDetail : t.dayMasterWeakDetail}</div>
+                `;
+                container.appendChild(detail1);
+                
+                // 2. 月令分析
+                if (bazi.isSeasonMatch !== undefined) {
+                    const detail2 = document.createElement('div');
+                    detail2.className = 'detail-item';
+                    detail2.innerHTML = `
+                        <div class="detail-label">${bazi.isSeasonMatch ? t.seasonMatch : t.seasonNotMatch}</div>
+                        <div>${bazi.isSeasonMatch ? t.seasonMatchDetail : t.seasonNotMatchDetail}</div>
+                    `;
+                    container.appendChild(detail2);
+                }
+                
+                // 3. 地支藏干分析
+                if (bazi.month && bazi.month.hidden) {
+                    const detail3 = document.createElement('div');
+                    detail3.className = 'detail-item';
+                    detail3.innerHTML = `
+                        <div class="detail-label">${t.monthEarthBranch || '月支藏干'}</div>
+                        <div>${bazi.month.hidden}</div>
+                    `;
+                    container.appendChild(detail3);
+                }
+                
+                // 4. 年支藏干分析
+                if (bazi.year && bazi.year.hidden) {
+                    const detail4 = document.createElement('div');
+                    detail4.className = 'detail-item';
+                    detail4.innerHTML = `
+                        <div class="detail-label">${t.yearEarthBranch || '年支藏干'}</div>
+                        <div>${bazi.year.hidden}</div>
+                    `;
+                    container.appendChild(detail4);
+                }
+            } catch (error) {
+                console.error('Error in updateDetailsSection:', error);
+            }
+        }
+
+        // 更新十神显示（语言切换时）
+        function updateShishenDisplay() {
+            const container = document.getElementById('shishenGrid');
+            if (!container.children.length) return;
+            
+            const t = translations[currentLang];
+            
+            Array.from(container.children).forEach(item => {
+                const nameDiv = item.querySelector('.shishen-name');
+                const descDiv = item.querySelector('.shishen-desc');
+                
+                if (nameDiv && descDiv) {
+                    // 查找与当前显示名称匹配的键
+                    let foundType = null;
+                    for (const key in t) {
+                        if (nameDiv.textContent === translations['zh-Hant'][key] || 
+                            nameDiv.textContent === translations['zh-Hans'][key] ||
+                            nameDiv.textContent === translations['en'][key] ||
+                            nameDiv.textContent === translations['ja'][key] ||
+                            nameDiv.textContent === translations['ko'][key]) {
+                            foundType = key;
+                            break;
+                        }
+                    }
+                    
+                    if (foundType) {
+                        nameDiv.textContent = t[foundType];
+                        descDiv.textContent = t[foundType + 'Desc'];
+                    }
+                }
+            });
+        }
+
+        // 更新详细分析显示（语言切换时）
+        function updateDetailsDisplay() {
+            const container = document.getElementById('detailsList');
+            if (!container.children.length) return;
+            
+            const t = translations[currentLang];
+            
+            // 日主强弱
+            const detail1 = container.children[0];
+            const label1 = detail1.querySelector('.detail-label');
+            const content1 = detail1.querySelector('div:not(.detail-label)');
+            
+            if (label1.textContent === translations['zh-Hant'].dayMasterStrong ||
+                label1.textContent === translations['zh-Hans'].dayMasterStrong ||
+                label1.textContent === translations['en'].dayMasterStrong ||
+                label1.textContent === translations['ja'].dayMasterStrong ||
+                label1.textContent === translations['ko'].dayMasterStrong) {
+                label1.textContent = t.dayMasterStrong;
+                content1.textContent = t.dayMasterStrongDetail;
+            } else {
+                label1.textContent = t.dayMasterWeak;
+                content1.textContent = t.dayMasterWeakDetail;
+            }
+            
+            // 月令
+            const detail2 = container.children[1];
+            const label2 = detail2.querySelector('.detail-label');
+            const content2 = detail2.querySelector('div:not(.detail-label)');
+            
+            if (label2.textContent === translations['zh-Hant'].seasonMatch ||
+                label2.textContent === translations['zh-Hans'].seasonMatch ||
+                label2.textContent === translations['en'].seasonMatch ||
+                label2.textContent === translations['ja'].seasonMatch ||
+                label2.textContent === translations['ko'].seasonMatch) {
+                label2.textContent = t.seasonMatch;
+                content2.textContent = t.seasonMatchDetail;
+            } else {
+                label2.textContent = t.seasonNotMatch;
+                content2.textContent = t.seasonNotMatchDetail;
+            }
+            
+            // 地支藏干
+            container.children[2].querySelector('.detail-label').textContent = t.monthEarthBranch;
+            container.children[3].querySelector('.detail-label').textContent = t.yearEarthBranch;
+        }
+    </script>
+
+
+</body></html>

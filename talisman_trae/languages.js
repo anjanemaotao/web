@@ -280,3 +280,4 @@ const languages = {
         yearFormat: '{year}년 ({zodiac}년)',
         languageName: '한국어'
     }
+};
