@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="八字计算器 - 输入阴历生日计算八字格局">
+    <meta name="keywords" content="八字,命理,四柱,阴历,生辰八字,五行,十神">
+    <meta property="og:title" content="八字计算器">
+    <meta property="og:description" content="输入阴历生日计算八字格局">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="八字计算器">
+    <meta name="twitter:description" content="输入阴历生日计算八字格局">
+    <title>八字计算器</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- Data files -->
+    <script src="js/data/calendarData.js"></script>
+    <script src="js/data/baziData.js"></script>
+    
+    <!-- Utility files -->
+    <script type="text/babel" src="js/utils/lunarCalendar.js"></script>
+    <script type="text/babel" src="js/utils/baziCalculator.js"></script>
+    <script type="text/babel" src="js/utils/baziAnalyzer.js"></script>
+    
+    <!-- Components -->
+    <script type="text/babel" src="js/components/Header.js"></script>
+    <script type="text/babel" src="js/components/InputForm.js"></script>
+    <script type="text/babel" src="js/components/BaziChart.js"></script>
+    <script type="text/babel" src="js/components/ElementsChart.js"></script>
+    <script type="text/babel" src="js/components/FormatAnalysis.js"></script>
+    <script type="text/babel" src="js/components/FateChart.js"></script>
+    <script type="text/babel" src="js/components/AnalysisResult.js"></script>
+    <script type="text/babel" src="js/components/Footer.js"></script>
+    
+    <!-- Main App -->
+    <script type="text/babel" src="js/app.js"></script>
+</body>
+</html>

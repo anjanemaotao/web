@@ -1,0 +1,103 @@
+:root {
+  --color-primary: #8b0000;
+  --color-secondary: #d4af37;
+  --color-background: #121212;
+  --color-paper: #1e1e1e;
+  --color-text: #f0f0f0;
+  --color-wood: #7cae7a;
+  --color-fire: #e67e22;
+  --color-earth: #c19a6b;
+  --color-metal: #bdc3c7;
+  --color-water: #3498db;
+}
+
+body {
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+.bg-paper {
+  background-color: var(--color-paper);
+}
+
+.border-mystic {
+  border-image: linear-gradient(45deg, var(--color-primary), var(--color-secondary)) 1;
+}
+
+.text-mystic {
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.element-wood {
+  color: var(--color-wood);
+}
+
+.element-fire {
+  color: var(--color-fire);
+}
+
+.element-earth {
+  color: var(--color-earth);
+}
+
+.element-metal {
+  color: var(--color-metal);
+}
+
+.element-water {
+  color: var(--color-water);
+}
+
+.bg-element-wood {
+  background-color: var(--color-wood);
+}
+
+.bg-element-fire {
+  background-color: var(--color-fire);
+}
+
+.bg-element-earth {
+  background-color: var(--color-earth);
+}
+
+.bg-element-metal {
+  background-color: var(--color-metal);
+}
+
+.bg-element-water {
+  background-color: var(--color-water);
+}
+
+.chart-cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.chart-header {
+  font-weight: bold;
+  background-color: rgba(212, 175, 55, 0.2);
+}
+
+.lucky-period-item {
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.lucky-period-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

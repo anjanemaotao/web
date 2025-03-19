@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="八字命理计算器 - 根据阴历出生日期和时辰推算命理信息">
+    <meta name="keywords" content="八字, 命理, 阴历, 生辰八字, 命盘, 五行, 天干, 地支">
+    <meta property="og:title" content="八字命理计算器">
+    <meta property="og:description" content="根据阴历出生日期和时辰推算命理信息">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="八字命理计算器">
+    <meta name="twitter:description" content="根据阴历出生日期和时辰推算命理信息">
+    <title>八字命理计算器</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/animations.css" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- Utils -->
+    <script type="text/babel" src="utils/lunarCalendar.js"></script>
+    <script type="text/babel" src="utils/baziCalculator.js"></script>
+    <script type="text/babel" src="utils/elementUtils.js"></script>
+    
+    <!-- Components -->
+    <script type="text/babel" src="components/Header.js"></script>
+    <script type="text/babel" src="components/DateTimeInput.js"></script>
+    <script type="text/babel" src="components/BaziChart.js"></script>
+    <script type="text/babel" src="components/ElementAnalysis.js"></script>
+    <script type="text/babel" src="components/LuckyPeriods.js"></script>
+    <script type="text/babel" src="components/Footer.js"></script>
+    
+    <!-- Main App -->
+    <script type="text/babel" src="app.js"></script>
+    <script type="text/babel">
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
