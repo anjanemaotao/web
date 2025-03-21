@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八字计算测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>八字计算测试</h1>
+    <p>测试农历1987年2月22日丑时(1点)的八字计算</p>
+    <p>期望结果: <strong>丁卯 癸卯 己巳 乙丑</strong></p>
+    
+    <div class="result" id="result">
+        <h2>计算结果</h2>
+        <div id="output">计算中...</div>
+    </div>
+
+    <!-- 引入工具库 -->
+    <script src="utils/lunarCalendar.js"></script>
+    <script src="utils/baziCalculator.js"></script>
+    
+    <script>
+        window.onload = function() {
+            // 创建工具实例
+            const lunarCalendar = LunarCalendar();
+            const baziCalculator = BaziCalculator();
+            
+            // 测试参数
+            const lunarYear = 1987;
+            const lunarMonth = 2;
+            const lunarDay = 22;
+            const hour = 1; // 丑时
+            
+            // 转换为公历日期
+            const solarDate = lunarCalendar.lunarToSolar(lunarYear, lunarMonth, lunarDay, false);
+            
+            // 计算日柱
+            const dayGanZhi = lunarCalendar.getDayGanZhi(solarDate.year, solarDate.month, solarDate.day);
+            
+            // 计算时柱
+            const hourGanZhi = lunarCalendar.getHourGanZhi(dayGanZhi.heavenlyStem, hour);
+            
+            // 计算完整八字
+            const bazi = baziCalculator.calculateBazi(lunarYear, lunarMonth, lunarDay, hour);
+            
+            // 显示结果
+            let output = '';
+            output += '<p>农历1987年2月22日转公历: ' + solarDate.year + '年' + solarDate.month + '月' + solarDate.day + '日</p>';
+            output += '<p>日柱: ' + dayGanZhi.heavenlyStem + dayGanZhi.earthlyBranch + '</p>';
+            output += '<p>丑时(1点)时柱: ' + hourGanZhi.heavenlyStem + hourGanZhi.earthlyBranch + '</p>';
+            
+            output += '<h3>完整八字:</h3>';
+            output += '<p>年柱: ' + bazi.year.stem + bazi.year.branch + '</p>';
+            output += '<p>月柱: ' + bazi.month.stem + bazi.month.branch + '</p>';
+            output += '<p>日柱: ' + bazi.day.stem + bazi.day.branch + '</p>';
+            output += '<p>时柱: ' + bazi.hour.stem + bazi.hour.branch + '</p>';
+            
+            // 检查结果是否正确
+            const expected = '丁卯 癸卯 己巳 乙丑';
+            const actual = bazi.year.stem + bazi.year.branch + ' ' + 
+                          bazi.month.stem + bazi.month.branch + ' ' + 
+                          bazi.day.stem + bazi.day.branch + ' ' + 
+                          bazi.hour.stem + bazi.hour.branch;
+            
+            if (actual === expected) {
+                output += '<p class="correct">测试通过! 计算结果与期望结果一致!</p>';
+            } else {
+                output += '<p class="incorrect">测试失败! 计算结果与期望结果不一致!</p>';
+                output += '<p>期望结果: ' + expected + '</p>';
+                output += '<p>实际结果: ' + actual + '</p>';
+            }
+            
+            document.getElementById('output').innerHTML = output;
+        };
+    </script>
+</body>
+</html>

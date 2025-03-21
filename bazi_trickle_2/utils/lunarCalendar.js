@@ -89,6 +89,7 @@ function LunarCalendar() {
     let isLeap = false;
     
     for (i = 1; i < 13 && offset > 0; i++) {
+      let temp;
       if (leap > 0 && i === leap + 1 && !isLeap) {
         --i;
         isLeap = true;
@@ -193,42 +194,101 @@ function LunarCalendar() {
     // 月干公式: (年干序号 * 2 + 月序号) % 10
     // 年干序号从0开始，月序号从0开始
     const yearGanIndex = (year - 1900 + 36) % 10;
-    // 寅月为正月
+    // 寅月为正月，需要将农历月份转换为节气月
     const monthOffset = (month + 1) % 12;
-    const monthGanIndex = (yearGanIndex * 2 + monthOffset) % 10;
+    // 月干 = (年干 × 2 + 月数 - 1) % 10
+    const monthGanIndex = (yearGanIndex * 2 + monthOffset - 1) % 10;
+    // 月支 = (月数 + 2) % 12
+    const monthZhiIndex = (monthOffset + 1) % 12;
     
     return {
       heavenlyStem: heavenlyStems[monthGanIndex],
-      earthlyBranch: earthlyBranches[monthOffset]
+      earthlyBranch: earthlyBranches[monthZhiIndex]
     };
   }
 
   // 获取日的天干地支
   function getDayGanZhi(year, month, day) {
     // 计算距离1900年1月31日的天数
+    // 1900年1月31日是庚子日，天干索引为6，地支索引为0
     const date = new Date(year, month - 1, day);
-    const offset = Math.floor((date - new Date(1900, 0, 31)) / 86400000);
+    const baseDate = new Date(1900, 0, 31);
+    const offset = Math.floor((date - baseDate) / 86400000);
+    
+    // 根据偏移量计算天干地支索引
+    // 天干索引 = (偏移量 + 6) % 10，6是庚的索引
+    // 地支索引 = (偏移量 + 0) % 12，0是子的索引
+    // 注意：JavaScript的取模运算对负数的处理与我们需要的不同，所以需要特殊处理
+    let stemIndex = (offset + 6) % 10;
+    let branchIndex = (offset + 0) % 12;
+    
+    // 处理负数情况
+    if (stemIndex < 0) stemIndex = stemIndex + 10;
+    if (branchIndex < 0) branchIndex = branchIndex + 12;
     
     return {
-      heavenlyStem: heavenlyStems[offset % 10],
-      earthlyBranch: earthlyBranches[offset % 12]
+      heavenlyStem: heavenlyStems[stemIndex],
+      earthlyBranch: earthlyBranches[branchIndex]
     };
   }
 
   // 获取时辰的天干地支
   function getHourGanZhi(dayGan, hour) {
     // 日干对应的时辰干支起始序号
+    // 甲己日起甲子，乙庚日起丙子，丙辛日起戊子，丁壬日起庚子，戊癸日起壬子
     const dayGanIndex = heavenlyStems.indexOf(dayGan);
-    const baseHourStem = (dayGanIndex * 2) % 10;
     
     // 时辰地支序号 (0-11)
-    const hourBranchIndex = Math.floor(hour / 2) % 12;
+    let hourBranchIndex;
+    if (hour >= 23 || hour < 1) {
+      hourBranchIndex = 0; // 子时 (23-1点)
+    } else if (hour >= 1 && hour < 3) {
+      hourBranchIndex = 1; // 丑时 (1-3点)
+    } else if (hour >= 3 && hour < 5) {
+      hourBranchIndex = 2; // 寅时 (3-5点)
+    } else if (hour >= 5 && hour < 7) {
+      hourBranchIndex = 3; // 卯时 (5-7点)
+    } else if (hour >= 7 && hour < 9) {
+      hourBranchIndex = 4; // 辰时 (7-9点)
+    } else if (hour >= 9 && hour < 11) {
+      hourBranchIndex = 5; // 巳时 (9-11点)
+    } else if (hour >= 11 && hour < 13) {
+      hourBranchIndex = 6; // 午时 (11-13点)
+    } else if (hour >= 13 && hour < 15) {
+      hourBranchIndex = 7; // 未时 (13-15点)
+    } else if (hour >= 15 && hour < 17) {
+      hourBranchIndex = 8; // 申时 (15-17点)
+    } else if (hour >= 17 && hour < 19) {
+      hourBranchIndex = 9; // 酉时 (17-19点)
+    } else if (hour >= 19 && hour < 21) {
+      hourBranchIndex = 10; // 戌时 (19-21点)
+    } else {
+      hourBranchIndex = 11; // 亥时 (21-23点)
+    }
     
-    // 时辰天干序号
+    // 根据日干确定子时天干（按照口诀：甲己还加甲，乙庚丙作初；丙辛从戊起，丁壬庚子居；戊癸何方发，壬子是真途）
+    let baseHourStem;
+    if (dayGanIndex === 0 || dayGanIndex === 5) { // 甲己日
+      baseHourStem = 0; // 甲
+    } else if (dayGanIndex === 1 || dayGanIndex === 6) { // 乙庚日
+      baseHourStem = 2; // 丙
+    } else if (dayGanIndex === 2 || dayGanIndex === 7) { // 丙辛日
+      baseHourStem = 4; // 戊
+    } else if (dayGanIndex === 3 || dayGanIndex === 8) { // 丁壬日
+      baseHourStem = 6; // 庚
+    } else { // 戊癸日 (dayGanIndex === 4 || dayGanIndex === 9)
+      baseHourStem = 8; // 壬
+    }
+    
+    // 时辰天干 = (子时天干 + 时辰序号) % 10
     const hourStemIndex = (baseHourStem + hourBranchIndex) % 10;
     
+    // 根据传统命理学规则计算时干
+    // 甲己还加甲，乙庚丙作初；丙辛从戊起，丁壬庚子居；戊癸何方发，壬子是真途
+    let hourStem = heavenlyStems[hourStemIndex];
+    
     return {
-      heavenlyStem: heavenlyStems[hourStemIndex],
+      heavenlyStem: hourStem,
       earthlyBranch: earthlyBranches[hourBranchIndex]
     };
   }

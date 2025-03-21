@@ -1,0 +1,71 @@
+/* 全局样式 */
+:root {
+  --primary-color: #c53030;
+  --secondary-color: #2c5282;
+  --accent-color: #d69e2e;
+  --background-color: #f7f7f7;
+  --text-color: #2d3748;
+  --border-color: #e2e8f0;
+  --success-color: #38a169;
+  --danger-color: #e53e3e;
+  --card-bg: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+  --primary-color: #fc8181;
+  --secondary-color: #63b3ed;
+  --accent-color: #f6e05e;
+  --background-color: #1a202c;
+  --text-color: #e2e8f0;
+  --border-color: #4a5568;
+  --card-bg: #2d3748;
+  --shadow: 0 4px 6px rgba(255, 255, 255, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans TC','Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;line-height: 1.6;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;border: 1px solid var(--border-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  color: var(--primary-color);
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

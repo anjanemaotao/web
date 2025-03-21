@@ -211,33 +211,52 @@ function BaziCalculator() {
       "水": 0
     };
     
-    // 天干五行
-    counts[fiveElements[yearStem]] += 1;
-    counts[fiveElements[monthStem]] += 1;
-    counts[fiveElements[dayStem]] += 1;
-    counts[fiveElements[hourStem]] += 1;
+    // 天干五行（权重1.2）
+    counts[fiveElements[yearStem]] += 1.2;
+    counts[fiveElements[monthStem]] += 1.2;
+    counts[fiveElements[dayStem]] += 1.2;
+    counts[fiveElements[hourStem]] += 1.2;
     
-    // 地支五行
-    counts[fiveElements[yearBranch]] += 0.5;
-    counts[fiveElements[monthBranch]] += 0.5;
-    counts[fiveElements[dayBranch]] += 0.5;
-    counts[fiveElements[hourBranch]] += 0.5;
+    // 地支本气五行（权重1.0）
+    counts[fiveElements[yearBranch]] += 1.0;
+    counts[fiveElements[monthBranch]] += 1.0;
+    counts[fiveElements[dayBranch]] += 1.0;
+    counts[fiveElements[hourBranch]] += 1.0;
     
-    // 地支藏干五行
-    branchHiddenStems[yearBranch].forEach(stem => {
-      counts[fiveElements[stem]] += 0.5 / branchHiddenStems[yearBranch].length;
+    // 地支藏干五行（根据藏干强度分配权重）
+    const getHiddenStemWeight = (position, index, total) => {
+      // 根据藏干位置（年月日时）和在藏干中的顺序分配权重
+      const baseWeight = 0.8; // 基础权重
+      const positionFactor = {
+        year: 0.9,
+        month: 1.0,
+        day: 1.0,
+        hour: 0.9
+      };
+      
+      // 根据藏干个数和位置计算权重
+      const weight = baseWeight * positionFactor[position] / total;
+      return weight * (1 - index * 0.2); // 藏干越靠后权重越小
+    };
+    
+    // 年支藏干
+    branchHiddenStems[yearBranch].forEach((stem, index) => {
+      counts[fiveElements[stem]] += getHiddenStemWeight('year', index, branchHiddenStems[yearBranch].length);
     });
     
-    branchHiddenStems[monthBranch].forEach(stem => {
-      counts[fiveElements[stem]] += 0.5 / branchHiddenStems[monthBranch].length;
+    // 月支藏干
+    branchHiddenStems[monthBranch].forEach((stem, index) => {
+      counts[fiveElements[stem]] += getHiddenStemWeight('month', index, branchHiddenStems[monthBranch].length);
     });
     
-    branchHiddenStems[dayBranch].forEach(stem => {
-      counts[fiveElements[stem]] += 0.5 / branchHiddenStems[dayBranch].length;
+    // 日支藏干
+    branchHiddenStems[dayBranch].forEach((stem, index) => {
+      counts[fiveElements[stem]] += getHiddenStemWeight('day', index, branchHiddenStems[dayBranch].length);
     });
     
-    branchHiddenStems[hourBranch].forEach(stem => {
-      counts[fiveElements[stem]] += 0.5 / branchHiddenStems[hourBranch].length;
+    // 时支藏干
+    branchHiddenStems[hourBranch].forEach((stem, index) => {
+      counts[fiveElements[stem]] += getHiddenStemWeight('hour', index, branchHiddenStems[hourBranch].length);
     });
     
     return counts;
@@ -248,19 +267,23 @@ function BaziCalculator() {
     const periods = [];
     
     // 确定大运顺逆
-    const gender = true; // 默认阳男阴女顺排，阴男阳女逆排
     const yearStemIndex = lunarCalendar.heavenlyStems.indexOf(yearStem);
     const isYangYear = yearStemIndex % 2 === 0; // 阳年
+    const isYangDay = lunarCalendar.heavenlyStems.indexOf(dayStem) % 2 === 0; // 阳日
+    
+    // 根据性别和年干阴阳确定大运顺逆
+    // 此处需要在实际应用中传入性别参数
+    const gender = true; // 默认为男性
+    const direction = ((gender && isYangDay) || (!gender && !isYangDay)) ? 1 : -1;
     
     // 大运起始干支
     let stemIndex = lunarCalendar.heavenlyStems.indexOf(monthStem);
     let branchIndex = lunarCalendar.earthlyBranches.indexOf(monthBranch);
     
-    // 根据顺逆调整方向
-    const direction = (isYangYear && gender) || (!isYangYear && !gender) ? 1 : -1;
-    
     // 计算起运时间（虚岁）
-    const startAge = 1; // 默认从1岁开始
+    // 根据性别和年干阴阳确定起运时间
+    // 阳年男或阴年女，从3岁起运；阴年男或阳年女，从4岁起运
+    const startAge = ((gender && isYangYear) || (!gender && !isYangYear)) ? 3 : 4;
     
     // 生成10个大运
     for (let i = 0; i < 10; i++) {
@@ -270,18 +293,81 @@ function BaziCalculator() {
       const stem = lunarCalendar.heavenlyStems[stemIndex];
       const branch = lunarCalendar.earthlyBranches[branchIndex];
       
+      // 计算大运干支五行
+      const stemElement = fiveElements[stem];
+      const branchElement = fiveElements[branch];
+      
+      // 分析大运干支与日主的关系
+      const dayMasterElement = fiveElements[dayStem];
+      const stemRelation = analyzeElementRelation(dayMasterElement, stemElement);
+      const branchRelation = analyzeElementRelation(dayMasterElement, branchElement);
+      
+      // 计算大运强度
+      const strength = calculatePeriodStrength(
+        stem, branch,
+        dayStem, dayBranch,
+        monthStem, monthBranch
+      );
+      
       periods.push({
         stem,
         branch,
-        stemElement: fiveElements[stem],
-        branchElement: fiveElements[branch],
+        stemElement,
+        branchElement,
         nayin: nayin[stem + branch],
         age: startAge + i * 10,
-        year: solarYear + startAge + i * 10 - 1
+        year: solarYear + startAge + i * 10 - 1,
+        stemRelation,
+        branchRelation,
+        strength
       });
     }
     
     return periods;
+  }
+  
+  // 分析五行关系
+  function analyzeElementRelation(baseElement, targetElement) {
+    if (baseElement === targetElement) return "比和";
+    if (elementRelations[baseElement].生 === targetElement) return "生";
+    if (elementRelations[baseElement].克 === targetElement) return "克";
+    if (elementRelations[baseElement].被生 === targetElement) return "泄";
+    if (elementRelations[baseElement].被克 === targetElement) return "耗";
+    return "";
+  }
+  
+  // 计算大运强度
+  function calculatePeriodStrength(periodStem, periodBranch, dayStem, dayBranch, monthStem, monthBranch) {
+    let strength = 0;
+    
+    // 天干五行关系评分
+    const stemScore = {
+      "比和": 1.0,
+      "生": 0.8,
+      "泄": 0.6,
+      "克": 0.4,
+      "耗": 0.2
+    };
+    
+    // 计算与日主的关系得分
+    const dayMasterElement = fiveElements[dayStem];
+    const periodStemElement = fiveElements[periodStem];
+    const stemRelation = analyzeElementRelation(dayMasterElement, periodStemElement);
+    strength += stemScore[stemRelation] || 0;
+    
+    // 考虑地支藏干
+    const hiddenStems = branchHiddenStems[periodBranch];
+    hiddenStems.forEach((stem, index) => {
+      const hiddenElement = fiveElements[stem];
+      const relation = analyzeElementRelation(dayMasterElement, hiddenElement);
+      strength += (stemScore[relation] || 0) * (0.8 - index * 0.2);
+    });
+    
+    // 考虑月令
+    const monthElement = fiveElements[monthStem];
+    if (periodStemElement === monthElement) strength += 0.5;
+    
+    return parseFloat(strength.toFixed(2));
   }
   
   return {
