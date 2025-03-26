@@ -1,4 +1,6 @@
-function ElementAnalysis({ baziData }) {
+import { ElementUtils } from '../utils/elementUtils';
+
+export function ElementAnalysis({ baziData }) {
   try {
     if (!baziData) return null;
 
@@ -163,7 +165,6 @@ function ElementAnalysis({ baziData }) {
     );
   } catch (error) {
     console.error('ElementAnalysis component error:', error);
-    reportError(error);
     return <div>五行分析组件加载出错</div>;
   }
 }

@@ -1,4 +1,4 @@
-function ElementUtils() {
+export function ElementUtils() {
   // 五行颜色映射
   const elementColors = {
     "木": "element-wood",

@@ -1,0 +1,108 @@
+<!-- pages/result/result.wxml -->
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <view class="logo">
+      <image src="/images/logo.png" mode="aspectFit"></image>
+      <text class="title">墨衍子八字</text>
+    </view>
+    
+    <view class="actions">
+      <view class="back-btn" bindtap="goBack">返回</view>
+      <view class="share-btn" bindtap="shareResult">分享</view>
+    </view>
+  </view>
+
+  <view class="bazi-result card">
+    <text class="section-title">八字</text>
+    <view class="bazi-grid">
+      <view class="bazi-pillar">
+        <view class="pillar-label">年柱</view>
+        <view class="tian-gan">{{result.bazi.year[0]}}</view>
+        <view class="di-zhi">{{result.bazi.year[1]}}</view>
+      </view>
+      <view class="bazi-pillar">
+        <view class="pillar-label">月柱</view>
+        <view class="tian-gan">{{result.bazi.month[0]}}</view>
+        <view class="di-zhi">{{result.bazi.month[1]}}</view>
+      </view>
+      <view class="bazi-pillar">
+        <view class="pillar-label">日柱</view>
+        <view class="tian-gan">{{result.bazi.day[0]}}</view>
+        <view class="di-zhi">{{result.bazi.day[1]}}</view>
+      </view>
+      <view class="bazi-pillar">
+        <view class="pillar-label">时柱</view>
+        <view class="tian-gan">{{result.bazi.hour[0]}}</view>
+        <view class="di-zhi">{{result.bazi.hour[1]}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="wuxing-analysis card">
+    <text class="section-title">五行分析</text>
+    <view class="wuxing-summary">
+      <block wx:for="{{result.wuxingAnalysis.wuxingCount}}" wx:for-index="wuxing" wx:for-item="count" wx:key="wuxing">
+        <view class="wuxing-item">
+          <text class="wuxing-name" style="color: {{getWuxingColor(wuxing)}}">{{wuxing}}</text>
+          <view class="wuxing-bar">
+            <view class="wuxing-bar-inner" style="width: {{count * 12.5}}%; background-color: {{getWuxingColor(wuxing)}}"></view>
+          </view>
+          <text class="wuxing-count">{{count}}</text>
+          <text class="wuxing-strength">{{getWuxingStrength(count, 16)}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="shishen-analysis card">
+    <text class="section-title">十神分析</text>
+    <view class="shishen-grid">
+      <view class="shishen-item">
+        <view class="shishen-label">年干</view>
+        <view class="shishen-value">{{result.shiShenAnalysis.year}}</view>
+        <view class="shishen-meaning">{{getShiShenMeaning(result.shiShenAnalysis.year)}}</view>
+      </view>
+      <view class="shishen-item">
+        <view class="shishen-label">月干</view>
+        <view class="shishen-value">{{result.shiShenAnalysis.month}}</view>
+        <view class="shishen-meaning">{{getShiShenMeaning(result.shiShenAnalysis.month)}}</view>
+      </view>
+      <view class="shishen-item">
+        <view class="shishen-label">日干</view>
+        <view class="shishen-value">{{result.shiShenAnalysis.day}}</view>
+        <view class="shishen-meaning">{{getShiShenMeaning(result.shiShenAnalysis.day)}}</view>
+      </view>
+      <view class="shishen-item">
+        <view class="shishen-label">时干</view>
+        <view class="shishen-value">{{result.shiShenAnalysis.hour}}</view>
+        <view class="shishen-meaning">{{getShiShenMeaning(result.shiShenAnalysis.hour)}}</view>
+      </view>
+    </view>
+    <view class="shishen-summary">
+      <text>{{result.shiShenAnalysis.summary}}</text>
+    </view>
+  </view>
+
+  <view class="ju-analysis card">
+    <text class="section-title">格局分析</text>
+    <view class="ju-types">
+      <block wx:for="{{result.ju.types}}" wx:key="index">
+        <view class="ju-type {{index === 0 ? 'primary-ju' : ''}}">
+          {{item}}
+        </view>
+      </block>
+    </view>
+    <view class="ju-explanation">
+      <text>{{result.ju.explanation}}</text>
+    </view>
+    <view class="ju-characteristics">
+      <text class="characteristics-title">性格特点：</text>
+      <text>{{result.ju.characteristics}}</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <button class="back-button" bindtap="goBack">返回首页</button>
+    <button class="share-button" bindtap="shareResult">分享结果</button>
+  </view>
+</view>

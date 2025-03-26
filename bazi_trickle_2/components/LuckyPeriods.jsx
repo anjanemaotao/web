@@ -1,4 +1,6 @@
-function LuckyPeriods({ baziData }) {
+import { ElementUtils } from '../utils/elementUtils';
+
+export function LuckyPeriods({ baziData }) {
   try {
     if (!baziData) return null;
     

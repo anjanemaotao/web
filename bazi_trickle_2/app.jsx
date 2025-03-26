@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BaziCalculator } from './utils/baziCalculator';
 import { Header } from './components/Header.jsx';
-import { Footer } from './components/Footer.jsx';
+import Footer from './components/Footer.jsx';
 import { DateTimeInput } from './components/DateTimeInput';
 import { BaziChart } from './components/BaziChart';
 import { ElementAnalysis } from './components/ElementAnalysis';
@@ -78,7 +78,6 @@ function App() {
     );
   } catch (error) {
     console.error('App component error:', error);
-    reportError(error);
     return <div>应用加载出错</div>;
   }
 

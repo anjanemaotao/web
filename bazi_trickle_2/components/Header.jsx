@@ -1,4 +1,4 @@
-function Header() {
+export function Header() {
   try {
     return (
       <div data-name="header" className="bg-paper p-4 shadow-lg border-b border-mystic">

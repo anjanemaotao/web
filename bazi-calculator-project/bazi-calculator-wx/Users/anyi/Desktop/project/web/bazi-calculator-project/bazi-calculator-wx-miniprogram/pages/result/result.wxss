@@ -1,0 +1,309 @@
+/* pages/result/result.wxss */
+.container {
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.dark-mode {
+  background-color: #222;
+  color: #eee;
+}
+
+.dark-mode .card {
+  background-color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo image {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.back-btn, .share-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-left: 10px;
+  background-color: #eee;
+  color: #666;
+}
+
+.dark-mode .back-btn, .dark-mode .share-btn {
+  background-color: #444;
+  color: #ddd;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* 八字结果样式 */
+.bazi-grid {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.bazi-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+}
+
+.pillar-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.dark-mode .pillar-label {
+  color: #aaa;
+}
+
+.tian-gan, .di-zhi {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 3px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.tian-gan {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.di-zhi {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.dark-mode .tian-gan {
+  background-color: #1a3a5f;
+  color: #90caf9;
+}
+
+.dark-mode .di-zhi {
+  background-color: #4d3800;
+  color: #ffcc80;
+}
+
+/* 五行分析样式 */
+.wuxing-summary {
+  padding: 10px 0;
+}
+
+.wuxing-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.wuxing-name {
+  width: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.wuxing-bar {
+  flex: 1;
+  height: 16px;
+  background-color: #eee;
+  border-radius: 8px;
+  margin: 0 10px;
+  overflow: hidden;
+}
+
+.dark-mode .wuxing-bar {
+  background-color: #444;
+}
+
+.wuxing-bar-inner {
+  height: 100%;
+  border-radius: 8px;
+}
+
+.wuxing-count {
+  width: 20px;
+  text-align: center;
+}
+
+.wuxing-strength {
+  width: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.dark-mode .wuxing-strength {
+  color: #aaa;
+}
+
+/* 十神分析样式 */
+.shishen-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.shishen-item {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.dark-mode .shishen-item {
+  background-color: #3a3a3a;
+}
+
+.shishen-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.dark-mode .shishen-label {
+  color: #aaa;
+}
+
+.shishen-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.shishen-meaning {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.dark-mode .shishen-meaning {
+  color: #aaa;
+}
+
+.shishen-summary {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dark-mode .shishen-summary {
+  background-color: #3a3a3a;
+}
+
+/* 格局分析样式 */
+.ju-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.ju-type {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  font-size: 14px;
+}
+
+.dark-mode .ju-type {
+  background-color: #3a3a3a;
+}
+
+.primary-ju {
+  background-color: #4a6bdf;
+  color: white;
+}
+
+.dark-mode .primary-ju {
+  background-color: #5d7ce6;
+}
+
+.ju-explanation, .ju-characteristics {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.characteristics-title {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* 底部按钮样式 */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.back-button, .share-button {
+  width: 48%;
+  padding: 10px 0;
+  border-radius: 6px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.back-button {
+  background-color: #eee;
+  color: #666;
+}
+
+.share-button {
+  background-color: #4a6bdf;
+  color: white;
+}
+
+.dark-mode .back-button {
+  background-color: #444;
+  color: #ddd;
+}

@@ -1,0 +1,167 @@
+/* Traditional Theme (Default) */
+.theme-traditional {
+    --primary-bg: #f5f0e8;
+    --secondary-bg: #e8d8c3;
+    --primary-text: #4a3933;
+    --secondary-text: #7d6b5d;
+    --accent-color: #c8553d;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: #d3b88c;
+    --input-bg: #fff;
+    --input-border: #d3b88c;
+    --button-bg: #c8553d;
+    --button-hover: #a83e29;
+    --button-text: #fff;
+}
+
+/* Modern Theme */
+.theme-modern {
+    --primary-bg: #f0f4f8;
+    --secondary-bg: #d9e2ec;
+    --primary-text: #102a43;
+    --secondary-text: #486581;
+    --accent-color: #0f609b;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-border: #bcccdc;
+    --input-bg: #fff;
+    --input-border: #bcccdc;
+    --button-bg: #0f609b;
+    --button-hover: #0b4d7d;
+    --button-text: #fff;
+}
+
+/* Dark Theme */
+.theme-dark {
+    --primary-bg: #121212;
+    --secondary-bg: #1e1e1e;
+    --primary-text: #e0e0e0;
+    --secondary-text: #a0a0a0;
+    --accent-color: #bb86fc;
+    --card-bg: rgba(30, 30, 30, 0.9);
+    --card-border: #333;
+    --input-bg: #2c2c2c;
+    --input-border: #444;
+    --button-bg: #bb86fc;
+    --button-hover: #9d65e5;
+    --button-text: #121212;
+}
+
+/* Mystical Theme */
+.theme-mystical {
+    --primary-bg: #0f111a;
+    --secondary-bg: #1a1c25;
+    --primary-text: #e2e8f0;
+    --secondary-text: #a0aec0;
+    --accent-color: #805ad5;
+    --card-bg: rgba(26, 28, 37, 0.9);
+    --card-border: #2d3748;
+    --input-bg: #2d3748;
+    --input-border: #4a5568;
+    --button-bg: #805ad5;
+    --button-hover: #6b46c1;
+    --button-text: #fff;
+}
+
+/* Element-specific styling */
+.wuxing-wood {
+    color: #4caf50;
+}
+
+.wuxing-fire {
+    color: #f44336;
+}
+
+.wuxing-earth {
+    color: #ff9800;
+}
+
+.wuxing-metal {
+    color: #9e9e9e;
+}
+
+.wuxing-water {
+    color: #2196f3;
+}
+
+.pillar-year {
+    border-bottom: 3px solid #4caf50;
+}
+
+.pillar-month {
+    border-bottom: 3px solid #f44336;
+}
+
+.pillar-day {
+    border-bottom: 3px solid #ff9800;
+}
+
+.pillar-hour {
+    border-bottom: 3px solid #2196f3;
+}
+
+.pattern-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.pattern-shangguan {
+    background-color: rgba(76, 175, 80, 0.2);
+    border: 1px solid #4caf50;
+    color: #2e7d32;
+}
+
+.pattern-yinzhong {
+    background-color: rgba(33, 150, 243, 0.2);
+    border: 1px solid #2196f3;
+    color: #1565c0;
+}
+
+.pattern-bijian {
+    background-color: rgba(156, 39, 176, 0.2);
+    border: 1px solid #9c27b0;
+    color: #7b1fa2;
+}
+
+.pattern-shazhong {
+    background-color: rgba(244, 67, 54, 0.2);
+    border: 1px solid #f44336;
+    color: #c62828;
+}
+
+.pattern-caiwang {
+    background-color: rgba(255, 152, 0, 0.2);
+    border: 1px solid #ff9800;
+    color: #ef6c00;
+}
+
+.celestial-symbol {
+    font-size: 1.2em;
+    margin-right: 0.25rem;
+}
+
+.shier-gong-state {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-right: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.state-strong {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #2e7d32;
+}
+
+.state-weak {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #c62828;
+}
+
+.state-neutral {
+    background-color: rgba(33, 150, 243, 0.2);
+    color: #1565c0;
+}

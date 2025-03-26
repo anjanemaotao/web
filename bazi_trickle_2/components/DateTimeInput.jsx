@@ -1,4 +1,7 @@
-function DateTimeInput({ onCalculate }) {
+import React from 'react';
+import { LunarCalendar } from '../utils/lunarCalendar.js';
+
+export function DateTimeInput({ onCalculate }) {
   try {
     const [formData, setFormData] = React.useState({
       year: 1990,
@@ -13,7 +16,7 @@ function DateTimeInput({ onCalculate }) {
     const [isCalculating, setIsCalculating] = React.useState(false);
 
     const lunarCalendar = LunarCalendar();
-    const { branchToHour } = lunarCalendar;
+    const { branchToHour, earthlyBranches } = lunarCalendar;
 
     // 生成年份选项
     const generateYearOptions = () => {
@@ -74,10 +77,43 @@ function DateTimeInput({ onCalculate }) {
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
-      setFormData({
-        ...formData,
-        [name]: name === "calendarType" || name === "gender" ? value : parseInt(value, 10)
-      });
+      
+      if (name === "calendarType") {
+        // 当切换日历类型时，转换日期
+        const currentDate = formData;
+        let convertedDate;
+        
+        if (value === "solar" && currentDate.calendarType === "lunar") {
+          // 从阴历转换为阳历
+          convertedDate = lunarCalendar.lunarToSolar(currentDate.year, currentDate.month, currentDate.day);
+        } else if (value === "lunar" && currentDate.calendarType === "solar") {
+          // 从阳历转换为阴历
+          convertedDate = lunarCalendar.solarToLunar(currentDate.year, currentDate.month, currentDate.day);
+        }
+        
+        if (convertedDate && !convertedDate.error) {
+          setFormData({
+            ...formData,
+            year: convertedDate.year,
+            month: convertedDate.month,
+            day: convertedDate.day,
+            calendarType: value
+          });
+        } else {
+          setFormData({
+            ...formData,
+            calendarType: value
+          });
+          if (convertedDate?.error) {
+            setFormErrors({ general: convertedDate.error });
+          }
+        }
+      } else {
+        setFormData({
+          ...formData,
+          [name]: name === "gender" ? value : parseInt(value, 10)
+        });
+      }
     };
 
     const validateForm = () => {
@@ -298,7 +334,6 @@ function DateTimeInput({ onCalculate }) {
     );
   } catch (error) {
     console.error('DateTimeInput component error:', error);
-    reportError(error);
     return <div>输入组件加载出错</div>;
   }
 }

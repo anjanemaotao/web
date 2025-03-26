@@ -1,0 +1,81 @@
+<!-- pages/index/index.wxml -->
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <view class="logo">
+      <image src="/images/logo.png" mode="aspectFit"></image>
+      <text class="title">墨衍子八字</text>
+    </view>
+    
+    <view class="actions">
+      <view class="language-selector">
+        <view class="language-btn {{language === 'zh-TW' ? 'active' : ''}}" bindtap="changeLanguage" data-lang="zh-TW">繁體</view>
+        <view class="language-btn {{language === 'zh-CN' ? 'active' : ''}}" bindtap="changeLanguage" data-lang="zh-CN">简体</view>
+      </view>
+      <view class="theme-toggle" bindtap="toggleTheme">
+        <text class="theme-icon">{{darkMode ? '🌙' : '🔆'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="intro-section">
+    <text class="subtitle">探索命运天机，寻求人生指引</text>
+  </view>
+
+  <view class="bazi-form card">
+    <text class="form-title">请输入您的出生信息</text>
+    
+    <view class="date-type-switch">
+      <view class="switch-btn {{isLunar ? 'active' : ''}}" bindtap="switchCalendarType" data-type="lunar">农历</view>
+      <view class="switch-btn {{!isLunar ? 'active' : ''}}" bindtap="switchCalendarType" data-type="solar">阳历</view>
+    </view>
+    
+    <view class="form-group">
+      <text class="label">年</text>
+      <picker mode="selector" range="{{years}}" range-key="label" bindchange="bindYearChange" value="{{form.lunarYear - 1900}}">
+        <view class="picker">
+          {{form.lunarYear}}年
+        </view>
+      </picker>
+    </view>
+    
+    <view class="form-group">
+      <text class="label">月</text>
+      <picker mode="selector" range="{{months}}" range-key="label" bindchange="bindMonthChange" value="{{form.lunarMonth - 1}}">
+        <view class="picker">
+          {{months[form.lunarMonth - 1].label}}
+        </view>
+      </picker>
+    </view>
+    
+    <view class="form-group">
+      <text class="label">日</text>
+      <picker mode="selector" range="{{days}}" range-key="label" bindchange="bindDayChange" value="{{form.lunarDay - 1}}">
+        <view class="picker">
+          {{form.lunarDay}}日
+        </view>
+      </picker>
+    </view>
+    
+    <view class="form-group">
+      <text class="label">时辰</text>
+      <picker mode="selector" range="{{hours}}" range-key="label" bindchange="bindHourChange" value="{{hours.findIndex(h => h.value === form.hour)}}">
+        <view class="picker">
+          {{hours.find(h => h.value === form.hour).label}}
+        </view>
+      </picker>
+    </view>
+    
+    <view class="form-actions">
+      <button class="btn primary" bindtap="calculateBazi" disabled="{{loading}}">
+        {{loading ? '正在推算...' : '推算命盘'}}
+      </button>
+      <button class="btn secondary" bindtap="resetForm" disabled="{{loading}}">
+        重设
+      </button>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text>版权所有 © 2023 墨衍子八字</text>
+  </view>
+</view>

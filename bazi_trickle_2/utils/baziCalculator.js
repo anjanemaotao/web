@@ -1,4 +1,6 @@
-function BaziCalculator() {
+import { LunarCalendar } from './lunarCalendar.js';
+
+export function BaziCalculator() {
   const lunarCalendar = LunarCalendar();
   
   // 五行属性对照表

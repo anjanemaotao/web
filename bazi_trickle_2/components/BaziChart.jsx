@@ -1,4 +1,6 @@
-function BaziChart({ baziData }) {
+import { ElementUtils } from '../utils/elementUtils';
+
+export function BaziChart({ baziData }) {
   try {
     if (!baziData) return null;
 
@@ -130,7 +132,6 @@ function BaziChart({ baziData }) {
     );
   } catch (error) {
     console.error('BaziChart component error:', error);
-    reportError(error);
     return <div>命盘组件加载出错</div>;
   }
 }

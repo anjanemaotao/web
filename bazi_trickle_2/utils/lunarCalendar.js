@@ -1,4 +1,4 @@
-function LunarCalendar() {
+export function LunarCalendar() {
   // 农历1900-2100的闰大小信息表
   const lunarInfo = [
     0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,
@@ -72,8 +72,16 @@ function LunarCalendar() {
       };
     }
 
-    const solarDate = new Date(year, month - 1, day);
-    let offset = (Date.UTC(solarDate.getFullYear(), solarDate.getMonth(), solarDate.getDate()) - Date.UTC(1900, 0, 31)) / 86400000;
+    // 验证日期有效性
+    const daysInMonth = new Date(year, month, 0).getDate();
+    if (day > daysInMonth) {
+      return {
+        error: `输入的日期无效，${year}年${month}月只有${daysInMonth}天`
+      };
+    }
+
+    const solarDate = new Date(Date.UTC(year, month - 1, day));
+    let offset = Math.floor((solarDate - Date.UTC(1900, 0, 31)) / 86400000);
     
     let i;
     for (i = 1900; i < 2101 && offset > 0; i++) {
@@ -88,8 +96,8 @@ function LunarCalendar() {
     const leap = leapMonth(i);
     let isLeap = false;
     
+    let temp = 0;
     for (i = 1; i < 13 && offset > 0; i++) {
-      let temp;
       if (leap > 0 && i === leap + 1 && !isLeap) {
         --i;
         isLeap = true;
@@ -167,8 +175,16 @@ function LunarCalendar() {
     // 加上当月的天数
     offset += parseInt(day, 10) - 1;
     
+    // 验证农历日期有效性
+    const monthDaysCount = isLeap ? leapDays(year) : monthDays(year, month);
+    if (day > monthDaysCount) {
+      return {
+        error: `输入的农历日期无效，该月只有${monthDaysCount}天`
+      };
+    }
+
     // 1900年1月31日的公历
-    const baseDate = new Date(1900, 0, 31);
+    const baseDate = new Date(Date.UTC(1900, 0, 31));
     
     // 计算公历日期
     const date = new Date(baseDate.getTime() + offset * 24 * 3600 * 1000);

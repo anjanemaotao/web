@@ -1,4 +1,4 @@
-function Footer() {
+export default function Footer() {
   try {
     return (
       <footer data-name="footer" className="bg-gray-900 text-gray-400 py-8 border-t border-gray-800">
