@@ -124,7 +124,7 @@ function getWuxingBarColor(wx) {
     case '木': return 'green-500';
     case '火': return 'red-500';
     case '土': return 'yellow-700';
-    case '金': return 'yellow-500';
+    case '金': return 'amber-500'; /* 更适合金属的颜色 */
     case '水': return 'blue-500';
     default: return 'gray-300';
   }

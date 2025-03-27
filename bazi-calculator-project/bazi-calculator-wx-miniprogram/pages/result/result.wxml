@@ -8,7 +8,6 @@
     
     <view class="actions">
       <view class="back-btn" bindtap="goBack">返回</view>
-      <view class="share-btn" bindtap="shareResult">分享</view>
     </view>
   </view>
 
@@ -103,6 +102,5 @@
 
   <view class="footer">
     <button class="back-button" bindtap="goBack">返回首页</button>
-    <button class="share-button" bindtap="shareResult">分享结果</button>
   </view>
 </view>

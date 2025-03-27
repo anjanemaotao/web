@@ -9,15 +9,17 @@ function ResultCard({ bazi, patterns, wuxingResult, shishenResult, shierGongResu
         <div className="card" data-name="bazi-card">
           <h2 className="text-xl font-bold mb-4">{t('baziSection')}</h2>
           <BaziDisplay bazi={bazi} />
-        </div>
-        
-        <div className="card" data-name="person-info-card">
-          <PersonInfo bazi={bazi} lunarDate={lunarDate} solarDate={solarDate} />
+          <BirthInfo bazi={bazi} lunarDate={lunarDate} solarDate={solarDate} />
         </div>
         
         <div className="card" data-name="pattern-card">
           <h2 className="text-xl font-bold mb-4">{t('patternSection')}</h2>
-          <PatternAnalysis patterns={patterns} bazi={bazi} />
+          <PatternAnalysis patterns={patterns} />
+        </div>
+        
+        <div className="card" data-name="mingzhu-card">
+          <h2 className="text-xl font-bold mb-4">命主分析</h2>
+          <MingzhuAnalysis bazi={bazi} />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

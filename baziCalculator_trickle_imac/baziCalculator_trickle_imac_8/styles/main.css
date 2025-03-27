@@ -69,7 +69,7 @@ body {
 
 .card {
     background-color: var(--card-bg);
-    border: none;
+    border: 1px solid var(--card-border);
     border-radius: 0.5rem;
     padding: 1.5rem;
     box-shadow: 0 4px 6px var(--shadow-color);
@@ -538,6 +538,237 @@ body {
 
 .contact-banner-button:hover i {
     transform: translateX(3px);
+}
+
+/* 出生信息显示样式 */
+.birth-info-section {
+    margin-top: 2rem;
+    border-top: 1px dashed var(--card-border);
+    padding-top: 1.5rem;
+}
+
+.info-card {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.info-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.info-card-content {
+    font-size: 0.95rem;
+}
+
+.info-item {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+
+.info-label {
+    font-weight: 500;
+    color: var(--primary-text);
+}
+
+.info-value {
+    color: var(--secondary-text);
+}
+
+.info-divider {
+    margin: 0 0.5rem;
+    color: var(--card-border);
+}
+
+/* 格局分析板块样式 */
+.pattern-section {
+    margin-bottom: 1.5rem;
+}
+
+.pattern-section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.pattern-section-line {
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent-color), transparent);
+    margin-left: 0.75rem;
+}
+
+.pattern-badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.pattern-badge-enhanced {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pattern-badge-enhanced:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pattern-orientation {
+    position: relative;
+    padding-left: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.pattern-main-name {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pattern-highlight {
+    position: relative;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: rgba(200, 85, 61, 0.1);
+    box-shadow: 0 2px 4px rgba(200, 85, 61, 0.2);
+}
+
+.pattern-nickname {
+    margin-left: 0.5rem;
+    opacity: 0.8;
+}
+
+.pattern-description {
+    line-height: 1.7;
+    color: var(--primary-text);
+    padding-left: 0.5rem;
+    border-left: 3px solid rgba(200, 85, 61, 0.3);
+}
+
+/* 格局详细分析样式 */
+.pattern-details {
+    margin-top: 1rem;
+    border-left: 3px solid var(--accent-color);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pattern-details:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pattern-details-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    position: relative;
+}
+
+.pattern-details-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(200, 85, 61, 0.1);
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.pattern-details-line {
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent-color), transparent);
+    margin-left: 0.75rem;
+}
+
+.pattern-details h5 {
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.pattern-feature-card,
+.pattern-advantages-card,
+.pattern-disadvantages-card {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.2s;
+}
+
+.pattern-feature-card:hover,
+.pattern-advantages-card:hover,
+.pattern-disadvantages-card:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.pattern-feature-text {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.pattern-advantages-text,
+.pattern-disadvantages-text {
+    line-height: 1.7;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 命主分析样式 */
+.mingzhu-header {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.5rem;
+}
+
+.mingzhu-symbol {
+    font-size: 2rem;
+    font-weight: bold;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mingzhu-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--secondary-text);
+}
+
+.mingzhu-interpretation {
+    color: var(--secondary-text);
+    line-height: 1.8;
+}
+
+.mingzhu-details {
+    border-left: 3px solid var(--accent-color);
+    padding-left: 1rem;
 }
 
 @media (max-width: 768px) {

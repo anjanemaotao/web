@@ -121,39 +121,53 @@ getLunarDayName() {
   getMonthInGanZhi() {
     // 正确的月柱计算，考虑节气
     const yearGan = this.getYearInGanZhi()[0];
-    let baseGanIndex;
+    let startTianGan;
     
     // 根据年干确定月干的起始位置
+    // 甲己年起丙寅月，乙庚年起戊寅月，丙辛年起庚寅月，丁壬年起壬寅月，戊癸年起甲寅月
     if(['甲', '己'].includes(yearGan)) {
-      baseGanIndex = 2; // 丙
+      startTianGan = 2; // 丙
     } else if(['乙', '庚'].includes(yearGan)) {
-      baseGanIndex = 4; // 戊
+      startTianGan = 4; // 戊
     } else if(['丙', '辛'].includes(yearGan)) {
-      baseGanIndex = 6; // 庚
+      startTianGan = 6; // 庚
     } else if (['丁', '壬'].includes(yearGan)) {
-      baseGanIndex = 8; // 壬
+      startTianGan = 8; // 壬
     } else {
-      baseGanIndex = 0; // 甲
+      startTianGan = 0; // 甲
     }
     
-    // 月支从寅月开始，每月推一位
-    const zhiIndex = (this.month + 1) % 12;
-    // 月干从丙开始推算，每月推一位
-    const ganIndex = (baseGanIndex + this.month - 1) % 10;
+    // 月支从寅月开始，正月为寅月
+    const diZhis = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'];
+    const zhiIndex = (this.month - 1) % 12;
+    const monthZhi = diZhis[zhiIndex];
     
-    return TIAN_GANS[ganIndex] + DI_ZHIS[zhiIndex];
+    // 月干从起始天干开始推算，每月推一位
+    // 注意：月干的推算是从寅月开始的，而不是从正月开始
+    const ganIndex = (startTianGan + zhiIndex) % 10;
+    
+    return TIAN_GANS[ganIndex] + monthZhi;
   }
 
   // 获取农历日的干支
   getDayInGanZhi() {
     // 修正算法，使用正确的基准日期和偏移量
+    // 首先将农历日期转换为阳历日期，然后计算干支
+    const solar = this.getSolar();
+    const solarYear = solar.getYear();
+    const solarMonth = solar.getMonth();
+    const solarDay = solar.getDay();
+    
+    // 使用阳历日期计算干支
+    // 1900年1月31日为庚子日
     const baseDate = new Date(1900, 0, 31); // 1900年1月31日，农历庚子年正月初一
-    const currentDate = new Date(this.year, this.month - 1, this.day);
+    const currentDate = new Date(solarYear, solarMonth - 1, solarDay);
     const diffDays = Math.floor((currentDate - baseDate) / (24 * 60 * 60 * 1000));
     
-    // 1900年1月31日为辛丑日，辛为天干第8位(索引7)，丑为地支第2位(索引1)
-    const ganIndex = (diffDays + 7) % 10; // 辛的索引为7
-    const zhiIndex = (diffDays + 1) % 12; // 丑的索引为1
+    // 庚为天干第7位(索引6)，子为地支第1位(索引0)
+    // 注意：如果基准日期是庚子日，那么偏移量应该是6和0
+    const ganIndex = (diffDays + 6) % 10; // 庚的索引为6
+    const zhiIndex = (diffDays + 0) % 12; // 子的索引为0
     
     return TIAN_GANS[ganIndex] + DI_ZHIS[zhiIndex];
   }
@@ -232,8 +246,8 @@ class Solar {
 
   // 获取农历日期
   getLunar() {
-    // 简化实现，实际应使用阳历转农历算法
-    return Lunar.fromYmd(this.year, this.month, this.day);
+    // 使用正确的阳历转农历算法
+    return Lunar.fromSolar(new Solar(this.year, this.month, this.day));
   }
 }
 

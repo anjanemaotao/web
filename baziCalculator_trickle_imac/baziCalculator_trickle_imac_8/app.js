@@ -13,12 +13,12 @@ function App() {
     const [wuxingResult, setWuxingResult] = React.useState(null);
     const [shishenResult, setShishenResult] = React.useState(null);
     const [shierGongResult, setShierGongResult] = React.useState(null);
+    const [lunarDate, setLunarDate] = React.useState(null);
+    const [solarDate, setSolarDate] = React.useState(null);
     const [calculating, setCalculating] = React.useState(false); // 添加计算中状态
-    const [currentLunarDate, setCurrentLunarDate] = React.useState(null); // 保存当前阴历日期
-    const [currentSolarDate, setCurrentSolarDate] = React.useState(null); // 保存当前阳历日期
     
     // 处理八字计算
-    const handleCalculate = (lunarDate) => {
+    const handleCalculate = (lunarDateInput) => {
       try {
         setCalculating(true); // 开始计算动画
         
@@ -28,15 +28,13 @@ function App() {
         const shishenAnalyzer = ShishenAnalyzer();
         const shierGongAnalyzer = ShierGongAnalyzer();
         
-        // 保存当前阴历日期
-        setCurrentLunarDate(lunarDate);
-        
-        // 计算并保存当前阳历日期
-        const solarDate = calculator.lunarToSolar(lunarDate);
-        setCurrentSolarDate(solarDate);
+        // 保存日期信息
+        setLunarDate(lunarDateInput);
+        const solarDateResult = calculator.lunarToSolar(lunarDateInput);
+        setSolarDate(solarDateResult);
         
         // 计算八字
-        const baziResult = calculator.calculateBazi(lunarDate);
+        const baziResult = calculator.calculateBazi(lunarDateInput);
         
         // 分析格局
         const patternResult = patternAnalyzer.analyzePattern(baziResult);
@@ -110,8 +108,8 @@ function App() {
                   wuxingResult={wuxingResult}
                   shishenResult={shishenResult}
                   shierGongResult={shierGongResult}
-                  lunarDate={currentLunarDate}
-                  solarDate={currentSolarDate}
+                  lunarDate={lunarDate}
+                  solarDate={solarDate}
                 />
               )}
               

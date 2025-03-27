@@ -297,18 +297,18 @@ function PatternAnalyzer() {
       // 获取日主五行
       const dayMasterWuxing = calculator.getWuxing(dayPillar.gan);
       
-      // 命旺是与日主同样五行的天干
-      // 命旺: 与日主五行相同且阴阳相同
+      // 比肩是与日主同样五行的天干
+      // 比肩: 与日主五行相同且阴阳相同
       // 劫财: 与日主五行相同且阴阳不同
       
-      // 统计命旺的数量
+      // 统计比肩的数量
       let bijianCount = 0;
       
       // 检查所有天干
       [yearPillar.gan, monthPillar.gan, hourPillar.gan].forEach(gan => {
         const ganWuxing = calculator.getWuxing(gan);
         
-        // 判断是否是命旺: 与日主五行相同
+        // 判断是否是比肩: 与日主五行相同
         if (ganWuxing === dayMasterWuxing) {
           bijianCount++;
         }
@@ -320,14 +320,14 @@ function PatternAnalyzer() {
         cangGans.forEach(gan => {
           const ganWuxing = calculator.getWuxing(gan);
           
-          // 判断是否是命旺: 与日主五行相同
+          // 判断是否是比肩: 与日主五行相同
           if (ganWuxing === dayMasterWuxing) {
             bijianCount += 0.5; // 藏干的权重小一些
           }
         });
       });
       
-      return bijianCount >= 2; // 命旺数量达到阈值判定为命旺局
+      return bijianCount >= 2; // 比肩数量达到阈值判定为命旺局
     } catch (error) {
       console.error("判断命旺局错误:", error);
       reportError(error);

@@ -164,11 +164,5 @@ Page({
     });
   },
   
-  // 分享结果
-  shareResult: function() {
-    wx.showShareMenu({
-      withShareTicket: true,
-      menus: ['shareAppMessage', 'shareTimeline']
-    });
-  }
+
 });
