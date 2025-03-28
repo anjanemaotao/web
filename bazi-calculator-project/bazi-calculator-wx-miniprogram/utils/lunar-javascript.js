@@ -139,7 +139,8 @@ getLunarDayName() {
     
     // 月支从寅月开始，正月为寅月
     const diZhis = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'];
-    const zhiIndex = (this.month - 1) % 12;
+    // 农历正月对应寅月，需要加2个月的偏移
+    const zhiIndex = (this.month + 1) % 12;
     const monthZhi = diZhis[zhiIndex];
     
     // 月干从起始天干开始推算，每月推一位
@@ -159,15 +160,15 @@ getLunarDayName() {
     const solarDay = solar.getDay();
     
     // 使用阳历日期计算干支
-    // 1900年1月31日为庚子日
-    const baseDate = new Date(1900, 0, 31); // 1900年1月31日，农历庚子年正月初一
+    // 1900年1月31日为庚子日，以此为基准点
+    const baseDate = new Date(1900, 0, 31);
     const currentDate = new Date(solarYear, solarMonth - 1, solarDay);
     const diffDays = Math.floor((currentDate - baseDate) / (24 * 60 * 60 * 1000));
     
-    // 庚为天干第7位(索引6)，子为地支第1位(索引0)
-    // 注意：如果基准日期是庚子日，那么偏移量应该是6和0
-    const ganIndex = (diffDays + 6) % 10; // 庚的索引为6
-    const zhiIndex = (diffDays + 0) % 12; // 子的索引为0
+    // 1900年1月31日为庚子日，庚为天干第7位(索引6)，子为地支第1位(索引0)
+    // 从庚子日开始，每天天干和地支各进一位
+    const ganIndex = (diffDays + 6) % 10;
+    const zhiIndex = (diffDays + 0) % 12
     
     return TIAN_GANS[ganIndex] + DI_ZHIS[zhiIndex];
   }

@@ -83,7 +83,7 @@ function App() {
                       <div className="yin-yang"></div>
                     </div>
                     <div className="calculation-text">
-                      <span>推算八字格局中</span>
+                      <span>命运的齿轮旋转中...</span>
                       <span className="dots">
                         <span>.</span>
                         <span>.</span>

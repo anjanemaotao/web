@@ -194,6 +194,11 @@ function DatePicker({ onCalculate }) {
     
     // 处理计算按钮点击
     const handleCalculate = () => {
+      // 添加百度统计事件跟踪
+      if (window._hmt) {
+        window._hmt.push(['_trackEvent', '按钮', '点击', '推算八字']);
+      }
+      
       setLoading(true);
       
       // 模拟异步计算，添加2秒左右的动画延迟
