@@ -198,14 +198,14 @@ function DatePicker({ onCalculate }) {
       if (window._hmt) {
         window._hmt.push(['_trackEvent', '按钮', '点击', '推算八字']);
       }
-      // 添加谷歌统计事件跟踪
+      // 添加GA4事件跟踪
       if (window.gtag) {
-        gtag('event', '推算八字', {
+        window.gtag('event', 'calculate_bazi', {
           'event_category': '按钮',
-          'event_label': '点击'
+          'event_label': '推算八字'
         });
       }
-      
+     
       setLoading(true);
       
       // 模拟异步计算，添加2秒左右的动画延迟
