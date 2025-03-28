@@ -18,6 +18,12 @@ function ContactBanner() {
             rel="noopener noreferrer"
             className="contact-banner-button"
             data-name="contact-banner-button"
+            onClick={() => {
+              gtag('event', 'contact_now', {
+                'event_category': 'engagement',
+                'event_label': '立即咨询按钮点击'
+              });
+            }}
           >
             立即咨询 <i className="fas fa-arrow-right"></i>
           </a>
