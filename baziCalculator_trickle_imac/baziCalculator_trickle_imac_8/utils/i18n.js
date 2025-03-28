@@ -100,7 +100,10 @@ function I18nProvider() {
       footer: '© 2024 八字格局推算應用 - 僅供娛樂參考',
       year: '年',
       month: '月',
-      day: '日'
+      day: '日',
+      responsibility: '責任',
+      responsibility: '责任',
+      responsibility: '責任'
     },
     'zh-Hans': {
       title: '墨衍子八字排盘，算准过去，指点未来',
@@ -200,7 +203,10 @@ function I18nProvider() {
       footer: '© 2024 八字格局推算应用 - 仅供娱乐参考',
       year: '年',
       month: '月',
-      day: '日'
+      day: '日',
+      responsibility: '責任',
+      responsibility: '责任',
+      responsibility: '責任'
     },
     'en': {
       title: 'MoYanZi BaZi Chart, Accurate Past, Guiding Future',
@@ -300,7 +306,8 @@ function I18nProvider() {
       footer: '© 2024 BaZi Calculator - For entertainment purposes only',
       year: 'Year',
       month: 'Month',
-      day: 'Day'
+      day: 'Day',
+      responsibility: 'Responsibility'
     },
     'ja': {
       title: '墨衍子八字盤、過去を読み解き、未来を導く',
@@ -400,7 +407,10 @@ function I18nProvider() {
       footer: '© 2024 八字計算アプリ - 娯楽目的のみ',
       year: '年',
       month: '月',
-      day: '日'
+      day: '日',
+      responsibility: '責任',
+      responsibility: '责任',
+      responsibility: '責任'
     },
     'ko': {
       title: '묵연자 팔자 명리, 과거를 정확히 읽고 미래를 안내',
@@ -499,7 +509,8 @@ function I18nProvider() {
       footer: '© 2024 팔자 계산기 - 오락 목적으로만 사용',
       year: '년',
       month: '월',
-      day: '일'
+      day: '일',
+      responsibility: '책임'
     }
   };
   
