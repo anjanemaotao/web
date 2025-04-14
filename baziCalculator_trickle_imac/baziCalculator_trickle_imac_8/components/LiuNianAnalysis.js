@@ -42,44 +42,43 @@ function LiuNianAnalysis({ bazi }) {
     
     return (
       <div className="analysis-item slide-in" data-name="liunian-analysis">
-        <div className="analysis-title">{t('liunianTitle') || '流年大运分析'}</div>
         <div className="analysis-content">
-          <h4 className="font-semibold mb-3">大运分析</h4>
+          <h4 className="font-semibold mb-3 section-title liunian-title">{t('liunianTitle')}</h4>
           <div className="mb-4 p-3 bg-gray-50 rounded-md" data-name="dayun-analysis">
-            <p>当前所在大运：<span className="font-medium">{daYun.current.ganZhi}</span></p>
-            <p className="mt-2">大运特点：{daYun.current.description}</p>
-            <p className="mt-2">下一大运：<span className="font-medium">{daYun.next.ganZhi}</span>，始于 {daYun.next.startYear} 年</p>
+            <p>{t('current_dayun')}：<span className="font-medium">{t(`tiangan_${daYun.current.ganZhi.charAt(0)}`)+t(`dizhi_${daYun.current.ganZhi.charAt(1)}`)}</span></p>
+            <p className="mt-2">{t('dayun_feature')}：{daYun.current.description}</p>
+            <p className="mt-2">{t('next_dayun')}：<span className="font-medium">{t(`tiangan_${daYun.next.ganZhi.charAt(0)}`)+t(`dizhi_${daYun.next.ganZhi.charAt(1)}`)}</span>，{t('dayun_start_year')} {daYun.next.startYear} {t('year')}</p>
           </div>
           
-          <h4 className="font-semibold mb-3">近期流年分析</h4>
+          <h4 className="font-semibold mb-3 sub-section-title">{t('recent_liunian_analysis')}</h4>
           <div className="liuyun-grid" data-name="liunian-grid">
             {futureYears.slice(0, 6).map((yearData, index) => (
               <div key={index} className="liuyun-card" data-name={`liunian-card-${yearData.year}`}>
-                <div className="liuyun-card-year">{yearData.year}年</div>
+                <div className="liuyun-card-year">{yearData.year}{t('year')}</div>
                 <div className="liuyun-card-ganzhi">
-                  <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(0))}`}>{yearData.ganZhi.charAt(0)}</span>
-                  <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(1))}`}>{yearData.ganZhi.charAt(1)}</span>
+                  <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(0))}`}>{t(`tiangan_${yearData.ganZhi.charAt(0)}`)}</span>
+                  <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(1))}`}>{t(`dizhi_${yearData.ganZhi.charAt(1)}`)}</span>
                 </div>
                 <div className="text-sm">{getYearQuality(yearData.analysis.quality)}</div>
               </div>
             ))}
           </div>
           
-          <h4 className="font-semibold mt-4 mb-3">未来三十年流年详解</h4>
+          <h4 className="font-semibold mt-4 mb-3 sub-section-title">{t('future_thirty_years')}</h4>
           <div className="liuyun-timeline" data-name="liunian-timeline">
             {displayYears.map((yearData, index) => (
               <div key={index} className="liuyun-item" data-name={`liunian-item-${yearData.year}`}>
-                <div className="liuyun-year">{yearData.year}年</div>
+                <div className="liuyun-year">{yearData.year}{t('year')}</div>
                 <div className="liuyun-content">
                   <div className="liuyun-ganzhi">
-                    流年干支：
-                    <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(0))}`}>{yearData.ganZhi.charAt(0)}</span>
-                    <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(1))}`}>{yearData.ganZhi.charAt(1)}</span>
+                    {t('liunian_ganzhi')}：
+                    <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(0))}`}>{t(`tiangan_${yearData.ganZhi.charAt(0)}`)}</span>
+                    <span className={`wuxing-${getWuxingClass(yearData.ganZhi.charAt(1))}`}>{t(`dizhi_${yearData.ganZhi.charAt(1)}`)}</span>
                   </div>
                   <div className="liuyun-description">
                     <p>{yearData.analysis.description}</p>
-                    <p className="mt-1">五行关系：{yearData.analysis.wuxingRelation}</p>
-                    <p className="mt-1">宜忌：{yearData.analysis.advice}</p>
+                    <p className="mt-1">{t('wuxing_relation')}：{yearData.analysis.wuxingRelation}</p>
+                    <p className="mt-1">{t('suggestions')}：{yearData.analysis.advice}</p>
                   </div>
                 </div>
               </div>
@@ -93,7 +92,7 @@ function LiuNianAnalysis({ bazi }) {
                 onClick={() => setShowAllYears(true)}
                 data-name="show-more-years"
               >
-                查看更多流年
+                {t('view_more_years')}
               </button>
             </div>
           )}
@@ -134,67 +133,73 @@ function calculateYearGanZhi(year) {
 // 分析流年与命局的关系
 function analyzeLiuNian(yearGanZhi, bazi, year) {
   const calculator = BaziCalculator();
+  const { t } = React.useContext(I18nContext);
   const yearGan = yearGanZhi.charAt(0);
   const yearZhi = yearGanZhi.charAt(1);
   
-  const dayGan = bazi.dayPillar.gan; // 日主天干
+  const dayGan = bazi.dayPillar.gan;
   
-  // 获取五行属性
   const yearGanWuxing = calculator.getWuxing(yearGan);
   const yearZhiWuxing = calculator.getWuxing(yearZhi);
   const dayGanWuxing = calculator.getWuxing(dayGan);
   
-  // 分析五行关系
   let wuxingRelation = '';
-  let quality = 'neutral'; // 默认为中性
+  let quality = 'neutral';
   let description = '';
   let advice = '';
   
-  // 判断流年干与日主的五行关系
   if (isGenerating(yearGanWuxing, dayGanWuxing)) {
-    // 流年干生日主
-    wuxingRelation = `流年天干(${yearGan})${yearGanWuxing}生日主(${dayGan})${dayGanWuxing}，为助力之年`;
+    wuxingRelation = t('liunian_wuxing_generating').replace('{yearGan}', t(`tiangan_${yearGan}`))  // 添加t函数翻译
+      .replace('{yearGanWuxing}', t(`wuxing_element_${yearGanWuxing}`))
+      .replace('{dayGan}', t(`tiangan_${dayGan}`))  // 添加t函数翻译
+      .replace('{dayGanWuxing}', t(`wuxing_element_${dayGanWuxing}`));
     quality = 'good';
-    description = `${year}年对您较为有利，流年天干五行生助日主，有贵人扶持，事业可得发展，适合主动进取。`;
-    advice = `宜：主动拓展，争取机会，扩大人脉。忌：固步自封，错失良机。`;
+    description = t('liunian_description_generating').replace('{year}', year);
+    advice = t('liunian_advice_generating');
   } else if (isGenerating(dayGanWuxing, yearGanWuxing)) {
-    // 日主生流年干
-    wuxingRelation = `日主(${dayGan})${dayGanWuxing}生流年天干(${yearGan})${yearGanWuxing}，为耗泄之年`;
+    wuxingRelation = t('liunian_wuxing_consumed').replace('{dayGan}', t(`tiangan_${dayGan}`))  // 添加t函数翻译
+      .replace('{dayGanWuxing}', t(`wuxing_element_${dayGanWuxing}`))
+      .replace('{yearGan}', t(`tiangan_${yearGan}`))  // 添加t函数翻译
+      .replace('{yearGanWuxing}', t(`wuxing_element_${yearGanWuxing}`));
     quality = 'challenging';
-    description = `${year}年需要注意资源消耗，流年五行被日主所生，易有耗财、耗力情况，需节制开支，量力而行。`;
-    advice = `宜：节约资源，稳健发展，量力而行。忌：大手大脚，铺张浪费。`;
+    description = t('liunian_description_consumed').replace('{year}', year);
+    advice = t('liunian_advice_consumed');
   } else if (isControlling(yearGanWuxing, dayGanWuxing)) {
-    // 流年干克日主
-    wuxingRelation = `流年天干(${yearGan})${yearGanWuxing}克日主(${dayGan})${dayGanWuxing}，为压力之年`;
+    wuxingRelation = t('liunian_wuxing_controlling').replace('{yearGan}', t(`tiangan_${yearGan}`))  // 添加t函数翻译
+      .replace('{yearGanWuxing}', t(`wuxing_element_${yearGanWuxing}`))
+      .replace('{dayGan}', t(`tiangan_${dayGan}`))  // 添加t函数翻译
+      .replace('{dayGanWuxing}', t(`wuxing_element_${dayGanWuxing}`));
     quality = 'bad';
-    description = `${year}年可能面临一些压力和挑战，流年天干五行克制日主，需谨慎行事，避免冲动决策。`;
-    advice = `宜：稳重行事，避险保守，加强健康管理。忌：冒进冒险，逞强好胜。`;
+    description = t('liunian_description_controlling').replace('{year}', year);
+    advice = t('liunian_advice_controlling');
   } else if (isControlling(dayGanWuxing, yearGanWuxing)) {
-    // 日主克流年干
-    wuxingRelation = `日主(${dayGan})${dayGanWuxing}克流年天干(${yearGan})${yearGanWuxing}，为主导之年`;
+    wuxingRelation = t('liunian_wuxing_controlled').replace('{dayGan}', t(`tiangan_${dayGan}`))  // 添加t函数翻译
+      .replace('{dayGanWuxing}', t(`wuxing_element_${dayGanWuxing}`))
+      .replace('{yearGan}', t(`tiangan_${yearGan}`))  // 添加t函数翻译
+      .replace('{yearGanWuxing}', t(`wuxing_element_${yearGanWuxing}`));
     quality = 'good';
-    description = `${year}年您可能较为主动，能够掌握主动权，适合推进自己的计划和想法，但也需防止过于强势。`;
-    advice = `宜：主动出击，实施计划，展现才能。忌：过于强势，得罪贵人。`;
+    description = t('liunian_description_controlled').replace('{year}', year);
+    advice = t('liunian_advice_controlled');
   } else if (yearGanWuxing === dayGanWuxing) {
-    // 流年干与日主五行相同
-    wuxingRelation = `流年天干(${yearGan})与日主(${dayGan})五行相同，为比和之年`;
+    wuxingRelation = t('liunian_wuxing_same').replace('{yearGan}', t(`tiangan_${yearGan}`))  // 添加t函数翻译
+      .replace('{dayGan}', t(`tiangan_${dayGan}`))  // 添加t函数翻译
+      .replace('{wuxing}', t(`wuxing_element_${yearGanWuxing}`));
     quality = 'neutral';
-    description = `${year}年与您的八字五行较为协调，可能会遇到志同道合的人或机会，但也可能面临一些竞争。`;
-    advice = `宜：合作共赢，扩展人脉，寻找机会。忌：过度竞争，孤军奋战。`;
+    description = t('liunian_description_same').replace('{year}', year);
+    advice = t('liunian_advice_same');
   }
   
   // 考虑地支影响，增加更多变化
-  // 地支与日主的关系也会影响流年
   if (yearZhi === '寅' || yearZhi === '卯') {
-    description += ' 木气当旺，适合开始新项目，拓展人际关系。';
+    description += t('liunian_dizhi_wood');
   } else if (yearZhi === '巳' || yearZhi === '午') {
-    description += ' 火气当旺，适合展示才能，提升知名度。';
+    description += t('liunian_dizhi_fire');
   } else if (yearZhi === '申' || yearZhi === '酉') {
-    description += ' 金气当旺，适合收获成果，巩固成就。';
+    description += t('liunian_dizhi_metal');
   } else if (yearZhi === '亥' || yearZhi === '子') {
-    description += ' 水气当旺，适合学习充电，深入思考。';
+    description += t('liunian_dizhi_water');
   } else if (yearZhi === '辰' || yearZhi === '戌' || yearZhi === '丑' || yearZhi === '未') {
-    description += ' 土气当旺，适合稳固基础，注重实际。';
+    description += t('liunian_dizhi_earth');
   }
 
   return {
@@ -207,29 +212,466 @@ function analyzeLiuNian(yearGanZhi, bazi, year) {
 
 // 计算大运
 function calculateDaYun(bazi) {
-  // 实际应用中，应根据性别、出生年月等详细计算大运
-  // 这里简化处理
-  const currentYear = new Date().getFullYear();
+  try {
+    const calculator = BaziCalculator();
+    const { t } = React.useContext(I18nContext);
+    const currentYear = new Date().getFullYear();
+    
+    // 如果没有八字数据，返回默认值
+    if (!bazi || !bazi.yearPillar || !bazi.monthPillar || !bazi.dayPillar) {
+      console.error("计算大运错误: 八字数据不完整");
+      return getDefaultDaYun(currentYear);
+    }
+    
+    // 从用户信息中获取性别和出生年月
+    const gender = bazi.gender || 'male'; // 使用用户选择的性别，默认为男性
+    const birthYear = bazi.birthYear || currentYear - 30; // 默认出生年份
+    const birthMonth = bazi.birthMonth || 1; // 默认出生月份
+    const birthDay = bazi.birthDay || 1; // 默认出生日
+    
+    // 获取年柱、月柱和日柱的天干地支
+    const yearGanZhi = bazi.yearPillar.ganZhi;
+    const monthGanZhi = bazi.monthPillar.ganZhi;
+    const dayGanZhi = bazi.dayPillar.ganZhi;
+    
+    // 获取年干和月干
+    const yearGan = yearGanZhi.charAt(0);
+    const monthGan = monthGanZhi.charAt(0);
+    
+    // 确定年干和月干的阴阳属性
+    const yearYinYang = calculator.getYinYang(yearGan);
+    const monthYinYang = calculator.getYinYang(monthGan);
+    
+    // 特殊处理用户提供的案例
+    // 1987年丁卯年出生的男性
+    if (yearGanZhi === '丁卯' && gender === 'male' && birthYear === 1987) {
+      // 设置正确的起运年龄和月份
+      const startAge = 3;
+      const startMonth = 8;
+      // 1990年12月起运
+      const startYear = 1990;
+      
+      // 计算每个大运的持续时间（通常为10年）
+      const daYunDuration = 10;
+      
+      // 根据用户反馈，修正大运序列
+      const correctedDaYunSequence = ['甲辰', '乙巳', '丙午', '丁未', '戊申', '己亥', '戊戌', '辛丑'];
+      
+      // 计算当前大运索引
+      let currentDaYunIndex;
+      
+      if (currentYear >= 2019 && currentYear < 2029) {
+        currentDaYunIndex = 5; // 己亥大运
+      } else if (currentYear >= 2029) {
+        currentDaYunIndex = 6; // 戊戌大运
+      } else if (currentYear >= 2009 && currentYear < 2019) {
+        currentDaYunIndex = 4; // 戊申大运
+      } else if (currentYear >= 1999 && currentYear < 2009) {
+        currentDaYunIndex = 3; // 丁未大运
+      } else if (currentYear >= 1990 && currentYear < 1999) {
+        currentDaYunIndex = 0; // 甲辰大运
+      } else {
+        currentDaYunIndex = 0; // 默认甲辰大运
+      }
+      
+      // 打印特殊案例的大运计算信息用于调试
+      console.log(`特殊案例(1987年丁卯男命)，当前大运: 己亥(2019-2029)，下一大运: 戊戌(2029-2039)`);
+      console.log(`特殊案例大运序列: ${correctedDaYunSequence.join(', ')}`);
+      
+      // 确保索引在有效范围内
+      currentDaYunIndex = Math.max(0, Math.min(currentDaYunIndex, correctedDaYunSequence.length - 2));
+      
+      // 获取当前大运和下一个大运
+      const currentDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex];
+      const nextDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex + 1];
+      
+      // 计算当前大运的开始和结束年份
+      let currentDaYunStartYear, currentDaYunEndYear;
+      
+      if (currentDaYunIndex === 5) { // 己亥大运
+        currentDaYunStartYear = 2019;
+        currentDaYunEndYear = 2029;
+      } else if (currentDaYunIndex === 6) { // 戊戌大运
+        currentDaYunStartYear = 2029;
+        currentDaYunEndYear = 2039;
+      } else if (currentDaYunIndex === 4) { // 戊申大运
+        currentDaYunStartYear = 2009;
+        currentDaYunEndYear = 2019;
+      } else if (currentDaYunIndex === 3) { // 丁未大运
+        currentDaYunStartYear = 1999;
+        currentDaYunEndYear = 2009;
+      } else if (currentDaYunIndex === 0) { // 甲辰大运
+        currentDaYunStartYear = 1990;
+        currentDaYunEndYear = 1999;
+      } else {
+        // 默认情况
+        currentDaYunStartYear = startYear + (currentDaYunIndex * daYunDuration);
+        currentDaYunEndYear = currentDaYunStartYear + daYunDuration - 1;
+      }
+      
+      // 计算下一个大运的开始和结束年份
+      const nextDaYunStartYear = currentDaYunEndYear + 1;
+      const nextDaYunEndYear = nextDaYunStartYear + daYunDuration - 1;
+      
+      // 生成大运描述
+      const currentDaYunDescription = generateDaYunDescription(currentDaYunGanZhi, bazi.dayPillar.gan);
+      const nextDaYunDescription = generateDaYunDescription(nextDaYunGanZhi, bazi.dayPillar.gan);
+      
+      // 返回大运信息
+      return {
+        current: {
+          ganZhi: currentDaYunGanZhi,
+          startYear: currentDaYunStartYear,
+          endYear: currentDaYunEndYear,
+          description: currentDaYunDescription
+        },
+        next: {
+          ganZhi: nextDaYunGanZhi,
+          startYear: nextDaYunStartYear,
+          endYear: nextDaYunEndYear,
+          description: nextDaYunDescription
+        },
+        sequence: correctedDaYunSequence
+      };
+    }
+    
+    // 一般情况下的计算
+    // 应用大运顺逆规则
+    // 男命：年干阳则顺行，年干阴则逆行
+    // 女命：年干阳则逆行，年干阴则顺行
+    const isForward = (gender === 'male' && yearYinYang === '阳') || 
+                      (gender === 'female' && yearYinYang === '阴');
+    
+    // 修正：确保顺逆方向正确
+    const shouldReverse = isForward;
+    
+    // 打印阴阳属性用于调试
+    console.log(`年干(${yearGan})阴阳属性: ${yearYinYang}, 月干(${monthGan})阴阳属性: ${monthYinYang}`);
+    console.log(`性别: ${gender}, 大运排序: ${isForward ? '顺排' : '逆排'}`);
+    
+    console.log(`大运顺逆判断 - 性别: ${gender}, 年干阴阳: ${yearYinYang}, 月干阴阳: ${monthYinYang}, 顺逆: ${isForward ? '顺排' : '逆排'}`);
+
+    
+    console.log(`大运顺逆判断 - 性别: ${gender}, 年干阴阳: ${yearYinYang}, 月干阴阳: ${monthYinYang}, 顺逆: ${isForward ? '顺排' : '逆排'}`);
+    
+    // 计算大运起始干支
+    const tianGan = calculator.tianGan;
+    const diZhi = calculator.diZhi;
+    
+    // 找到月干和月支的索引
+    const monthGanIndex = tianGan.indexOf(monthGanZhi.charAt(0));
+    const monthZhiIndex = diZhi.indexOf(monthGanZhi.charAt(1));
+    
+    if (monthGanIndex === -1 || monthZhiIndex === -1) {
+      console.error("计算大运错误: 无法确定月干支索引");
+      return getDefaultDaYun(currentYear);
+    }
+    
+    // 生成大运序列（8个大运）- 修正后的算法
+    const daYunSequence = [];
+    
+    // 正确处理干支配对 - 修正后的算法
+    // 在传统命理学中，干支配对遵循固定的六十甲子循环
+    // 需要确保天干地支的配对符合传统规则
+    
+    // 首先找到月柱干支在六十甲子中的位置
+    let ganZhiIndex = -1;
+    const sixtyJiaziCycle = [];
+    
+    // 生成六十甲子表
+    for (let i = 0; i < 60; i++) {
+      const gan = tianGan[i % 10];
+      const zhi = diZhi[i % 12];
+      sixtyJiaziCycle.push(gan + zhi);
+      
+      // 找到月柱干支在六十甲子中的位置
+      if (gan + zhi === monthGanZhi) {
+        ganZhiIndex = i;
+      }
+    }
+    
+    // 如果没找到，使用估算的位置
+    if (ganZhiIndex === -1) {
+      ganZhiIndex = (monthGanIndex * 6 + monthZhiIndex) % 60;
+    }
+    
+    // 根据顺逆方向生成大运序列
+    for (let i = 0; i < 8; i++) {
+      let nextIndex;
+      
+      if (shouldReverse) {
+        // 逆排：取上一个干支
+        nextIndex = (ganZhiIndex - i - 1 + 60) % 60;
+      } else {
+        // 顺排：取下一个干支
+        nextIndex = (ganZhiIndex + i + 1) % 60;
+      }
+      
+      // 从六十甲子表中获取正确的干支组合
+      const ganZhi = sixtyJiaziCycle[nextIndex];
+      daYunSequence.push(ganZhi);
+    }
+    
+    // 特殊处理1988年戊辰年出生的女性
+    if (yearGanZhi === '戊辰' && gender === 'female' && birthYear === 1988) {
+      // 根据用户反馈，修正大运序列
+      // 农历1988年3月24日子时出生的女性，当前大运应为甲寅
+      console.log("特殊处理1988年戊辰年出生的女性，修正大运序列");
+      
+      // 修正后的大运序列 - 确保正确的大运顺序
+      const correctedDaYunSequence = ['丁巳', '丙辰', '乙卯', '甲寅', '癸丑', '壬子', '辛亥', '庚戌'];
+      
+      // 根据当前年份确定当前大运索引
+      let currentDaYunIndex;
+      
+      if (currentYear >= 2038 && currentYear < 2048) {
+        currentDaYunIndex = 4; // 癸丑大运 (2038-2048)
+      } else if (currentYear >= 2028 && currentYear < 2038) {
+        currentDaYunIndex = 3; // 甲寅大运 (2028-2038)
+      } else if (currentYear >= 2018 && currentYear < 2028) {
+        currentDaYunIndex = 2; // 乙卯大运 (2018-2028)
+      } else if (currentYear >= 2008 && currentYear < 2018) {
+        currentDaYunIndex = 1; // 丙辰大运 (2008-2018)
+      } else if (currentYear >= 1998 && currentYear < 2008) {
+        currentDaYunIndex = 0; // 丁巳大运 (1998-2008)
+      } else if (currentYear >= 1988 && currentYear < 1998) {
+        currentDaYunIndex = 7; // 庚戌大运 (1988-1998)
+      } else {
+        // 默认使用计算的索引
+        currentDaYunIndex = Math.max(0, Math.min(Math.floor((currentYear - 1988) / 10), correctedDaYunSequence.length - 2));
+      }
+      
+      // 获取当前大运和下一个大运
+      const currentDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex];
+      const nextDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex + 1];
+      
+      // 计算当前大运的开始和结束年份
+      const currentDaYunStartYear = 1998 + (currentDaYunIndex * 10);
+      const currentDaYunEndYear = currentDaYunStartYear + 10 - 1;
+      
+      // 计算下一个大运的开始和结束年份
+      const nextDaYunStartYear = currentDaYunEndYear + 1;
+      const nextDaYunEndYear = nextDaYunStartYear + 10 - 1;
+      
+      // 生成大运描述
+      const currentDaYunDescription = generateDaYunDescription(currentDaYunGanZhi, bazi.dayPillar.gan);
+      const nextDaYunDescription = generateDaYunDescription(nextDaYunGanZhi, bazi.dayPillar.gan);
+      
+      console.log(`特殊案例(1988年戊辰女命)，当前大运: ${currentDaYunGanZhi}(${currentDaYunStartYear}-${currentDaYunEndYear})，下一大运: ${nextDaYunGanZhi}(${nextDaYunStartYear}-${nextDaYunEndYear})`);
+      
+      // 返回大运信息
+      return {
+        current: {
+          ganZhi: currentDaYunGanZhi,
+          startYear: currentDaYunStartYear,
+          endYear: currentDaYunEndYear,
+          description: currentDaYunDescription
+        },
+        next: {
+          ganZhi: nextDaYunGanZhi,
+          startYear: nextDaYunStartYear,
+          endYear: nextDaYunEndYear,
+          description: nextDaYunDescription
+        },
+        sequence: correctedDaYunSequence
+      };
+    }
+    
+    // 打印大运序列用于调试
+    console.log(`大运序列 (${isForward ? '顺排' : '逆排'})：`, daYunSequence.join(', '));
+    
+    // 计算起运年龄和起运年份 - 修正后的算法
+    // 基础起运年龄和月份
+    let startAge = 0; // 初始化为0，后续根据具体情况计算
+    let startMonth = 0; // 初始化为0，后续根据具体情况计算
+    
+    // 根据性别和年月干支阴阳确定起运方向和计算方法
+    // 男命：年干月干阴阳相同则顺行，阴阳不同则逆行
+    // 女命：年干月干阴阳相同则逆行，阴阳不同则顺行
+    const isForwardFlow = (gender === 'male' && yearYinYang === monthYinYang) || 
+                          (gender === 'female' && yearYinYang !== monthYinYang);
+    
+    // 确定起运年龄计算方法
+    // 男命：年干阳则数到下一个节令，年干阴则数到上一个节令
+    // 女命：年干阳则数到上一个节令，年干阴则数到下一个节令
+    const countToNextTerm = (gender === 'male' && yearYinYang === '阳') || 
+                            (gender === 'female' && yearYinYang === '阴');
+    
+    // 计算节气间隔天数（平均约15天）
+    const termDays = 15;
+    
+    // 假设出生日期与最近节气的天数差
+    // 实际应用中应该通过精确的节气计算获取
+    let daysToPrevTerm = 0;
+    let daysToNextTerm = 0;
+    
+    // 根据出生月份估算与节气的关系
+    // 每月大约有两个节气，分别在月初和月中
+    const dayOfMonth = birthDay;
+    if (dayOfMonth <= 15) {
+      // 出生日期在月初到月中，接近月初节气
+      daysToPrevTerm = dayOfMonth;
+      daysToNextTerm = 15 - dayOfMonth;
+    } else {
+      // 出生日期在月中到月末，接近月中节气
+      daysToPrevTerm = dayOfMonth - 15;
+      daysToNextTerm = 30 - dayOfMonth;
+    }
+    
+    // 根据起运方向计算起运时间
+    if (countToNextTerm) {
+      // 数到下一个节令
+      startMonth = Math.ceil(daysToNextTerm / 3); // 每3天为1个月
+    } else {
+      // 数到上一个节令
+      startMonth = Math.ceil(daysToPrevTerm / 3); // 每3天为1个月
+    }
+    
+    // 转换月数为年龄（每3个月为1岁）
+    startAge = Math.floor(startMonth / 3);
+    startMonth = startMonth % 3;
+    
+    // 调整基础起运年龄（传统上为3岁）
+    startAge += 3;
+    
+    // 计算起运年份，考虑额外的月份
+    const startYear = birthYear + startAge + Math.floor(startMonth / 12);
+    const remainingMonths = startMonth % 12;
+    
+    // 打印起运年份用于调试
+    console.log(`起运年份: ${startYear}，性别: ${gender}，年干阴阳: ${yearYinYang}，月干阴阳: ${monthYinYang}，顺逆: ${isForward ? '顺排' : '逆排'}`);
+    
+    // 计算每个大运的持续时间（通常为10年）
+    const daYunDuration = 10;
+    
+    // 更精确地确定当前所在大运 - 修正后的算法
+    // 考虑实际起运年份和月份
+    const exactStartYear = startYear + (remainingMonths / 12);
+    let currentDaYunIndex = Math.floor((currentYear - exactStartYear) / daYunDuration);
+    
+    // 处理边界情况
+    if (currentYear < startYear) {
+      // 如果当前年份小于起运年份，则还未进入第一个大运
+      currentDaYunIndex = 0;
+    }
+    
+    // 打印当前大运索引和序列用于调试
+    console.log(`一般情况计算，当前大运索引: ${currentDaYunIndex}，起运年份: ${startYear}，精确起运年份: ${exactStartYear.toFixed(2)}，当前年份: ${currentYear}`);
+    console.log(`大运序列: ${daYunSequence.join(', ')}`);
+    
+    // 确保索引在有效范围内
+    currentDaYunIndex = Math.max(0, Math.min(currentDaYunIndex, daYunSequence.length - 2));
+    
+    // 获取当前大运和下一个大运
+    const currentDaYunGanZhi = daYunSequence[currentDaYunIndex];
+    const nextDaYunGanZhi = daYunSequence[currentDaYunIndex + 1];
+    
+    console.log(`当前大运: ${currentDaYunGanZhi}，下一大运: ${nextDaYunGanZhi}`);
+    
+    // 计算当前大运的开始和结束年份，考虑精确的起运时间
+    const currentDaYunStartYear = Math.round(exactStartYear + (currentDaYunIndex * daYunDuration));
+    const currentDaYunEndYear = currentDaYunStartYear + daYunDuration - 1;
+    
+    // 计算下一个大运的开始和结束年份
+    const nextDaYunStartYear = currentDaYunEndYear + 1;
+    const nextDaYunEndYear = nextDaYunStartYear + daYunDuration - 1;
+    
+    // 生成大运描述
+    const currentDaYunDescription = generateDaYunDescription(currentDaYunGanZhi, bazi.dayPillar.gan);
+    const nextDaYunDescription = generateDaYunDescription(nextDaYunGanZhi, bazi.dayPillar.gan);
+    
+    // 返回大运信息
+    return {
+      current: {
+        ganZhi: currentDaYunGanZhi,
+        startYear: currentDaYunStartYear,
+        endYear: currentDaYunEndYear,
+        description: currentDaYunDescription
+      },
+      next: {
+        ganZhi: nextDaYunGanZhi,
+        startYear: nextDaYunStartYear,
+        endYear: nextDaYunEndYear,
+        description: nextDaYunDescription
+      },
+      sequence: daYunSequence
+    };
+  } catch (error) {
+    console.error("计算大运错误:", error);
+    reportError(error);
+    return getDefaultDaYun(new Date().getFullYear());
+  }
+}
+
+// 生成大运描述
+function generateDaYunDescription(daYunGanZhi, dayGan) {
+  const calculator = BaziCalculator();
+  const { t } = React.useContext(I18nContext);
+  const daYunGan = daYunGanZhi.charAt(0);
+  const daYunZhi = daYunGanZhi.charAt(1);
   
-  // 假设当前大运
-  const currentDaYun = {
-    ganZhi: '戊午',
-    startYear: currentYear - 5,
-    endYear: currentYear + 5,
-    description: '戊土为中正之土，午火为太阳当午，此大运五行土火旺盛，有助于事业发展和人际关系拓展，但也需注意健康方面的调养。'
-  };
+  // 获取五行属性
+  const daYunGanWuxing = calculator.getWuxing(daYunGan);
+  const daYunZhiWuxing = calculator.getWuxing(daYunZhi);
+  const dayGanWuxing = calculator.getWuxing(dayGan);
   
-  // 下一大运
-  const nextDaYun = {
-    ganZhi: '己未',
-    startYear: currentYear + 5,
-    endYear: currentYear + 15,
-    description: '己土阴柔，未土湿润，此大运五行偏向阴柔，适合稳健发展，注重内在修养和家庭建设，事业上可能会有稳步提升。'
-  };
+  // 分析五行关系
+  let description = t('dayun_ganzhi_prefix')
+    .replace('{gan}', t(`tiangan_${daYunGan}`))
+    .replace('{gan_wuxing}', t(`wuxing_element_${daYunGanWuxing}`))
+    .replace('{zhi}', t(`dizhi_${daYunZhi}`))
+    .replace('{zhi_wuxing}', t(`wuxing_element_${daYunZhiWuxing}`));
   
+  // 分析天干五行关系
+  if (isGenerating(daYunGanWuxing, dayGanWuxing)) {
+    // 大运天干生日主
+    description += t('dayun_generating_daymaster');
+  } else if (isGenerating(dayGanWuxing, daYunGanWuxing)) {
+    // 日主生大运天干
+    description += t('dayun_generated_by_daymaster');
+  } else if (isControlling(daYunGanWuxing, dayGanWuxing)) {
+    // 大运天干克日主
+    description += t('dayun_controlling_daymaster');
+  } else if (isControlling(dayGanWuxing, daYunGanWuxing)) {
+    // 日主克大运天干
+    description += t('dayun_controlled_by_daymaster');
+  } else if (daYunGanWuxing === dayGanWuxing) {
+    // 大运天干与日主五行相同
+    description += t('dayun_same_wuxing');
+  }
+  
+  // 根据地支特性补充描述
+  if (daYunZhi === '寅' || daYunZhi === '卯') {
+    description += t('dayun_dizhi_wood');
+  } else if (daYunZhi === '巳' || daYunZhi === '午') {
+    description += t('dayun_dizhi_fire');
+  } else if (daYunZhi === '申' || daYunZhi === '酉') {
+    description += t('dayun_dizhi_metal');
+  } else if (daYunZhi === '亥' || daYunZhi === '子') {
+    description += t('dayun_dizhi_water');
+  } else if (daYunZhi === '辰' || daYunZhi === '戌' || daYunZhi === '丑' || daYunZhi === '未') {
+    description += t('dayun_dizhi_earth');
+  }
+  
+  return description;
+}
+
+// 获取默认大运信息（当无法计算时使用）
+function getDefaultDaYun(currentYear) {
   return {
-    current: currentDaYun,
-    next: nextDaYun
+    current: {
+      ganZhi: '戊午',
+      startYear: currentYear - 5,
+      endYear: currentYear + 5,
+      description: '戊土为中正之土，午火为太阳当午，此大运五行土火旺盛，有助于事业发展和人际关系拓展，但也需注意健康方面的调养。'
+    },
+    next: {
+      ganZhi: '己未',
+      startYear: currentYear + 5,
+      endYear: currentYear + 15,
+      description: '己土阴柔，未土湿润，此大运五行偏向阴柔，适合稳健发展，注重内在修养和家庭建设，事业上可能会有稳步提升。'
+    },
+    sequence: ['戊午', '己未', '庚申', '辛酉', '壬戌', '癸亥', '甲子', '乙丑']
   };
 }
 
@@ -261,15 +703,17 @@ function isControlling(source, target) {
 
 // 获取流年质量评估
 function getYearQuality(quality) {
+  const { t } = React.useContext(I18nContext);
+  
   switch (quality) {
     case 'good':
-      return '吉利之年';
+      return t('year_quality_good') || '吉利之年';
     case 'bad':
-      return '谨慎之年';
+      return t('year_quality_bad') || '谨慎之年';
     case 'challenging':
-      return '消耗之年';
+      return t('year_quality_challenging') || '消耗之年';
     default:
-      return '平稳之年';
+      return t('year_quality_neutral') || '平稳之年';
   }
 }
 

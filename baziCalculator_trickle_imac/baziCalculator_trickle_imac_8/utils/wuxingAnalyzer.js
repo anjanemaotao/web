@@ -17,25 +17,57 @@ function WuxingAnalyzer() {
         '水': 0
       };
       
-      // 统计天干中的五行
+      // 统计天干中的五行（每个天干3%，共12%）
       [yearPillar.gan, monthPillar.gan, dayPillar.gan, hourPillar.gan].forEach(gan => {
         const ganWuxing = calculator.getWuxing(gan);
-        wuxingCount[ganWuxing] += 1;
+        wuxingCount[ganWuxing] += 3;
       });
       
       // 统计地支中的五行
-      [yearPillar.zhi, monthPillar.zhi, dayPillar.zhi, hourPillar.zhi].forEach(zhi => {
+      // 月支40%
+      const monthZhiWuxing = calculator.getWuxing(monthPillar.zhi);
+      wuxingCount[monthZhiWuxing] += 40;
+      
+      // 年支、日支、时支各10%（共30%）
+      [yearPillar.zhi, dayPillar.zhi, hourPillar.zhi].forEach(zhi => {
         const zhiWuxing = calculator.getWuxing(zhi);
-        wuxingCount[zhiWuxing] += 0.8; // 地支五行权重稍低
-        
-        // 统计地支中藏干的五行
-        const cangGans = calculator.getCangGan(zhi);
-        cangGans.forEach((gan, index) => {
+        wuxingCount[zhiWuxing] += 10;
+      });
+      
+      // 月支藏干分配8%（只计算中气和尾气）
+      const monthCangGans = calculator.getCangGan(monthPillar.zhi);
+      const monthZhiWuxingValue = calculator.getWuxing(monthPillar.zhi);
+      const monthNonBenQiCount = monthCangGans.filter((gan, index) => 
+        calculator.getWuxing(gan) !== monthZhiWuxingValue && index > 0
+      ).length;
+      
+      if (monthNonBenQiCount > 0) {
+        const monthWeight = 8 / monthNonBenQiCount; // 8% 平均分配给中气和尾气
+        monthCangGans.forEach((gan, index) => {
           const ganWuxing = calculator.getWuxing(gan);
-          // 藏干权重递减
-          const weight = 0.5 / (index + 1);
-          wuxingCount[ganWuxing] += weight;
+          if (ganWuxing !== monthZhiWuxingValue && index > 0) {
+            wuxingCount[ganWuxing] += monthWeight;
+          }
         });
+      }
+      
+      // 其他地支藏干平均分配10%（只计算中气和尾气）
+      [yearPillar.zhi, dayPillar.zhi, hourPillar.zhi].forEach(zhi => {
+        const cangGans = calculator.getCangGan(zhi);
+        const zhiWuxing = calculator.getWuxing(zhi);
+        const nonBenQiCount = cangGans.filter((gan, index) => 
+          calculator.getWuxing(gan) !== zhiWuxing && index > 0
+        ).length;
+        
+        if (nonBenQiCount > 0) {
+          const weight = 10 / (3 * nonBenQiCount); // 10%平均分配给所有非本气藏干
+          cangGans.forEach((gan, index) => {
+            const ganWuxing = calculator.getWuxing(gan);
+            if (ganWuxing !== zhiWuxing && index > 0) {
+              wuxingCount[ganWuxing] += weight;
+            }
+          });
+        }
       });
       
       // 考虑月令旺相
@@ -80,8 +112,18 @@ function WuxingAnalyzer() {
         wuxingCount[wx] *= seasonalFactor[wx] || 1.0;
       });
       
-      // 计算五行的相对强度
+      // 计算应用季节因素后的总分
       const totalCount = Object.values(wuxingCount).reduce((sum, count) => sum + count, 0);
+      
+      // 归一化处理，确保总分为100
+      Object.keys(wuxingCount).forEach(wx => {
+        wuxingCount[wx] = (wuxingCount[wx] / totalCount) * 100;
+      });
+      
+      // 重新计算归一化后的总分（应该接近100）
+      const normalizedTotal = Object.values(wuxingCount).reduce((sum, count) => sum + count, 0);
+      
+      // 计算五行的相对强度
       const wuxingStrength = {};
       
       Object.keys(wuxingCount).forEach(wx => {

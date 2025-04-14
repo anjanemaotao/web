@@ -1,5 +1,7 @@
 function MingzhuAnalysis({ bazi }) {
   try {
+    const { t } = React.useContext(I18nContext);
+    
     if (!bazi) return null;
     
     // 获取日干
@@ -11,38 +13,37 @@ function MingzhuAnalysis({ bazi }) {
     if (!mingzhuData) {
       return (
         <div className="analysis-item" data-name="mingzhu-analysis-empty">
-          <div className="analysis-title">命主分析</div>
-          <div className="analysis-content">无法获取命主数据</div>
+          <div className="analysis-title">{t('mingzhuAnalysis')}</div>
+          <div className="analysis-content">{t('noMingzhuData')}</div>
         </div>
       );
     }
     
     // 将释义中的换行符转换为JSX
-    const interpretationParts = mingzhuData.释义.split('\n').map((part, index) => (
+    const interpretationParts = t(`mingzhu_interpretation_${dayMaster}`).split('\n').map((part, index) => (
       <p key={index} className="mb-2">{part}</p>
     ));
     
     return (
       <div className="analysis-item slide-in" data-name="mingzhu-analysis">
-        <div className="analysis-title">命主分析</div>
         <div className="analysis-content">
           <div className="pattern-section" data-name="mingzhu-main">
             <div className="pattern-section-header">
               <i className="fas fa-user text-accent-color mr-2"></i>
-              <h4 className="font-semibold">命主信息：</h4>
+              <h4 className="font-semibold">{t('mingzhuInfo')}</h4>
               <div className="pattern-section-line"></div>
             </div>
             <div className="mingzhu-header mb-4 p-3 bg-gray-50 rounded-md border-l-4 border-accent-color" data-name="mingzhu-header">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <span className={`mingzhu-symbol wuxing-${getWuxingClass(dayMaster)}`}>
-                    {dayMaster}
+                    {t(`tiangan_${dayMaster}`)}
                   </span>
-                  <span className="text-xl font-bold ml-2 text-accent-color">{mingzhuData.命主}</span>
+                  <span className="text-xl font-bold ml-2 text-accent-color">{t(`mingzhu_name_${dayMaster}`)}</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="mingzhu-badge mr-2 pattern-badge-enhanced">{mingzhuData.五常}</span>
-                  <span className="mingzhu-badge pattern-badge-enhanced">{mingzhuData.属性}</span>
+                  <span className="mingzhu-badge mr-2 pattern-badge-enhanced">{t(`mingzhu_wuchang_${dayMaster}`)}</span>
+                  <span className="mingzhu-badge pattern-badge-enhanced">{t(`mingzhu_attribute_${dayMaster}`)}</span>
                 </div>
               </div>
             </div>
@@ -51,16 +52,11 @@ function MingzhuAnalysis({ bazi }) {
           <div className="pattern-section" data-name="mingzhu-analysis-section">
             <div className="pattern-section-header">
               <i className="fas fa-book-open text-accent-color mr-2"></i>
-              <h4 className="font-semibold">命主解析：</h4>
+              <h4 className="font-semibold">{t('mingzhuAnalysisTitle')}</h4>
               <div className="pattern-section-line"></div>
             </div>
             <div className="mingzhu-details bg-gray-50 rounded-lg p-4 shadow-sm" data-name="mingzhu-details">
               <div className="pattern-details-header">
-                <div className="pattern-details-icon">
-                  <i className="fas fa-info-circle text-accent-color"></i>
-                </div>
-                <h5 className="text-md font-semibold mb-3 text-accent-color">详细解释</h5>
-                <div className="pattern-details-line"></div>
               </div>
               <div className="mingzhu-interpretation">
                 {interpretationParts}

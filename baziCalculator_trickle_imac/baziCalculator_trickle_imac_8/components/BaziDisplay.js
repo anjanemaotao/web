@@ -30,24 +30,24 @@ function BaziDisplay({ bazi }) {
           <div className="pillar-content">
             <div className="gan-zhi-container">
               <div className={`wuxing-${getWuxingClass(yearPillar.gan)}`}>
-                {yearPillar.gan}
+                {t(`tiangan_${yearPillar.gan}`)}
                 <sup className="wuxing-notation">{t(yearAttributes.ganWuxing)}</sup>
-                <span className="yinyang-tag">{yearAttributes.ganYinYang}</span>
+                <span className="yinyang-tag">{t(yearAttributes.ganYinYang)}</span>
               </div>
               <div className={`wuxing-${getWuxingClass(yearPillar.zhi)}`}>
-                {yearPillar.zhi}
+                {t(`dizhi_${yearPillar.zhi}`)}
                 <sup className="wuxing-notation">{t(yearAttributes.zhiWuxing)}</sup>
-                <span className="yinyang-tag">{yearAttributes.zhiYinYang}</span>
+                <span className="yinyang-tag">{t(yearAttributes.zhiYinYang)}</span>
               </div>
             </div>
             <div className="cang-gan-display">
-              <span className="cang-gan-label">藏干:</span>
+              <span className="cang-gan-label">{t('hiddenStem')}:</span>
               {yearAttributes.zhiCangGan.map((gan, index) => (
                 <span 
                   key={index} 
                   className={`cang-gan-item wuxing-${getWuxingClass(gan)}`}
                 >
-                  {gan}
+                  {t(`tiangan_${gan}`)}
                 </span>
               ))}
             </div>
@@ -59,24 +59,24 @@ function BaziDisplay({ bazi }) {
           <div className="pillar-content">
             <div className="gan-zhi-container">
               <div className={`wuxing-${getWuxingClass(monthPillar.gan)}`}>
-                {monthPillar.gan}
+                {t(`tiangan_${monthPillar.gan}`)}
                 <sup className="wuxing-notation">{t(monthAttributes.ganWuxing)}</sup>
-                <span className="yinyang-tag">{monthAttributes.ganYinYang}</span>
+                <span className="yinyang-tag">{t(monthAttributes.ganYinYang)}</span>
               </div>
               <div className={`wuxing-${getWuxingClass(monthPillar.zhi)}`}>
-                {monthPillar.zhi}
+                {t(`dizhi_${monthPillar.zhi}`)}
                 <sup className="wuxing-notation">{t(monthAttributes.zhiWuxing)}</sup>
-                <span className="yinyang-tag">{monthAttributes.zhiYinYang}</span>
+                <span className="yinyang-tag">{t(monthAttributes.zhiYinYang)}</span>
               </div>
             </div>
             <div className="cang-gan-display">
-              <span className="cang-gan-label">藏干:</span>
+              <span className="cang-gan-label">{t('hiddenStem')}:</span>
               {monthAttributes.zhiCangGan.map((gan, index) => (
                 <span 
                   key={index} 
                   className={`cang-gan-item wuxing-${getWuxingClass(gan)}`}
                 >
-                  {gan}
+                  {t(`tiangan_${gan}`)}
                 </span>
               ))}
             </div>
@@ -88,24 +88,24 @@ function BaziDisplay({ bazi }) {
           <div className="pillar-content">
             <div className="gan-zhi-container">
               <div className={`wuxing-${getWuxingClass(dayPillar.gan)}`}>
-                {dayPillar.gan}
+                {t(`tiangan_${dayPillar.gan}`)}
                 <sup className="wuxing-notation">{t(dayAttributes.ganWuxing)}</sup>
-                <span className="yinyang-tag">{dayAttributes.ganYinYang}</span>
+                <span className="yinyang-tag">{t(dayAttributes.ganYinYang)}</span>
               </div>
               <div className={`wuxing-${getWuxingClass(dayPillar.zhi)}`}>
-                {dayPillar.zhi}
+                {t(`dizhi_${dayPillar.zhi}`)}
                 <sup className="wuxing-notation">{t(dayAttributes.zhiWuxing)}</sup>
-                <span className="yinyang-tag">{dayAttributes.zhiYinYang}</span>
+                <span className="yinyang-tag">{t(dayAttributes.zhiYinYang)}</span>
               </div>
             </div>
             <div className="cang-gan-display">
-              <span className="cang-gan-label">藏干:</span>
+              <span className="cang-gan-label">{t('hiddenStem')}:</span>
               {dayAttributes.zhiCangGan.map((gan, index) => (
                 <span 
                   key={index} 
                   className={`cang-gan-item wuxing-${getWuxingClass(gan)}`}
                 >
-                  {gan}
+                  {t(`tiangan_${gan}`)}
                 </span>
               ))}
             </div>
@@ -117,24 +117,24 @@ function BaziDisplay({ bazi }) {
           <div className="pillar-content">
             <div className="gan-zhi-container">
               <div className={`wuxing-${getWuxingClass(hourPillar.gan)}`}>
-                {hourPillar.gan}
+                {t(`tiangan_${hourPillar.gan}`)}
                 <sup className="wuxing-notation">{t(hourAttributes.ganWuxing)}</sup>
-                <span className="yinyang-tag">{hourAttributes.ganYinYang}</span>
+                <span className="yinyang-tag">{t(hourAttributes.ganYinYang)}</span>
               </div>
               <div className={`wuxing-${getWuxingClass(hourPillar.zhi)}`}>
-                {hourPillar.zhi}
+                {t(`dizhi_${hourPillar.zhi}`)}
                 <sup className="wuxing-notation">{t(hourAttributes.zhiWuxing)}</sup>
-                <span className="yinyang-tag">{hourAttributes.zhiYinYang}</span>
+                <span className="yinyang-tag">{t(hourAttributes.zhiYinYang)}</span>
               </div>
             </div>
             <div className="cang-gan-display">
-              <span className="cang-gan-label">藏干:</span>
+              <span className="cang-gan-label">{t('hiddenStem')}:</span>
               {hourAttributes.zhiCangGan.map((gan, index) => (
                 <span 
                   key={index} 
                   className={`cang-gan-item wuxing-${getWuxingClass(gan)}`}
                 >
-                  {gan}
+                  {t(`tiangan_${gan}`)}
                 </span>
               ))}
             </div>

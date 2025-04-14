@@ -1,0 +1,386 @@
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 1000;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 6rpx solid #f3f3f3;
+  border-top: 6rpx solid #8C6A56;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #8C6A56;
+}
+
+/* 容器样式 */
+.container {
+  padding: 30rpx 20rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+/* 顶部信息样式 */
+.header {
+  background-color: #8C6A56;
+  color: #fff;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+.birth-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.birth-date {
+  display: flex;
+  margin: 6rpx 0;
+  font-size: 28rpx;
+}
+
+.label {
+  width: 100rpx;
+  font-weight: bold;
+}
+
+.value {
+  flex: 1;
+}
+
+/* 标签页导航样式 */
+.tabs {
+  display: flex;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.tab.active {
+  color: #8C6A56;
+  font-weight: bold;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 6rpx;
+  background-color: #8C6A56;
+  border-radius: 3rpx;
+}
+
+/* 内容区域样式 */
+.tab-content {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 八字显示样式 */
+.bazi-display {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.bazi-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 22%;
+}
+
+.pillar-name {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.pillar-content {
+  width: 100%;
+}
+
+.gan-zhi-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gan, .zhi {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 6rpx 0;
+}
+
+/* 五行颜色 */
+.wuxing-mu {
+  background-color: #8BC34A;
+  color: #fff;
+}
+
+.wuxing-huo {
+  background-color: #FF5722;
+  color: #fff;
+}
+
+.wuxing-tu {
+  background-color: #8C6A56;
+  color: #fff;
+}
+
+.wuxing-jin {
+  background-color: #FFC107;
+  color: #fff;
+}
+
+.wuxing-shui {
+  background-color: #03A9F4;
+  color: #fff;
+}
+
+/* 八字总览 */
+.bazi-summary {
+  border-top: 1rpx solid #eee;
+  padding-top: 20rpx;
+}
+
+.summary-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.summary-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 格局分析样式 */
+.pattern-analysis {
+  padding: 10rpx 0;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.pattern-item {
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx dashed #eee;
+}
+
+.pattern-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #8C6A56;
+  margin-bottom: 10rpx;
+}
+
+.pattern-description {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 五行分析样式 */
+.wuxing-analysis {
+  padding: 10rpx 0;
+}
+
+.wuxing-chart {
+  display: flex;
+  justify-content: space-between;
+  margin: 20rpx 0 30rpx;
+}
+
+.wuxing-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 18%;
+  padding: 15rpx 0;
+  border-radius: 8rpx;
+}
+
+.wuxing-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.wuxing-value {
+  font-size: 26rpx;
+}
+
+.wuxing-wood {
+  background-color: rgba(139, 195, 74, 0.1);
+  color: #8BC34A;
+}
+
+.wuxing-fire {
+  background-color: rgba(255, 87, 34, 0.1);
+  color: #FF5722;
+}
+
+.wuxing-earth {
+  background-color: rgba(140, 106, 86, 0.1);
+  color: #8C6A56;
+}
+
+.wuxing-metal {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #FFC107;
+}
+
+.wuxing-water {
+  background-color: rgba(3, 169, 244, 0.1);
+  color: #03A9F4;
+}
+
+.wuxing-item.strong {
+  border: 2rpx solid currentColor;
+  font-weight: bold;
+}
+
+.wuxing-item.weak {
+  opacity: 0.7;
+}
+
+/* 十神分析样式 */
+.shishen-analysis {
+  padding: 10rpx 0;
+}
+
+.shishen-chart {
+  display: flex;
+  justify-content: space-between;
+  margin: 20rpx 0;
+}
+
+.shishen-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 22%;
+}
+
+.shishen-value {
+  font-size: 26rpx;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 10rpx 15rpx;
+  border-radius: 6rpx;
+  margin-top: 10rpx;
+  text-align: center;
+}
+
+.shishen-strength {
+  margin-top: 30rpx;
+}
+
+.strength-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.strength-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.strength-item {
+  width: 33.33%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 15rpx;
+  font-size: 26rpx;
+  color: #666;
+  box-sizing: border-box;
+}
+
+.strength-name {
+  color: #333;
+}
+
+/* 十二宫分析样式 */
+.shiergong-analysis {
+  padding: 10rpx 0;
+}
+
+.shiergong-list {
+  margin-top: 20rpx;
+}
+
+.shiergong-item {
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx dashed #eee;
+}
+
+.shiergong-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #8C6A56;
+  margin-bottom: 10rpx;
+}
+
+.shiergong-description {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}

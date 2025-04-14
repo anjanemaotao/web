@@ -18,14 +18,14 @@ function ResultCard({ bazi, patterns, wuxingResult, shishenResult, shierGongResu
         </div>
         
         <div className="card" data-name="mingzhu-card">
-          <h2 className="text-xl font-bold mb-4">命主分析</h2>
+          <h2 className="text-xl font-bold mb-4">{t('mingzhuSection')}</h2>
           <MingzhuAnalysis bazi={bazi} />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="card" data-name="wuxing-card">
             <h2 className="text-xl font-bold mb-4">{t('wuxingSection')}</h2>
-            <WuxingAnalysis wuxingResult={wuxingResult} />
+            <WuxingAnalysis wuxingResult={wuxingResult} bazi={bazi} patterns={patterns} />
           </div>
           
           <div className="card" data-name="shishen-card">

@@ -116,22 +116,14 @@ function ShierGongAnalyzer() {
   
   // 获取十二宫状态的解释
   const getShierGongExplanation = (state) => {
-    const explanations = {
-      'changsheng': '长生代表新的开始，充满活力和潜力，如同初生的婴儿。',
-      'muyu': '沐浴是净化阶段，有不稳定性，容易受外界影响。',
-      'guandai': '冠带象征成长和准备，如同穿戴整齐准备出门。',
-      'linguan': '临官表示事业有成，能够获得收获和地位。',
-      'diwang': '帝旺是鼎盛状态，力量达到巅峰。',
-      'shuai': '衰表示开始走下坡路，力量减弱。',
-      'bing': '病代表不健康状态，容易出现问题。',
-      'si': '死象征结束和消亡，一个阶段的终结。',
-      'mu': '墓代表收藏和收敛，进入积累阶段。',
-      'jue': '绝表示断绝，缺乏生机，处于低谷。',
-      'tai': '胎有孕育和希望的意思，新生命的起点。',
-      'yang': '养代表滋养和培育，为新的循环做准备。'
-    };
-    
-    return explanations[state] || '';
+    try {
+      const { t } = React.useContext(I18nContext);
+      return t(`shierGong_${state}`) || '';
+    } catch (error) {
+      console.error('获取十二宫状态解释错误:', error);
+      reportError(error);
+      return '';
+    }
   };
   
   // 获取十二宫状态的强弱判断

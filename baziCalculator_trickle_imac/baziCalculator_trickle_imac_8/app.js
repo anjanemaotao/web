@@ -36,6 +36,10 @@ function App() {
         // 计算八字
         const baziResult = calculator.calculateBazi(lunarDateInput);
         
+        // 确保性别信息被传递给八字结果
+        baziResult.gender = lunarDateInput.gender || 'male';
+        baziResult.birthYear = lunarDateInput.year;
+        
         // 分析格局
         const patternResult = patternAnalyzer.analyzePattern(baziResult);
         
@@ -83,7 +87,7 @@ function App() {
                       <div className="yin-yang"></div>
                     </div>
                     <div className="calculation-text">
-                      <span>命运的齿轮旋转中...</span>
+                      <span>{t('mingyunloading')}</span>
                       <span className="dots">
                         <span>.</span>
                         <span>.</span>
@@ -102,15 +106,15 @@ function App() {
               )}
               
               {bazi && !calculating && (
-                <ResultCard 
-                  bazi={bazi}
-                  patterns={patterns}
-                  wuxingResult={wuxingResult}
-                  shishenResult={shishenResult}
-                  shierGongResult={shierGongResult}
-                  lunarDate={lunarDate}
-                  solarDate={solarDate}
-                />
+                 <ResultCard 
+                   bazi={bazi}
+                   patterns={patterns}
+                   wuxingResult={wuxingResult}
+                   shishenResult={shishenResult}
+                   shierGongResult={shierGongResult}
+                   lunarDate={lunarDate}
+                   solarDate={solarDate}
+                 />
               )}
               
               {/* 添加联系我们横幅 */}

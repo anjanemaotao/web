@@ -1,0 +1,65 @@
+<!-- index.wxml -->
+<view class="container">
+  <view class="header">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <view class="title">墨衍子八字</view>
+    <view class="subtitle">专业八字排盘分析</view>
+  </view>
+  
+  <view class="date-picker-container">
+    <view class="calendar-type-selector">
+      <view class="{{calendarType === 'lunar' ? 'active' : ''}}" bindtap="handleCalendarTypeChange" data-type="lunar">阴历</view>
+      <view class="{{calendarType === 'solar' ? 'active' : ''}}" bindtap="handleCalendarTypeChange" data-type="solar">阳历</view>
+    </view>
+    
+    <view class="date-inputs">
+      <!-- 年份选择 -->
+      <view class="input-group">
+        <view class="input-label">年份</view>
+        <picker mode="selector" range="{{yearOptions}}" range-key="label" value="{{lunarDate.year - 1900}}" bindchange="handleInputChange" data-field="year">
+          <view class="picker-value">{{yearOptions[lunarDate.year - 1900].label}}</view>
+        </picker>
+      </view>
+      
+      <!-- 月份选择 -->
+      <view class="input-group">
+        <view class="input-label">月份</view>
+        <picker mode="selector" range="{{monthOptions}}" range-key="label" value="{{lunarDate.month - 1}}" bindchange="handleInputChange" data-field="month">
+          <view class="picker-value">{{monthOptions[lunarDate.month - 1].label}}</view>
+        </picker>
+      </view>
+      
+      <!-- 日期选择 -->
+      <view class="input-group">
+        <view class="input-label">日期</view>
+        <picker mode="selector" range="{{dayOptions}}" range-key="label" value="{{lunarDate.day - 1}}" bindchange="handleInputChange" data-field="day">
+          <view class="picker-value">{{dayOptions[lunarDate.day - 1].label}}</view>
+        </picker>
+      </view>
+      
+      <!-- 时辰选择 -->
+      <view class="input-group">
+        <view class="input-label">时辰</view>
+        <picker mode="selector" range="{{hourOptions}}" range-key="label" value="{{hourIndex}}" bindchange="handleInputChange" data-field="hour">
+          <view class="picker-value">{{hourOptions[hourIndex].label}}</view>
+        </picker>
+      </view>
+    </view>
+    
+    <!-- 显示对应的阳历/阴历日期 -->
+    <view class="converted-date" wx:if="{{calendarType === 'lunar' && solarDate}}">
+      <text>对应阳历: {{solarDate.year}}年{{solarDate.month}}月{{solarDate.day}}日</text>
+    </view>
+    <view class="converted-date" wx:if="{{calendarType === 'solar' && displayLunarDate}}">
+      <text>对应阴历: {{displayLunarDate.year}}年{{getChineseMonth(displayLunarDate.month)}}{{getTraditionalChineseDay(displayLunarDate.day)}}</text>
+    </view>
+    
+    <!-- 计算按钮 -->
+    <button class="calculate-button" bindtap="handleCalculate" loading="{{loading}}">推算八字</button>
+  </view>
+  
+  <!-- 底部信息 -->
+  <view class="footer">
+    <text>墨衍子八字 © {{currentYear}}</text>
+  </view>
+</view>

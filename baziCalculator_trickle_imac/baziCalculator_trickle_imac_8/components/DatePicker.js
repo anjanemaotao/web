@@ -6,7 +6,8 @@ function DatePicker({ onCalculate }) {
       year: new Date().getFullYear(),
       month: 1,
       day: 1,
-      hour: 0
+      hour: 0,
+      gender: 'male' // 添加性别默认值
     });
     const [solarDate, setSolarDate] = React.useState(null);
     const [displayLunarDate, setDisplayLunarDate] = React.useState(null); // 用于显示的阴历日期（阳历模式下）
@@ -21,7 +22,7 @@ function DatePicker({ onCalculate }) {
       const zodiac = getChineseZodiac(year);
       yearOptions.push({
         value: year,
-        label: `${year} 年(${t(zodiac)})`
+        label: `${year}${t('year')}(${t(zodiac)})`
       });
     }
     
@@ -37,7 +38,7 @@ function DatePicker({ onCalculate }) {
         } else {
           options.push({
             value: month,
-            label: `${month} 月`
+            label: `${month} ${t('month')}`
           });
         }
       }
@@ -95,7 +96,7 @@ function DatePicker({ onCalculate }) {
         } else {
           options.push({
             value: day,
-            label: `${day} 日`
+            label: `${day} ${t('day')}`
           });
         }
       }
@@ -122,7 +123,7 @@ function DatePicker({ onCalculate }) {
       
       return hourOptions.map((hour, index) => ({
         value: hour,
-        label: `${hourRanges[index]} (${t(calculator.diZhi[index])})`
+        label: `${hourRanges[index]} (${t('dizhi_' + calculator.diZhi[index])})`
       }));
     };
     
@@ -137,6 +138,8 @@ function DatePicker({ onCalculate }) {
         // 阳历转阴历
         const newLunarDate = calculator.solarToLunar(solarDate);
         if (newLunarDate) {
+          // 保留原有的性别信息
+          newLunarDate.gender = lunarDate.gender;
           setLunarDate(newLunarDate);
           setDisplayLunarDate(null); // 阴历模式不需要额外显示
         }
@@ -144,6 +147,8 @@ function DatePicker({ onCalculate }) {
         // 阴历转阳历
         const newSolarDate = calculator.lunarToSolar(lunarDate);
         if (newSolarDate) {
+          // 保留原有的性别信息
+          newSolarDate.gender = lunarDate.gender;
           setSolarDate(newSolarDate);
           setLunarDate(newSolarDate); // 更新当前使用的日期
           setDisplayLunarDate(lunarDate); // 保存原始阴历日期用于显示
@@ -153,6 +158,15 @@ function DatePicker({ onCalculate }) {
     
     // 处理输入变化
     const handleInputChange = (field, value) => {
+      // 对于性别字段，直接更新不需要转换为数字
+      if (field === 'gender') {
+        setLunarDate(prev => ({
+          ...prev,
+          [field]: value
+        }));
+        return;
+      }
+      
       const numValue = parseInt(value, 10);
       
       // 更新当前使用的日期
@@ -252,35 +266,14 @@ function DatePicker({ onCalculate }) {
     
     // 获取中文月份
     function getChineseMonth(month) {
-      const chineseMonths = ['正', '二', '三', '四', '五', '六', '七', '八', '九', '十', '冬', '腊'];
-      return `${chineseMonths[month - 1]}月`;
+      return t(`month_${month}`);
     }
     
     // 获取传统中文日期格式（初一、初二、十一、廿一等）
     function getTraditionalChineseDay(day) {
-      const prefixes = ['初', '十', '廿', '三'];
-      const chineseDigits = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-      
-      if (day === 1) {
-        return '初一';
-      } else if (day <= 10) {
-        return `初${chineseDigits[day - 1]}`;
-      } else if (day === 10) {
-        return '初十';
-      } else if (day < 20) {
-        return `十${chineseDigits[day - 11]}`;
-      } else if (day === 20) {
-        return '二十';
-      } else if (day < 30) {
-        return `廿${chineseDigits[day - 21]}`;
-      } else if (day === 30) {
-        return '三十';
-      } else {
-        return '三十一';
-      }
+      return t(`lunar_day_${day}`);
     }
-    
-    // 获取中文日期（仅用于显示，不用于选择）
+      // 获取中文日期（仅用于显示，不用于选择）
     function getChineseDay(day) {
       const chineseDigits = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
       if (day <= 10) {
@@ -393,6 +386,38 @@ function DatePicker({ onCalculate }) {
           </div>
         </div>
         
+        <div className="mt-4">
+          <div className="form-group" data-name="gender-select-group">
+            <label htmlFor="gender">{t('genderLabel') || '性别'}</label>
+            <div className="flex mt-2">
+              <label className="inline-flex items-center mr-4">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  checked={lunarDate.gender === 'male'}
+                  onChange={() => handleInputChange('gender', 'male')}
+                  className="form-radio"
+                  data-name="gender-male"
+                />
+                <span className="ml-2">{t('male') || '男'}</span>
+              </label>
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  checked={lunarDate.gender === 'female'}
+                  onChange={() => handleInputChange('gender', 'female')}
+                  className="form-radio"
+                  data-name="gender-female"
+                />
+                <span className="ml-2">{t('female') || '女'}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
         {solarDate && calendarType === 'lunar' && (
           <div className="mt-4 p-3 bg-opacity-50 bg-gray-100 rounded-md" data-name="solar-date-display">
             <h3 className="text-lg font-semibold mb-2">{t('solarDateSection')}</h3>
@@ -406,7 +431,7 @@ function DatePicker({ onCalculate }) {
           <div className="mt-4 p-3 bg-opacity-50 bg-gray-100 rounded-md" data-name="lunar-date-display">
             <h3 className="text-lg font-semibold mb-2">{t('lunarDateSection')}</h3>
             <p className="text-gray-700">
-              {displayLunarDate.year} 年 {getChineseMonth(displayLunarDate.month)} {getTraditionalChineseDay(displayLunarDate.day)}
+              {displayLunarDate.year} {t('year')} {getChineseMonth(displayLunarDate.month)} {getTraditionalChineseDay(displayLunarDate.day)}
             </p>
           </div>
         )}

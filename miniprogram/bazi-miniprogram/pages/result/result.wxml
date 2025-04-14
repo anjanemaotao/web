@@ -1,0 +1,193 @@
+<!-- result.wxml -->
+<view class="container">
+  <!-- 加载中提示 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">八字计算中...</text>
+  </view>
+  <!-- 顶部信息 -->
+  <view class="header">
+    <view class="birth-info">
+      <view class="birth-date">
+        <text class="label">阴历：</text>
+        <text class="value">{{lunarDate.year}}年{{getChineseMonth(lunarDate.month)}}{{getTraditionalChineseDay(lunarDate.day)}}</text>
+      </view>
+      <view class="birth-date">
+        <text class="label">阳历：</text>
+        <text class="value">{{solarDate.year}}年{{solarDate.month}}月{{solarDate.day}}日</text>
+      </view>
+    </view>
+  </view>
+  <!-- 标签页导航 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'bazi' ? 'active' : ''}}" bindtap="switchTab" data-tab="bazi">八字</view>
+    <view class="tab {{activeTab === 'pattern' ? 'active' : ''}}" bindtap="switchTab" data-tab="pattern">格局</view>
+    <view class="tab {{activeTab === 'wuxing' ? 'active' : ''}}" bindtap="switchTab" data-tab="wuxing">五行</view>
+    <view class="tab {{activeTab === 'shishen' ? 'active' : ''}}" bindtap="switchTab" data-tab="shishen">十神</view>
+    <view class="tab {{activeTab === 'shiergong' ? 'active' : ''}}" bindtap="switchTab" data-tab="shiergong">十二宫</view>
+  </view>
+  
+  <!-- 八字显示 -->
+  <view class="tab-content" wx:if="{{activeTab === 'bazi' && bazi}}">
+    <view class="bazi-display">
+      <!-- 年柱 -->
+      <view class="bazi-pillar">
+        <view class="pillar-name">年柱</view>
+        <view class="pillar-content">
+          <view class="gan-zhi-container">
+            <view class="gan wuxing-{{getWuxingClass(bazi.yearPillar.gan)}}">
+              {{bazi.yearPillar.gan}}
+            </view>
+            <view class="zhi wuxing-{{getWuxingClass(bazi.yearPillar.zhi)}}">
+              {{bazi.yearPillar.zhi}}
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 月柱 -->
+      <view class="bazi-pillar">
+        <view class="pillar-name">月柱</view>
+        <view class="pillar-content">
+          <view class="gan-zhi-container">
+            <view class="gan wuxing-{{getWuxingClass(bazi.monthPillar.gan)}}">
+              {{bazi.monthPillar.gan}}
+            </view>
+            <view class="zhi wuxing-{{getWuxingClass(bazi.monthPillar.zhi)}}">
+              {{bazi.monthPillar.zhi}}
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 日柱 -->
+      <view class="bazi-pillar">
+        <view class="pillar-name">日柱</view>
+        <view class="pillar-content">
+          <view class="gan-zhi-container">
+            <view class="gan wuxing-{{getWuxingClass(bazi.dayPillar.gan)}}">
+              {{bazi.dayPillar.gan}}
+            </view>
+            <view class="zhi wuxing-{{getWuxingClass(bazi.dayPillar.zhi)}}">
+              {{bazi.dayPillar.zhi}}
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 时柱 -->
+      <view class="bazi-pillar">
+        <view class="pillar-name">时柱</view>
+        <view class="pillar-content">
+          <view class="gan-zhi-container">
+            <view class="gan wuxing-{{getWuxingClass(bazi.hourPillar.gan)}}">
+              {{bazi.hourPillar.gan}}
+            </view>
+            <view class="zhi wuxing-{{getWuxingClass(bazi.hourPillar.zhi)}}">
+              {{bazi.hourPillar.zhi}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="bazi-summary">
+      <text class="summary-title">八字总览</text>
+      <text class="summary-content">{{bazi.bazi}}</text>
+    </view>
+  </view>
+  <!-- 格局分析 -->
+  <view class="tab-content" wx:if="{{activeTab === 'pattern' && patterns.length > 0}}">
+    <view class="pattern-analysis">
+      <view class="section-title">命局格局</view>
+      <view class="pattern-list">
+        <view class="pattern-item" wx:for="{{patterns}}" wx:key="index">
+          <view class="pattern-name">{{getPatternName(item)}}</view>
+          <view class="pattern-description">
+            <text wx:if="{{item === 'yinzhong'}}">印重局表示学习能力强，有文化修养，但可能缺乏实际行动力。</text>
+            <text wx:elif="{{item === 'shangguan'}}">伤官局表示聪明有才华，创新能力强，但可能不守规矩。</text>
+            <text wx:elif="{{item === 'bijian'}}">命旺局表示个性坚强，独立自主，有领导能力。</text>
+            <text wx:elif="{{item === 'shazhong'}}">煞重局表示有权威，执行力强，但可能过于严厉。</text>
+            <text wx:elif="{{item === 'caiwang'}}">财旺局表示财运好，物质生活丰富，但需防止贪婪。</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 五行分析 -->
+  <view class="tab-content" wx:if="{{activeTab === 'wuxing' && wuxingResult}}">
+    <view class="wuxing-analysis">
+      <view class="section-title">五行分析</view>
+      <view class="wuxing-chart">
+        <view class="wuxing-item wuxing-wood {{wuxingResult.strength['木'] === 'strong' ? 'strong' : wuxingResult.strength['木'] === 'weak' ? 'weak' : ''}}">
+          <text class="wuxing-name">木</text>
+          <text class="wuxing-value">{{wuxingResult.count['木'].toFixed(1)}}</text>
+        </view>
+        <view class="wuxing-item wuxing-fire {{wuxingResult.strength['火'] === 'strong' ? 'strong' : wuxingResult.strength['火'] === 'weak' ? 'weak' : ''}}">
+          <text class="wuxing-name">火</text>
+          <text class="wuxing-value">{{wuxingResult.count['火'].toFixed(1)}}</text>
+        </view>
+        <view class="wuxing-item wuxing-earth {{wuxingResult.strength['土'] === 'strong' ? 'strong' : wuxingResult.strength['土'] === 'weak' ? 'weak' : ''}}">
+          <text class="wuxing-name">土</text>
+          <text class="wuxing-value">{{wuxingResult.count['土'].toFixed(1)}}</text>
+        </view>
+        <view class="wuxing-item wuxing-metal {{wuxingResult.strength['金'] === 'strong' ? 'strong' : wuxingResult.strength['金'] === 'weak' ? 'weak' : ''}}">
+          <text class="wuxing-name">金</text>
+          <text class="wuxing-value">{{wuxingResult.count['金'].toFixed(1)}}</text>
+        </view>
+        <view class="wuxing-item wuxing-water {{wuxingResult.strength['水'] === 'strong' ? 'strong' : wuxingResult.strength['水'] === 'weak' ? 'weak' : ''}}">
+          <text class="wuxing-name">水</text>
+          <text class="wuxing-value">{{wuxingResult.count['水'].toFixed(1)}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 十神分析 -->
+  <view class="tab-content" wx:if="{{activeTab === 'shishen' && shishenResult}}">
+    <view class="shishen-analysis">
+      <view class="section-title">十神分析</view>
+      <view class="shishen-chart">
+        <view class="shishen-pillar">
+          <view class="pillar-name">年柱</view>
+          <view class="shishen-value">{{shishenResult.shishen.yearGan}}</view>
+        </view>
+        <view class="shishen-pillar">
+          <view class="pillar-name">月柱</view>
+          <view class="shishen-value">{{shishenResult.shishen.monthGan}}</view>
+        </view>
+        <view class="shishen-pillar">
+          <view class="pillar-name">日柱</view>
+          <view class="shishen-value">{{shishenResult.shishen.dayGan}}</view>
+        </view>
+        <view class="shishen-pillar">
+          <view class="pillar-name">时柱</view>
+          <view class="shishen-value">{{shishenResult.shishen.hourGan}}</view>
+        </view>
+      </view>
+      <view class="shishen-strength">
+        <view class="strength-title">十神强度</view>
+        <view class="strength-list">
+          <view class="strength-item" wx:for="{{shishenResult.count}}" wx:key="index">
+            <text class="strength-name">{{index}}</text>
+            <text class="strength-value">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 十二宫分析 -->
+  <view class="tab-content" wx:if="{{activeTab === 'shiergong' && shiergongResult}}">
+    <view class="shiergong-analysis">
+      <view class="section-title">十二宫分析</view>
+      
+      <view class="shiergong-list">
+        <view class="shiergong-item" wx:for="{{shiergongResult}}" wx:key="index">
+          <view class="shiergong-name">{{index}}</view>
+          <view class="shiergong-description">{{item}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+{
+  "name": "bazicalculator_trickle_imac_8",
+  "version": "1.0.0",
+  "description": "墨衍子八字排盘系统是一个现代化的在线八字命理分析工具，基于React开发，提供专业的八字排盘、命理分析功能。本系统采用传统命理学理论，结合现代化的用户界面，为用户提供直观、易用的八字分析体验。",
+  "main": "app.js",
+  "dependencies": {
+    "browserslist": "^4.24.4",
+    "caniuse-lite": "^1.0.30001707",
+    "convert-source-map": "^2.0.0",
+    "debug": "^4.4.0",
+    "electron-to-chromium": "^1.5.128",
+    "esbuild": "^0.21.5",
+    "escalade": "^3.2.0",
+    "gensync": "^1.0.0-beta.2",
+    "globals": "^11.12.0",
+    "js-tokens": "^4.0.0",
+    "jsesc": "^3.1.0",
+    "json5": "^2.2.3",
+    "loose-envify": "^1.4.0",
+    "lru-cache": "^5.1.1",
+    "lunar-javascript": "^1.7.1",
+    "ms": "^2.1.3",
+    "nanoid": "^3.3.11",
+    "node-releases": "^2.0.19",
+    "picocolors": "^1.1.1",
+    "postcss": "^8.5.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-refresh": "^0.14.2",
+    "rollup": "^4.37.0",
+    "scheduler": "^0.23.2",
+    "semver": "^6.3.1",
+    "source-map-js": "^1.2.1",
+    "update-browserslist-db": "^1.1.3",
+    "vite": "^5.4.15",
+    "yallist": "^3.1.1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
