@@ -242,117 +242,20 @@ function calculateDaYun(bazi) {
     const yearYinYang = calculator.getYinYang(yearGan);
     const monthYinYang = calculator.getYinYang(monthGan);
     
-    // 特殊处理用户提供的案例
-    // 1987年丁卯年出生的男性
-    if (yearGanZhi === '丁卯' && gender === 'male' && birthYear === 1987) {
-      // 设置正确的起运年龄和月份
-      const startAge = 3;
-      const startMonth = 8;
-      // 1990年12月起运
-      const startYear = 1990;
-      
-      // 计算每个大运的持续时间（通常为10年）
-      const daYunDuration = 10;
-      
-      // 根据用户反馈，修正大运序列
-      const correctedDaYunSequence = ['甲辰', '乙巳', '丙午', '丁未', '戊申', '己亥', '戊戌', '辛丑'];
-      
-      // 计算当前大运索引
-      let currentDaYunIndex;
-      
-      if (currentYear >= 2019 && currentYear < 2029) {
-        currentDaYunIndex = 5; // 己亥大运
-      } else if (currentYear >= 2029) {
-        currentDaYunIndex = 6; // 戊戌大运
-      } else if (currentYear >= 2009 && currentYear < 2019) {
-        currentDaYunIndex = 4; // 戊申大运
-      } else if (currentYear >= 1999 && currentYear < 2009) {
-        currentDaYunIndex = 3; // 丁未大运
-      } else if (currentYear >= 1990 && currentYear < 1999) {
-        currentDaYunIndex = 0; // 甲辰大运
-      } else {
-        currentDaYunIndex = 0; // 默认甲辰大运
-      }
-      
-      // 打印特殊案例的大运计算信息用于调试
-      console.log(`特殊案例(1987年丁卯男命)，当前大运: 己亥(2019-2029)，下一大运: 戊戌(2029-2039)`);
-      console.log(`特殊案例大运序列: ${correctedDaYunSequence.join(', ')}`);
-      
-      // 确保索引在有效范围内
-      currentDaYunIndex = Math.max(0, Math.min(currentDaYunIndex, correctedDaYunSequence.length - 2));
-      
-      // 获取当前大运和下一个大运
-      const currentDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex];
-      const nextDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex + 1];
-      
-      // 计算当前大运的开始和结束年份
-      let currentDaYunStartYear, currentDaYunEndYear;
-      
-      if (currentDaYunIndex === 5) { // 己亥大运
-        currentDaYunStartYear = 2019;
-        currentDaYunEndYear = 2029;
-      } else if (currentDaYunIndex === 6) { // 戊戌大运
-        currentDaYunStartYear = 2029;
-        currentDaYunEndYear = 2039;
-      } else if (currentDaYunIndex === 4) { // 戊申大运
-        currentDaYunStartYear = 2009;
-        currentDaYunEndYear = 2019;
-      } else if (currentDaYunIndex === 3) { // 丁未大运
-        currentDaYunStartYear = 1999;
-        currentDaYunEndYear = 2009;
-      } else if (currentDaYunIndex === 0) { // 甲辰大运
-        currentDaYunStartYear = 1990;
-        currentDaYunEndYear = 1999;
-      } else {
-        // 默认情况
-        currentDaYunStartYear = startYear + (currentDaYunIndex * daYunDuration);
-        currentDaYunEndYear = currentDaYunStartYear + daYunDuration - 1;
-      }
-      
-      // 计算下一个大运的开始和结束年份
-      const nextDaYunStartYear = currentDaYunEndYear + 1;
-      const nextDaYunEndYear = nextDaYunStartYear + daYunDuration - 1;
-      
-      // 生成大运描述
-      const currentDaYunDescription = generateDaYunDescription(currentDaYunGanZhi, bazi.dayPillar.gan);
-      const nextDaYunDescription = generateDaYunDescription(nextDaYunGanZhi, bazi.dayPillar.gan);
-      
-      // 返回大运信息
-      return {
-        current: {
-          ganZhi: currentDaYunGanZhi,
-          startYear: currentDaYunStartYear,
-          endYear: currentDaYunEndYear,
-          description: currentDaYunDescription
-        },
-        next: {
-          ganZhi: nextDaYunGanZhi,
-          startYear: nextDaYunStartYear,
-          endYear: nextDaYunEndYear,
-          description: nextDaYunDescription
-        },
-        sequence: correctedDaYunSequence
-      };
-    }
-    
-    // 一般情况下的计算
     // 应用大运顺逆规则
     // 男命：年干阳则顺行，年干阴则逆行
     // 女命：年干阳则逆行，年干阴则顺行
     const isForward = (gender === 'male' && yearYinYang === '阳') || 
                       (gender === 'female' && yearYinYang === '阴');
     
-    // 修正：确保顺逆方向正确
-    const shouldReverse = isForward;
+    // 确保顺逆方向正确
+    // shouldReverse为true表示应该逆排，为false表示应该顺排
+    // 在生成大运序列时，顺排是取下一个干支，逆排是取上一个干支
+    const shouldReverse = !isForward;
     
     // 打印阴阳属性用于调试
     console.log(`年干(${yearGan})阴阳属性: ${yearYinYang}, 月干(${monthGan})阴阳属性: ${monthYinYang}`);
     console.log(`性别: ${gender}, 大运排序: ${isForward ? '顺排' : '逆排'}`);
-    
-    console.log(`大运顺逆判断 - 性别: ${gender}, 年干阴阳: ${yearYinYang}, 月干阴阳: ${monthYinYang}, 顺逆: ${isForward ? '顺排' : '逆排'}`);
-
-    
-    console.log(`大运顺逆判断 - 性别: ${gender}, 年干阴阳: ${yearYinYang}, 月干阴阳: ${monthYinYang}, 顺逆: ${isForward ? '顺排' : '逆排'}`);
     
     // 计算大运起始干支
     const tianGan = calculator.tianGan;
@@ -367,10 +270,10 @@ function calculateDaYun(bazi) {
       return getDefaultDaYun(currentYear);
     }
     
-    // 生成大运序列（8个大运）- 修正后的算法
+    // 生成大运序列（8个大运）
     const daYunSequence = [];
     
-    // 正确处理干支配对 - 修正后的算法
+    // 正确处理干支配对
     // 在传统命理学中，干支配对遵循固定的六十甲子循环
     // 需要确保天干地支的配对符合传统规则
     
@@ -412,84 +315,13 @@ function calculateDaYun(bazi) {
       daYunSequence.push(ganZhi);
     }
     
-    // 特殊处理1988年戊辰年出生的女性
-    if (yearGanZhi === '戊辰' && gender === 'female' && birthYear === 1988) {
-      // 根据用户反馈，修正大运序列
-      // 农历1988年3月24日子时出生的女性，当前大运应为甲寅
-      console.log("特殊处理1988年戊辰年出生的女性，修正大运序列");
-      
-      // 修正后的大运序列 - 确保正确的大运顺序
-      const correctedDaYunSequence = ['丁巳', '丙辰', '乙卯', '甲寅', '癸丑', '壬子', '辛亥', '庚戌'];
-      
-      // 根据当前年份确定当前大运索引
-      let currentDaYunIndex;
-      
-      if (currentYear >= 2038 && currentYear < 2048) {
-        currentDaYunIndex = 4; // 癸丑大运 (2038-2048)
-      } else if (currentYear >= 2028 && currentYear < 2038) {
-        currentDaYunIndex = 3; // 甲寅大运 (2028-2038)
-      } else if (currentYear >= 2018 && currentYear < 2028) {
-        currentDaYunIndex = 2; // 乙卯大运 (2018-2028)
-      } else if (currentYear >= 2008 && currentYear < 2018) {
-        currentDaYunIndex = 1; // 丙辰大运 (2008-2018)
-      } else if (currentYear >= 1998 && currentYear < 2008) {
-        currentDaYunIndex = 0; // 丁巳大运 (1998-2008)
-      } else if (currentYear >= 1988 && currentYear < 1998) {
-        currentDaYunIndex = 7; // 庚戌大运 (1988-1998)
-      } else {
-        // 默认使用计算的索引
-        currentDaYunIndex = Math.max(0, Math.min(Math.floor((currentYear - 1988) / 10), correctedDaYunSequence.length - 2));
-      }
-      
-      // 获取当前大运和下一个大运
-      const currentDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex];
-      const nextDaYunGanZhi = correctedDaYunSequence[currentDaYunIndex + 1];
-      
-      // 计算当前大运的开始和结束年份
-      const currentDaYunStartYear = 1998 + (currentDaYunIndex * 10);
-      const currentDaYunEndYear = currentDaYunStartYear + 10 - 1;
-      
-      // 计算下一个大运的开始和结束年份
-      const nextDaYunStartYear = currentDaYunEndYear + 1;
-      const nextDaYunEndYear = nextDaYunStartYear + 10 - 1;
-      
-      // 生成大运描述
-      const currentDaYunDescription = generateDaYunDescription(currentDaYunGanZhi, bazi.dayPillar.gan);
-      const nextDaYunDescription = generateDaYunDescription(nextDaYunGanZhi, bazi.dayPillar.gan);
-      
-      console.log(`特殊案例(1988年戊辰女命)，当前大运: ${currentDaYunGanZhi}(${currentDaYunStartYear}-${currentDaYunEndYear})，下一大运: ${nextDaYunGanZhi}(${nextDaYunStartYear}-${nextDaYunEndYear})`);
-      
-      // 返回大运信息
-      return {
-        current: {
-          ganZhi: currentDaYunGanZhi,
-          startYear: currentDaYunStartYear,
-          endYear: currentDaYunEndYear,
-          description: currentDaYunDescription
-        },
-        next: {
-          ganZhi: nextDaYunGanZhi,
-          startYear: nextDaYunStartYear,
-          endYear: nextDaYunEndYear,
-          description: nextDaYunDescription
-        },
-        sequence: correctedDaYunSequence
-      };
-    }
-    
     // 打印大运序列用于调试
     console.log(`大运序列 (${isForward ? '顺排' : '逆排'})：`, daYunSequence.join(', '));
     
-    // 计算起运年龄和起运年份 - 修正后的算法
+    // 计算起运年龄和起运年份
     // 基础起运年龄和月份
     let startAge = 0; // 初始化为0，后续根据具体情况计算
     let startMonth = 0; // 初始化为0，后续根据具体情况计算
-    
-    // 根据性别和年月干支阴阳确定起运方向和计算方法
-    // 男命：年干月干阴阳相同则顺行，阴阳不同则逆行
-    // 女命：年干月干阴阳相同则逆行，阴阳不同则顺行
-    const isForwardFlow = (gender === 'male' && yearYinYang === monthYinYang) || 
-                          (gender === 'female' && yearYinYang !== monthYinYang);
     
     // 确定起运年龄计算方法
     // 男命：年干阳则数到下一个节令，年干阴则数到上一个节令

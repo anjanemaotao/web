@@ -222,29 +222,32 @@ function DatePicker({ onCalculate }) {
      
       setLoading(true);
       
-      // 模拟异步计算，添加2秒左右的动画延迟
-      setTimeout(() => {
-        // 如果是阳历模式，先转换为阴历再计算
-        if (calendarType === 'solar') {
-          // 使用已经计算好的displayLunarDate
-          if (displayLunarDate) {
-            onCalculate(displayLunarDate);
-          } else {
-            // 如果没有，重新计算一次
-            const lunarDateForCalc = calculator.solarToLunar(lunarDate);
-            if (lunarDateForCalc) {
-              onCalculate(lunarDateForCalc);
-            } else {
-              console.error("阳历转阴历失败");
-              reportError(new Error("阳历转阴历失败"));
-            }
-          }
+      // 立即调用父组件的计算函数，不再等待
+      // 如果是阳历模式，先转换为阴历再计算
+      if (calendarType === 'solar') {
+        // 使用已经计算好的displayLunarDate
+        if (displayLunarDate) {
+          onCalculate(displayLunarDate);
         } else {
-          // 阴历模式直接计算
-          onCalculate(lunarDate);
+          // 如果没有，重新计算一次
+          const lunarDateForCalc = calculator.solarToLunar(lunarDate);
+          if (lunarDateForCalc) {
+            onCalculate(lunarDateForCalc);
+          } else {
+            console.error("阳历转阴历失败");
+            reportError(new Error("阳历转阴历失败"));
+            setLoading(false); // 出错时结束加载状态
+          }
         }
+      } else {
+        // 阴历模式直接计算
+        onCalculate(lunarDate);
+      }
+      
+      // 2秒后结束本地加载状态
+      setTimeout(() => {
         setLoading(false);
-      }, 2000); // 延迟2秒显示结果
+      }, 2000);
     };
     
     // 初始化日期

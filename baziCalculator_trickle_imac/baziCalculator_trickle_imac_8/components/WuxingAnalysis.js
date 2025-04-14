@@ -78,13 +78,13 @@ function WuxingAnalysis({ wuxingResult, bazi, patterns }) {
                   type: 'high',
                   content: item.content_high
                 };
-              } else if (strength[element] === 'weak') {
+              } else if (strength[element] === 'weak' || strength[element] === 'neutral') {
+                // 将五行强弱为中和的属性也算为含量低
                 analysis[element] = {
                   type: 'low',
                   content: item.content_low
                 };
               }
-              // 中和状态不显示内容
             }
           });
           
@@ -129,6 +129,7 @@ function WuxingAnalysis({ wuxingResult, bazi, patterns }) {
             ))}
           </div>
           
+          {/* 注释掉五行强弱解释部分
           <div className="mt-4" data-name="wuxing-analysis-description">
             <h4 className="font-semibold mb-2 sub-section-title">{t('wuxing_analysis_title')}</h4>
             <ul className="list-disc pl-5 space-y-2">
@@ -159,6 +160,7 @@ function WuxingAnalysis({ wuxingResult, bazi, patterns }) {
               })}
             </ul>
           </div>
+          */}
           
           {/* 五行性格分析部分 */}
           {Object.keys(personalityAnalysis).length > 0 && (

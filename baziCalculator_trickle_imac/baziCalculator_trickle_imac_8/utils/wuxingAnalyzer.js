@@ -1,6 +1,6 @@
 function WuxingAnalyzer() {
   // 五行
-  const wuxing = ['木', '火', '土', '金', '水'];
+  const wuxing = ['金', '木', '水', '火', '土'];
   
   // 分析八字中的五行强弱
   const analyzeWuxing = (bazi) => {
