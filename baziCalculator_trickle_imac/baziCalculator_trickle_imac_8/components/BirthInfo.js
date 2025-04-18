@@ -147,7 +147,7 @@ function BirthInfo({ bazi, lunarDate, solarDate }) {
           <div className="info-card info-card-decorated" data-name="basic-info">
             <h3 className="info-card-title">
               <i className="fas fa-user-circle info-icon"></i>
-              <span>{t('basicInfo')}</span>
+              <span>{t('birthDate')}</span>
               <div className="title-underline"></div>
             </h3>
             <div className="info-card-content">
@@ -157,6 +157,11 @@ function BirthInfo({ bazi, lunarDate, solarDate }) {
                 <span className="info-divider"><i className="fas fa-circle-notch fa-xs"></i></span>
                 <span className="info-label"><i className="fas fa-birthday-cake info-icon-small"></i>{t('nominalAge')}：</span>
                 <span className="info-value info-value-highlight">{nominalAge} {t('age')}</span>
+              </div>
+              
+              <div className="info-item" data-name="gender-info">
+                <span className="info-label"><i className="fas fa-venus-mars info-icon-small"></i>{t('genderLabel')}：</span>
+                <span className="info-value info-value-highlight">{bazi.gender === 'male' ? t('male') || '男' : t('female') || '女'}</span>
               </div>
               
               <div className="info-item" data-name="lunar-birth">
