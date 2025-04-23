@@ -1,0 +1,954 @@
+{
+  "elements_personality": [
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "金",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你身上有靈動的力量，通常是團隊中的擔當者、粘合劑，不怕苦累的付出者；朋友多，也通常能為你帶來很好的支持",
+        "zh-Hans": "你身上有灵动的力量，通常是团队中的担当者、粘合剂，不怕苦累的付出者；朋友多，也通常能为你带来很好的支持",
+        "en": "You have a dynamic energy and often act as the backbone and cohesive force in a team, tirelessly contributing. You have many friends who usually provide strong support.",
+        "ja": "あなたは活発な力を持ち、チームの責任者や結束役として苦労を厭わず尽力します。友人も多く、良いサポートを得られます。",
+        "ko": "당신은 활기찬 힘을 지녔으며, 팀의 책임자이자 결속력 있는 존재로 고생을 마다하지 않고 헌신합니다. 친구가 많으며 종종 강력한 지지를 받습니다."
+      },
+      "content_low": {
+        "zh-Hant": "你需要朋友，但是很少有人能真正走進你的內心。你對事情的關注度大於對人的關注，自己也有點缺乏信心，但不輕易展示出來。嘗試去勇敢在團隊中承擔事務，比如一些公益組織裡當個志願者。也可以多關注打扮自己，讓自己的內心裡開心起來。",
+        "zh-Hans": "你需要朋友，但是很少有人能真正走进你的内心。你对事情的关注度大于对人的关注，自己也有点缺乏信心，但不轻易展示出来。尝试去勇敢在团队中承担事务，比如一些公益组织里当个志愿者。也可以多关注打扮自己，让自己的内心里开心起来。",
+        "en": "You need friends, but few can truly enter your heart. You focus more on tasks than people and lack confidence internally, though you rarely show it. Try bravely taking on responsibilities in teams, such as volunteering in non-profit organizations. Also, pay attention to grooming yourself to uplift your inner joy.",
+        "ja": "あなたは友人を必要としますが、本当に心を開ける人はほとんどいません。物事への関心が人への関心より強く、自信が少し足りませんが、それを表に出しません。ボランティア活動などでチームの責任を勇敢に引き受けてみてください。また、身だしなみを整え、内面を明るくすることも大切です。",
+        "ko": "당신은 친구가 필요하지만, 진정으로 마음속까지 들어올 수 있는 사람은 드뭅니다. 사람보다 일에 더 집중하며 내면적으로 자신감이 부족하지만 쉽게 드러내지 않습니다. 봉사 단체에서 자원봉사자로 활동하는 등 팀에서 용기 있게 책임을 져보세요. 또한 자신을 꾸미고 내면을 기쁘게 하는 데 신경 써보세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "金",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，目標感較強，方法比較直接；心裡有個大目標，但差點力氣去實現。當有個較大的項目在眼前時，記得多團隊協作，團隊共享利益。",
+        "zh-Hans": "你追求可量化的成果，目标感较强，方法比较直接；心里有个大目标，但差点力气去实现。当有个较大的项目在眼前时，记得多团队协作，团队共享利益。",
+        "en": "You pursue quantifiable results with strong goal orientation and direct methods. Though you have grand ambitions, you may lack the energy to achieve them. When facing large projects, prioritize teamwork and shared benefits.",
+        "ja": "定量化できる成果を追求し、目標意識が強く直接的な方法を取ります。大きな目標がありますが、実現する力が少し足りません。大きなプロジェクトに直面したら、チームワークと利益の共有を重視してください。",
+        "ko": "당신은 계량 가능한 결과를 추구하며 목표 의식이 강하고 방법이 직접적입니다. 큰 목표를 품고 있지만 이를 실현할 힘이 조금 부족합니다. 큰 프로젝트를 마주할 때는 팀워크와 이익 공유를 우선시하세요."
+      },
+      "content_low": {
+        "zh-Hant": "身上有點仙氣，要相信不那麼操心也是一種福氣。可以多學習一些宗教、哲學類智慧。少說話，多關注自己內心的成長。",
+        "zh-Hans": "身上有点仙气，要相信不那么操心也是一种福气。可以多学习一些宗教、哲学类智慧。少说话，多关注自己内心的成长。",
+        "en": "You have an ethereal aura; believe that worrying less is a blessing. Explore religious or philosophical wisdom. Speak less and focus more on your inner growth.",
+        "ja": "あなたは神秘的なオーラを持っています。心配しすぎないことが幸せだと信じてください。宗教や哲学の知恵を学び、話すより内面の成長に集中しましょう。",
+        "ko": "당신은 신비로운 기운을 지녔습니다. 덜 걱정하는 것도 복임을 믿으세요. 종교나 철학적 지혜를 탐구하고, 말을 줄이고 내면의 성장에 집중하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "金",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你是靈動的精靈，是團隊中商機的發現者，對機會敏感，能靈活應變處理難題，有時有過於情緒化的問題，也會太多沉浸於想像",
+        "zh-Hans": "你是灵动的精灵，是团队中商机的发现者，对机会敏感，能灵活应变处理难题，有时有过于情绪化的问题，也会太多沉浸于想象",
+        "en": "You are a dynamic spirit, sensitive to opportunities and skilled at solving problems flexibly. However, you may be overly emotional or lost in imagination.",
+        "ja": "あなたは機敏で、チームのビジネスチャンス発見者です。機会に敏感で柔軟ですが、感情的すぎたり想像にふけりすぎたりします。",
+        "ko": "당신은 민첩한 정령처럼 기회를 민감하게 포착하고 유연하게 문제를 해결합니다. 하지만 감정적이거나 상상에 빠지기 쉽습니다."
+      },
+      "content_low": {
+        "zh-Hant": "有時候對他人情緒感知不是太敏感，鈍感力也是一種福氣。可以讓自己更舒服一點，和朋友聊天，春天的時候出去走走。",
+        "zh-Hans": "有时候对他人情绪感知不是太敏感，钝感力也是一种福气。可以让自己更舒服一点，和朋友聊天，春天的时候出去走走。",
+        "en": "Sometimes you lack sensitivity to others' emotions—this can be a blessing. Relax more, chat with friends, and take spring walks.",
+        "ja": "他人の感情に鈍感なこともありますが、それは幸せです。リラックスし、友人と話し、春の散歩を楽しみましょう。",
+        "ko": "타인의 감정에 둔감할 수 있지만, 이는 복입니다. 편안히 쉬고 친구와 대화하며 봄날 산책을 즐기세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "金",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你常常謹慎小心，溫婉體貼，需要注意的是，有時候會把問題想得過於複雜，或者對外界環境過於悲觀，有時還有點記仇，和朋友也一直有距離，可能沒什麼真正的朋友。你的擔憂是你心的感受，不是這個世界本來的樣子。多看看其他朋友的角度，會有更多機會。",
+        "zh-Hans": "你常常谨慎小心，温婉体贴，需要注意的是，有时候会把问题想得过于复杂，或者对外界环境过于悲观，有时还有点记仇，和朋友也一直有距离，可能没什么真正的朋友。你的担忧是你心的感受，不是这个世界本来的样子。多看看其他朋友的角度，会有更多机会。",
+        "en": "You are often cautious and considerate, but tend to overcomplicate problems or feel pessimistic about external circumstances. You may hold grudges and keep friends at a distance, lacking true friendships. Your worries are perceptions of your heart, not the reality of the world. Seek perspectives from others to find more opportunities.",
+        "ja": "あなたは慎重で優しいですが、問題を複雑に考えたり、外部環境に悲観的になりがちです。恨みを抱き、友人と距離を置くため、真の友情が少ないかもしれません。心配は心の感覚であって現実ではありません。他の視点を探れば機会が広がります。",
+        "ko": "당신은 신중하고 상냥하지만 문제를 과도하게 복잡하게 생각하거나 외부 환경에 비관적일 수 있습니다. 원한을 품고 친구와 거리를 둬 진정한 우정이 부족할 수 있습니다. 걱정은 마음의 감각일 뿐 현실이 아닙니다. 다른 시각을 찾으면 기회가 넓어집니다."
+      },
+      "content_low": {
+        "zh-Hant": "天生挺樂觀，也總能逢凶化吉。但是有時候風險意識較弱，會帶來一些沒必要的麻煩。",
+        "zh-Hans": "天生挺乐观，也总能逢凶化吉。但是有时候风险意识较弱，会带来一些没必要的麻烦。",
+        "en": "You are naturally optimistic and resilient, but sometimes lack risk awareness, leading to unnecessary troubles.",
+        "ja": "生来の楽観主義者で逆境を乗り越えますが、リスク意識が弱く不要な問題を招くことがあります。",
+        "ko": "타고난 낙천가이며 역경을 극복하지만, 위험 인식이 약해 불필요한 문제를 초래할 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "金",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你很敏銳，又有很好的擔當能力，較少與人爭論短長，但是內心自有主張；",
+        "zh-Hans": "你很敏锐，又有很好的担当能力，较少与人争论短长，但是内心自有主张；",
+        "en": "You are sharp and highly responsible, rarely engaging in disputes, yet firmly holding your own opinions internally.",
+        "ja": "あなたは鋭敏で責任感が強く、議論を避けますが、内面で確固たる主張を持っています。",
+        "ko": "당신은 예리하고 책임감이 강하며 논쟁을 피하지만 내면에 확고한 주장을 품고 있습니다."
+      },
+      "content_low": {
+        "zh-Hant": "看書學習有點困難，有時候也過於隨性。可以試試每天、每週做好規劃，結束了再來對計劃。長久養成這個習慣。",
+        "zh-Hans": "看书学习有点困难，有时候也过于随性。可以试试每天、每周做好规划，结束了再来对计划。长久养成这个习惯。",
+        "en": "You may struggle with studying and lack discipline. Try creating daily/weekly plans and reviewing them afterward. Build this habit over time.",
+        "ja": "勉強が苦手で計画性に欠けることがあります。日次・週次の計画を立て、終了後に振り返りましょう。習慣化することが大切です。",
+        "ko": "공부에 어려움을 느끼고 계획성이 부족할 수 있습니다. 매일/매주 계획을 세우고 마친 후 검토해보세요. 습관을 들이는 것이 중요합니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "金",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你通常是團隊中的擔當者，不怕苦累的付出者；有時也過於固執，不喜歡聽取意見。或者聽了也還是按自己的想法做。堅信人力定勝天，不撞南牆不回頭。",
+        "zh-Hans": "你通常是团队中的担当者，不怕苦累的付出者；有时也过于固执，不喜欢听取意见。或者听了也还是按自己的想法做。坚信人力定胜天，不撞南墙不回头。",
+        "en": "You are typically a responsible contributor in teams, unafraid of hard work. However, you can be stubborn, disliking others' opinions or persisting in your own ways. You firmly believe in overcoming challenges through effort, refusing to yield until hitting a wall.",
+        "ja": "あなたはチームの責任ある貢献者で、苦労を厭いません。しかし頑固で他人の意見を聞かず、自分の方法に固執することがあります。努力で困難を乗り越えると信じ、壁にぶつかるまで諦めません。",
+        "ko": "당신은 팀의 책임감 있는 기여자로 고생을 두려워하지 않습니다. 하지만 고집스럽고 타인의 의견을 듣지 않거나 자신의 방식에 집착할 수 있습니다. 노력으로 어려움을 극복한다고 믿으며 벽에 부딪힐 때까지 포기하지 않습니다."
+      },
+      "content_low": {
+        "zh-Hant": "在別人看不見的地方，自己會覺得有點沒自信。",
+        "zh-Hans": "在别人看不见的地方，自己会觉得有点没自信。",
+        "en": "In situations where others cannot see, you may feel a lack of confidence.",
+        "ja": "他人から見えない場面では自信が足りないと感じることがあります。",
+        "ko": "타인이 보지 못하는 상황에서는 자신감이 부족하다고 느낄 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "金",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，執行力較強，勤勞付出",
+        "zh-Hans": "你追求可量化的成果，执行力较强，勤劳付出",
+        "en": "You pursue measurable outcomes with strong execution and diligent effort.",
+        "ja": "定量化できる成果を追求し、実行力が強く勤勉に取り組みます。",
+        "ko": "계량 가능한 결과를 추구하며 실행력이 강하고 부지런히 노력합니다."
+      },
+      "content_low": {
+        "zh-Hant": "多思少動，注意所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "多思少动，注意所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "Overthinking and underacting—recognize that thoughts preventing action are obstacles.",
+        "ja": "考えすぎて行動しないこと—行動を阻む思考は障害であると認識しましょう。",
+        "ko": "생각은 많고 행동은 적음—행동을 막는 생각은 장애물임을 인식하세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "金",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你有擔當，又有靈活處理問題的能力。是團隊中商機的發現者，對機會敏感。情緒容易大起大落。",
+        "zh-Hans": "你有担当，又有灵活处理问题的能力。是团队中商机的发现者，对机会敏感。情绪容易大起大落。",
+        "en": "You are responsible and adept at solving problems flexibly. You are a keen spotter of business opportunities in teams but prone to emotional volatility.",
+        "ja": "責任感があり柔軟な問題解決能力を持ちます。チームのビジネスチャンス発見者ですが、感情の起伏が激しいです。",
+        "ko": "책임감 있고 유연한 문제 해결 능력을 지녔습니다. 팀의 비즈니스 기회 발견자이지만 감정 기복이 큽니다."
+      },
+      "content_low": {
+        "zh-Hant": "思維比較直接，試試和人溝通的時候，換到對方的角度。",
+        "zh-Hans": "思维比较直接，试试和人沟通的时候，换到对方的角度。",
+        "en": "Your thinking tends to be direct. Try shifting to others' perspectives during communication.",
+        "ja": "思考が直接的です。コミュニケーションでは相手の視点に立ってみましょう。",
+        "ko": "생각이 직선적입니다. 의사소통 시 상대방의 관점으로 전환해보세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "金",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你是紀律的守護者，遵守規則，又能利用好規則；因為能關注到別人不會注意的細節，所以學習能力很強，並且學習得比較有深度；對朋友很有篩選",
+        "zh-Hans": "你是纪律的守护者，遵守规则，又能利用好规则；因为能关注到别人不会注意的细节，所以学习能力很强，并且学习得比较有深度；对朋友很有筛选",
+        "en": "You are a guardian of discipline, adhering to rules while leveraging them effectively. Your attention to overlooked details makes you a deep learner. You are selective with friendships.",
+        "ja": "あなたは規律の守護者で、ルールを遵守しつつ活用します。他人が気付かない細部に注目するため、深く学ぶ能力があります。友人関係は厳選されます。",
+        "ko": "당신은 규율의 수호자로 규칙을 준수하면서 효과적으로 활용합니다. 다른 사람이 놓친 세부 사항에 주목해 깊이 있게 학습합니다. 친구 관계는 엄격하게 선별됩니다."
+      },
+      "content_low": {
+        "zh-Hant": "風險意識較差，朋友帶給你一些損失。",
+        "zh-Hans": "风险意识较差，朋友带给你一些损失。",
+        "en": "You have weak risk awareness, and friends may cause you some losses.",
+        "ja": "リスク意識が低く、友人から損失を受ける可能性があります。",
+        "ko": "위험 인식이 약해 친구로 인해 손실을 입을 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "金",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "信守傳統的價值觀，講邏輯，思考問題會比較理性。很難被說服，經常因為他人不符合自己的認可的邏輯或者規則而苦惱。想得多，做得少。記住，所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "信守传统的价值观，讲逻辑，思考问题会比较理性。很难被说服，经常因为他人不符合自己的认可的逻辑或者规则而苦恼。想得多，做得少。记住，所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "You adhere to traditional values and think rationally with logic. You are hard to persuade and often frustrated when others deviate from your accepted logic or rules. Overthinking leads to inaction—remember that thoughts preventing action are obstacles.",
+        "ja": "伝統的価値観を守り、論理的に理性的に考えます。説得されにくく、他人が自分の論理やルールに合わないと悩みがちです。考えすぎて行動しない—行動を阻む思考は障害です。",
+        "ko": "전통적 가치관을 지키며 논리적으로 이성적으로 사고합니다. 설득하기 어렵고 타인이 자신의 논리나 규칙에서 벗어나면 고민합니다. 생각은 많고 행동은 적음—행동을 막는 생각은 장애물입니다."
+      },
+      "content_low": {
+        "zh-Hant": "不是很擅長分析拆解一些複雜的項目。看書也有些困難。這時候可以求助於朋友。",
+        "zh-Hans": "不是很擅长分析拆解一些复杂的项目。看书也有些困难。这时候可以求助于朋友。",
+        "en": "You are not adept at analyzing complex projects and may struggle with studying. In such cases, seek help from friends.",
+        "ja": "複雑なプロジェクトの分析が苦手で、勉強にも困難を感じます。その場合は友人に助けを求めましょう。",
+        "ko": "복잡한 프로젝트 분석에 능숙하지 못하고 공부에도 어려움을 느낍니다. 이럴 땐 친구에게 도움을 요청하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "木",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你常常謹慎小心，溫婉體貼，需要注意的是，有時候會把問題想得過於複雜，或者對外界環境過於悲觀，有時還有點記仇，和朋友也一直有距離，可能沒什麼真正的朋友。你的擔憂是你心的感受，不是這個世界本來的樣子。多看看其他朋友的角度，會有更多機會。",
+        "zh-Hans": "你常常谨慎小心，温婉体贴，需要注意的是，有时候会把问题想得过于复杂，或者对外界环境过于悲观，有时还有点记仇，和朋友也一直有距离，可能没什么真正的朋友。你的担忧是你心的感受，不是这个世界本来的样子。多看看其他朋友的角度，会有更多机会。",
+        "en": "You are often cautious and considerate, but tend to overcomplicate problems or feel pessimistic about external circumstances. You may hold grudges and keep friends at a distance, lacking true friendships. Your worries are perceptions of your heart, not the reality of the world. Seek perspectives from others to find more opportunities.",
+        "ja": "あなたは慎重で優しいですが、問題を複雑に考えたり、外部環境に悲観的になりがちです。恨みを抱き、友人と距離を置くため、真の友情が少ないかもしれません。心配は心の感覚であって現実ではありません。他の視点を探れば機会が広がります。",
+        "ko": "당신은 신중하고 상냥하지만 문제를 과도하게 복잡하게 생각하거나 외부 환경에 비관적일 수 있습니다. 원한을 품고 친구와 거리를 둬 진정한 우정이 부족할 수 있습니다. 걱정은 마음의 감각일 뿐 현실이 아닙니다. 다른 시각을 찾으면 기회가 넓어집니다."
+      },
+      "content_low": {
+        "zh-Hant": "天生挺樂觀，也總能逢凶化吉。但是有時候風險意識較弱，會帶來一些沒必要的麻煩。",
+        "zh-Hans": "天生挺乐观，也总能逢凶化吉。但是有时候风险意识较弱，会带来一些没必要的麻烦。",
+        "en": "You are naturally optimistic and resilient, but sometimes lack risk awareness, leading to unnecessary troubles.",
+        "ja": "生来の楽観主義者で逆境を乗り越えますが、リスク意識が弱く不要な問題を招くことがあります。",
+        "ko": "타고난 낙천가이며 역경을 극복하지만, 위험 인식이 약해 불필요한 문제를 초래할 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "木",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你身上有靈動的力量，通常是團隊中的擔當者、粘合劑，不怕苦累的付出者；朋友多，也通常能為你帶來很好的支持",
+        "zh-Hans": "你身上有灵动的力量，通常是团队中的担当者、粘合剂，不怕苦累的付出者；朋友多，也通常能为你带来很好的支持",
+        "en": "You have dynamic energy and act as a responsible leader and cohesive force in a team, tirelessly contributing. Friends are plentiful and supportive.",
+        "ja": "あなたは活発な力を持ち、チームの責任者や結束役として苦労を厭わず尽力します。友人も多く、強いサポートを受けます。",
+        "ko": "당신은 활기찬 힘을 지녔으며 팀의 리더이자 결속자로 헌신합니다. 친구가 많고 강한 지지를 받습니다."
+      },
+      "content_low": {
+        "zh-Hant": "你需要朋友，但是很少有人能真正走進你的內心。你對事情的關注度大於對人的關注，自己也有點缺乏信心，但不輕易展示出來。嘗試去勇敢在團隊中承擔事務，比如一些公益組織裡當個志願者。也可以多關注打扮自己，讓自己的內心裡開心起來。",
+        "zh-Hans": "你需要朋友，但是很少有人能真正走进你的内心。你对事情的关注度大于对人的关注，自己也有点缺乏信心，但不轻易展示出来。尝试去勇敢在团队中承担事务，比如一些公益组织里当个志愿者。也可以多关注打扮自己，让自己的内心里开心起来。",
+        "en": "You need friends, but few can truly enter your heart. You focus more on tasks than people and hide inner insecurity. Engage in teamwork (e.g., volunteering) and self-care to boost joy.",
+        "ja": "あなたは友人を必要としますが、心を開ける人はほとんどいません。人より物事を重視し、自信不足を隠します。ボランティアなどでチームに参加し、身だしなみを整えて内面を豊かにしましょう。",
+        "ko": "친구가 필요하지만 진정한 교류는 적습니다. 사람보다 일을 중시하며 내면의 불안을 숨깁니다. 봉사활동 등에 참여하고 자기 관리를 통해 기쁨을 찾으세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "木",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你很敏銳，又有很好的擔當能力，較少與人爭論短長，但是內心自有主張；",
+        "zh-Hans": "你很敏锐，又有很好的担当能力，较少与人争论短长，但是内心自有主张；",
+        "en": "You are sharp and highly responsible, rarely engaging in disputes, yet firmly holding your own opinions internally.",
+        "ja": "あなたは鋭敏で責任感が強く、議論を避けますが、内面で確固たる主張を持っています。",
+        "ko": "당신은 예리하고 책임감이 강하며 논쟁을 피하지만 내면에 확고한 주장을 품고 있습니다."
+      },
+      "content_low": {
+        "zh-Hant": "看書學習有點困難，有時候也過於隨性。可以試試每天、每週做好規劃，結束了再來對計劃。長久養成這個習慣。",
+        "zh-Hans": "看书学习有点困难，有时候也过于随性。可以试试每天、每周做好规划，结束了再来对计划。长久养成这个习惯。",
+        "en": "You may struggle with studying and lack discipline. Try creating daily/weekly plans and reviewing them afterward. Build this habit over time.",
+        "ja": "勉強が苦手で計画性に欠けることがあります。日次・週次の計画を立て、終了後に振り返りましょう。習慣化することが大切です。",
+        "ko": "공부에 어려움을 느끼고 계획성이 부족할 수 있습니다. 매일/매주 계획을 세우고 마친 후 검토해보세요. 습관을 들이는 것이 중요합니다."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "木",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你是靈動的精靈，是團隊中商機的發現者，對機會敏感，能靈活應變處理難題，有時有過於情緒化的問題，也會太多沉浸於想像",
+        "zh-Hans": "你是灵动的精灵，是团队中商机的发现者，对机会敏感，能灵活应变处理难题，有时有过于情绪化的问题，也会太多沉浸于想象",
+        "en": "You are a dynamic spirit, sensitive to opportunities and skilled at solving problems flexibly. However, you may be overly emotional or lost in imagination.",
+        "ja": "あなたは機敏で、チームのビジネスチャンス発見者です。機会に敏感で柔軟ですが、感情的すぎたり想像にふけりすぎたりします。",
+        "ko": "당신은 민첩한 정령처럼 기회를 민감하게 포착하고 유연하게 문제를 해결합니다. 하지만 감정적이거나 상상에 빠지기 쉽습니다."
+      },
+      "content_low": {
+        "zh-Hant": "有時候對他人情緒感知不是太敏感，鈍感力也是一種福氣。可以讓自己更舒服一點，和朋友聊天，春天的時候出去走走。",
+        "zh-Hans": "有时候对他人情绪感知不是太敏感，钝感力也是一种福气。可以让自己更舒服一点，和朋友聊天，春天的时候出去走走。",
+        "en": "Sometimes you lack sensitivity to others' emotions—this can be a blessing. Relax more, chat with friends, and take spring walks.",
+        "ja": "他人の感情に鈍感なこともありますが、それは幸せです。リラックスし、友人と話し、春の散歩を楽しみましょう。",
+        "ko": "타인의 감정에 둔감할 수 있지만, 이는 복입니다. 편안히 쉬고 친구와 대화하며 봄날 산책을 즐기세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "木",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，目標感較強，方法比較直接；總覺得機會很多，但差點力氣去實現。可以在行動前，多思考幾天，或者找長者聊聊。當有個較大的項目在眼前時，記得團隊共享利益。",
+        "zh-Hans": "你追求可量化的成果，目标感较强，方法比较直接；总觉得机会很多，但差点力气去实现。可以在行动前，多思考几天，或者找长者聊聊。当有个较大的项目在眼前时，记得团队共享利益。",
+        "en": "You pursue quantifiable results with strong goal orientation and direct methods. Though opportunities seem abundant, you lack energy to realize them. Reflect before acting or consult elders. For large projects, ensure shared benefits within the team.",
+        "ja": "定量化できる成果を追求し、目標意識が強く直接的な方法を取ります。機会は多いが実現する力が不足。行動前に熟考や年長者への相談を。大きなプロジェクトではチームの利益共有を忘れずに。",
+        "ko": "계량 가능한 결과를 추구하며 목표 의식이 강하고 방법이 직접적입니다. 기회는 많지만 실현할 힘이 부족합니다. 행동 전 숙고하거나 연장자와 상담하세요. 큰 프로젝트에선 팀의 이익 공유를 기억하세요."
+      },
+      "content_low": {
+        "zh-Hant": "身上有點仙氣，要相信不那麼操心也是一種福氣。可以多學習一些宗教、哲學類智慧。少說話，多關注自己內心的成長。",
+        "zh-Hans": "身上有点仙气，要相信不那么操心也是一种福气。可以多学习一些宗教、哲学类智慧。少说话，多关注自己内心的成长。",
+        "en": "You have an ethereal aura; embrace the blessing of worrying less. Study religious or philosophical wisdom. Speak less and focus on inner growth.",
+        "ja": "神秘的なオーラを持っています。心配しすぎないことが幸せです。宗教や哲学の知恵を学び、内面の成長に集中しましょう。",
+        "ko": "신비로운 기운을 지녔습니다. 덜 걱정하는 것도 복입니다. 종교나 철학적 지혜를 탐구하고 내면 성장에 집중하세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "木",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你是紀律的守護者，遵守規則，又能利用好規則；因為能關注到別人不會注意的細節，所以學習能力很強，並且學習得比較有深度；對朋友很有篩選",
+        "zh-Hans": "你是纪律的守护者，遵守规则，又能利用好规则；因为能关注到别人不会注意的细节，所以学习能力很强，并且学习得比较有深度；对朋友很有筛选",
+        "en": "You are a guardian of discipline, adhering to rules while leveraging them effectively. Your attention to overlooked details makes you a deep learner. You are selective with friendships.",
+        "ja": "あなたは規律の守護者で、ルールを遵守しつつ活用します。他人が気付かない細部に注目するため、深く学ぶ能力があります。友人関係は厳選されます。",
+        "ko": "당신은 규율의 수호자로 규칙을 준수하면서 효과적으로 활용합니다. 다른 사람이 놓친 세부 사항에 주목해 깊이 있게 학습합니다. 친구 관계는 엄격하게 선별됩니다."
+      },
+      "content_low": {
+        "zh-Hant": "風險意識較差，朋友帶給你一些損失。",
+        "zh-Hans": "风险意识较差，朋友带给你一些损失。",
+        "en": "You have weak risk awareness, and friends may cause you some losses.",
+        "ja": "リスク意識が低く、友人から損失を受ける可能性があります。",
+        "ko": "위험 인식이 약해 친구로 인해 손실을 입을 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "木",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你通常是團隊中的擔當者，不怕苦累的付出者；有時也過於固執，不喜歡聽取意見。或者聽了也還是按自己的想法做。堅信人力定勝天，不撞南牆不回頭。",
+        "zh-Hans": "你通常是团队中的担当者，不怕苦累的付出者；有时也过于固执，不喜欢听取意见。或者听了也还是按自己的想法做。坚信人力定胜天，不撞南墙不回头。",
+        "en": "You are typically a responsible contributor in teams, unafraid of hard work. However, you can be stubborn, disliking others' opinions or persisting in your own ways. You firmly believe in overcoming challenges through effort, refusing to yield until hitting a wall.",
+        "ja": "あなたはチームの責任ある貢献者で、苦労を厭いません。しかし頑固で他人の意見を聞かず、自分の方法に固執することがあります。努力で困難を乗り越えると信じ、壁にぶつかるまで諦めません。",
+        "ko": "당신은 팀의 책임감 있는 기여자로 고생을 두려워하지 않습니다. 하지만 고집스럽고 타인의 의견을 듣지 않거나 자신의 방식에 집착할 수 있습니다. 노력으로 어려움을 극복한다고 믿으며 벽에 부딪힐 때까지 포기하지 않습니다."
+      },
+      "content_low": {
+        "zh-Hant": "在別人看不見的地方，自己會覺得有點沒自信。",
+        "zh-Hans": "在别人看不见的地方，自己会觉得有点没自信。",
+        "en": "In situations where others cannot see, you may feel a lack of confidence.",
+        "ja": "他人から見えない場面では自信が足りないと感じることがあります。",
+        "ko": "타인이 보지 못하는 상황에서는 자신감이 부족하다고 느낄 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "木",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "信守傳統的價值觀，講邏輯，思考問題會比較理性。很難被說服，經常因為他人不符合自己的認可的邏輯或者規則而苦惱。想得多，做得少。記住，所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "信守传统的价值观，讲逻辑，思考问题会比较理性。很难被说服，经常因为他人不符合自己的认可的逻辑或者规则而苦恼。想得多，做得少。记住，所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "You adhere to traditional values and think rationally with logic. You are hard to persuade and often frustrated when others deviate from your accepted logic or rules. Overthinking leads to inaction—remember that thoughts preventing action are obstacles.",
+        "ja": "伝統的価値観を守り、論理的に理性的に考えます。説得されにくく、他人が自分の論理やルールに合わないと悩みがちです。考えすぎて行動しない—行動を阻む思考は障害です。",
+        "ko": "전통적 가치관을 지키며 논리적으로 이성적으로 사고합니다. 설득하기 어렵고 타인이 자신의 논리나 규칙에서 벗어나면 고민합니다. 생각은 많고 행동은 적음—행동을 막는 생각은 장애물입니다."
+      },
+      "content_low": {
+        "zh-Hant": "不是很擅長分析拆解一些複雜的項目。看書也有些困難。這時候可以求助於朋友。",
+        "zh-Hans": "不是很擅长分析拆解一些复杂的项目。看书也有些困难。这时候可以求助于朋友。",
+        "en": "You are not adept at analyzing complex projects and may struggle with studying. In such cases, seek help from friends.",
+        "ja": "複雑なプロジェクトの分析が苦手で、勉強にも困難を感じます。その場合は友人に助けを求めましょう。",
+        "ko": "복잡한 프로젝트 분석에 능숙하지 못하고 공부에도 어려움을 느낍니다. 이럴 땐 친구에게 도움을 요청하세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "木",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你有擔當，又有靈活處理問題的能力。是團隊中商機的發現者，對機會敏感。情緒容易大起大落。",
+        "zh-Hans": "你有担当，又有灵活处理问题的能力。是团队中商机的发现者，对机会敏感。情绪容易大起大落。",
+        "en": "You are responsible and adept at solving problems flexibly. You are a keen spotter of business opportunities in teams but prone to emotional volatility.",
+        "ja": "責任感があり柔軟な問題解決能力を持ちます。チームのビジネスチャンス発見者ですが、感情の起伏が激しいです。",
+        "ko": "책임감 있고 유연한 문제 해결 능력을 지녔습니다. 팀의 비즈니스 기회 발견자이지만 감정 기복이 큽니다."
+      },
+      "content_low": {
+        "zh-Hant": "思維比較直接，試試和人溝通的時候，換到對方的角度。",
+        "zh-Hans": "思维比较直接，试试和人沟通的时候，换到对方的角度。",
+        "en": "Your thinking tends to be direct. Try shifting to others' perspectives during communication.",
+        "ja": "思考が直接的です。コミュニケーションでは相手の視点に立ってみましょう。",
+        "ko": "생각이 직선적입니다. 의사소통 시 상대방의 관점으로 전환해보세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "木",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，執行力較強，勤勞付出",
+        "zh-Hans": "你追求可量化的成果，执行力较强，勤劳付出",
+        "en": "You pursue measurable outcomes with strong execution and diligent effort.",
+        "ja": "定量化できる成果を追求し、実行力が強く勤勉に取り組みます。",
+        "ko": "계량 가능한 결과를 추구하며 실행력이 강하고 부지런히 노력합니다."
+      },
+      "content_low": {
+        "zh-Hant": "多思少動，注意所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "多思少动，注意所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "Overthinking and underacting—recognize that thoughts preventing action are obstacles.",
+        "ja": "考えすぎて行動しないこと—行動を阻む思考は障害であると認識しましょう。",
+        "ko": "생각은 많고 행동은 적음—행동을 막는 생각은 장애물임을 인식하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "水",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，目標感較強，方法比較直接；總覺得機會很多，但差點力氣去實現。可以在行動前，多思考幾天，或者找長者聊聊。當有個較大的項目在眼前時，記得團隊共享利益。",
+        "zh-Hans": "你追求可量化的成果，目标感较强，方法比较直接；总觉得机会很多，但差点力气去实现。可以在行动前，多思考几天，或者找长者聊聊。当有个较大的项目在眼前时，记得团队共享利益。",
+        "en": "You pursue quantifiable results with strong goal orientation and direct methods. Though opportunities seem abundant, you lack energy to realize them. Reflect before acting or consult elders. For large projects, ensure shared benefits within the team.",
+        "ja": "定量化できる成果を追求し、目標意識が強く直接的な方法を取ります。機会は多いが実現する力が不足。行動前に熟考や年長者への相談を。大きなプロジェクトではチームの利益共有を忘れずに。",
+        "ko": "계량 가능한 결과를 추구하며 목표 의식이 강하고 방법이 직접적입니다. 기회는 많지만 실현할 힘이 부족합니다. 행동 전 숙고하거나 연장자와 상담하세요. 큰 프로젝트에선 팀의 이익 공유를 기억하세요."
+      },
+      "content_low": {
+        "zh-Hant": "身上有點仙氣，要相信不那麼操心也是一種福氣。可以多學習一些宗教、哲學類智慧。少說話，多關注自己內心的成長。",
+        "zh-Hans": "身上有点仙气，要相信不那么操心也是一种福气。可以多学习一些宗教、哲学类智慧。少说话，多关注自己内心的成长。",
+        "en": "You have an ethereal aura; embrace the blessing of worrying less. Study religious or philosophical wisdom. Speak less and focus on inner growth.",
+        "ja": "神秘的なオーラを持っています。心配しすぎないことが幸せです。宗教や哲学の知恵を学び、内面の成長に集中しましょう。",
+        "ko": "신비로운 기운을 지녔습니다. 덜 걱정하는 것도 복입니다. 종교나 철학적 지혜를 탐구하고 내면 성장에 집중하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "水",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你是靈動的精靈，是團隊中商機的發現者，對機會敏感，能靈活應變處理難題，有時有過於情緒化的問題，也會太多沉浸於想像",
+        "zh-Hans": "你是灵动的精灵，是团队中商机的发现者，对机会敏感，能灵活应变处理难题，有时有过于情绪化的问题，也会太多沉浸于想象",
+        "en": "You are a dynamic spirit, sensitive to opportunities and skilled at solving problems flexibly. However, you may be overly emotional or lost in imagination.",
+        "ja": "あなたは機敏で、チームのビジネスチャンス発見者です。機会に敏感で柔軟ですが、感情的すぎたり想像にふけりすぎたりします。",
+        "ko": "당신은 민첩한 정령처럼 기회를 민감하게 포착하고 유연하게 문제를 해결합니다. 하지만 감정적이거나 상상에 빠지기 쉽습니다."
+      },
+      "content_low": {
+        "zh-Hant": "有時候對他人情緒感知不是太敏感，鈍感力也是一種福氣。可以讓自己更舒服一點，和朋友聊天，春天的時候出去走走。",
+        "zh-Hans": "有时候对他人情绪感知不是太敏感，钝感力也是一种福气。可以让自己更舒服一点，和朋友聊天，春天的时候出去走走。",
+        "en": "Sometimes you lack sensitivity to others' emotions—this can be a blessing. Relax more, chat with friends, and take spring walks.",
+        "ja": "他人の感情に鈍感なこともありますが、それは幸せです。リラックスし、友人と話し、春の散歩を楽しみましょう。",
+        "ko": "타인의 감정에 둔감할 수 있지만, 이는 복입니다. 편안히 쉬고 친구와 대화하며 봄날 산책을 즐기세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "水",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你常常謹慎小心，溫婉體貼，需要注意的是，有時候會把問題想得過於複雜，或者對外界環境過於悲觀，有時還有點記仇，和朋友也一直有距離，可能沒什麼真正的朋友。你的擔憂是你心的感受，不是這個世界本來的樣子。多看看其他朋友的角度，會有更多機會。",
+        "zh-Hans": "你常常谨慎小心，温婉体贴，需要注意的是，有时候会把问题想得过于复杂，或者对外界环境过于悲观，有时还有点记仇，和朋友也一直有距离，可能没什么真正的朋友。你的担忧是你心的感受，不是这个世界本来的样子。多看看其他朋友的角度，会有更多机会。",
+        "en": "You are often cautious and considerate, but tend to overcomplicate problems or feel pessimistic about external circumstances. You may hold grudges and keep friends at a distance, lacking true friendships. Your worries are perceptions of your heart, not the reality of the world. Seek perspectives from others to find more opportunities.",
+        "ja": "あなたは慎重で優しいですが、問題を複雑に考えたり、外部環境に悲観的になりがちです。恨みを抱き、友人と距離を置くため、真の友情が少ないかもしれません。心配は心の感覚であって現実ではありません。他の視点を探れば機会が広がります。",
+        "ko": "당신은 신중하고 상냥하지만 문제를 과도하게 복잡하게 생각하거나 외부 환경에 비관적일 수 있습니다. 원한을 품고 친구와 거리를 둬 진정한 우정이 부족할 수 있습니다. 걱정은 마음의 감각일 뿐 현실이 아닙니다. 다른 시각을 찾으면 기회가 넓어집니다."
+      },
+      "content_low": {
+        "zh-Hant": "天生挺樂觀，也總能逢凶化吉。但是有時候風險意識較弱，會帶來一些沒必要的麻煩。",
+        "zh-Hans": "天生挺乐观，也总能逢凶化吉。但是有时候风险意识较弱，会带来一些没必要的麻烦。",
+        "en": "You are naturally optimistic and resilient, but sometimes lack risk awareness, leading to unnecessary troubles.",
+        "ja": "生来の楽観主義者で逆境を乗り越えますが、リスク意識が弱く不要な問題を招くことがあります。",
+        "ko": "타고난 낙천가이며 역경을 극복하지만, 위험 인식이 약해 불필요한 문제를 초래할 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "水",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你身上有靈動的力量，通常是團隊中的擔當者、粘合劑，不怕苦累的付出者；朋友多，也通常能為你帶來很好的支持",
+        "zh-Hans": "你身上有灵动的力量，通常是团队中的担当者、粘合剂，不怕苦累的付出者；朋友多，也通常能为你带来很好的支持",
+        "en": "You have dynamic energy and act as a responsible leader and cohesive force in a team, tirelessly contributing. Friends are plentiful and supportive.",
+        "ja": "あなたは活発な力を持ち、チームの責任者や結束役として苦労を厭わず尽力します。友人も多く、強いサポートを受けます。",
+        "ko": "당신은 활기찬 힘을 지녔으며 팀의 리더이자 결속자로 헌신합니다. 친구가 많고 강한 지지를 받습니다."
+      },
+      "content_low": {
+        "zh-Hant": "你需要朋友，但是很少有人能真正走進你的內心。你對事情的關注度大於對人的關注，自己也有點缺乏信心，但不輕易展示出來。嘗試去勇敢在團隊中承擔事務，比如一些公益組織裡當個志願者。也可以多關注打扮自己，讓自己的內心裡開心起來。",
+        "zh-Hans": "你需要朋友，但是很少有人能真正走进你的内心。你对事情的关注度大于对人的关注，自己也有点缺乏信心，但不轻易展示出来。尝试去勇敢在团队中承担事务，比如一些公益组织里当个志愿者。也可以多关注打扮自己，让自己的内心里开心起来。",
+        "en": "You need friends, but few can truly enter your heart. You focus more on tasks than people and hide inner insecurity. Engage in teamwork (e.g., volunteering) and self-care to boost joy.",
+        "ja": "あなたは友人を必要としますが、心を開ける人はほとんどいません。人より物事を重視し、自信不足を隠します。ボランティアなどでチームに参加し、身だしなみを整えて内面を豊かにしましょう。",
+        "ko": "친구가 필요하지만 진정한 교류는 적습니다. 사람보다 일을 중시하며 내면의 불안을 숨깁니다. 봉사활동 등에 참여하고 자기 관리를 통해 기쁨을 찾으세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "水",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你很敏銳，又有很好的擔當能力，較少與人爭論短長，但是內心自有主張；",
+        "zh-Hans": "你很敏锐，又有很好的担当能力，较少与人争论短长，但是内心自有主张；",
+        "en": "You are sharp and highly responsible, rarely engaging in disputes, yet firmly holding your own opinions internally.",
+        "ja": "あなたは鋭敏で責任感が強く、議論を避けますが、内面で確固たる主張を持っています。",
+        "ko": "당신은 예리하고 책임감이 강하며 논쟁을 피하지만 내면에 확고한 주장을 품고 있습니다."
+      },
+      "content_low": {
+        "zh-Hant": "看書學習有點困難，有時候也過於隨性。可以試試每天、每週做好規劃，結束了再來對計劃。長久養成這個習慣。",
+        "zh-Hans": "看书学习有点困难，有时候也过于随性。可以试试每天、每周做好规划，结束了再来对计划。长久养成这个习惯。",
+        "en": "You may struggle with studying and lack discipline. Try creating daily/weekly plans and reviewing them afterward. Build this habit over time.",
+        "ja": "勉強が苦手で計画性に欠けることがあります。日次・週次の計画を立て、終了後に振り返りましょう。習慣化することが大切です。",
+        "ko": "공부에 어려움을 느끼고 계획성이 부족할 수 있습니다. 매일/매주 계획을 세우고 마친 후 검토해보세요. 습관을 들이는 것이 중요합니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "水",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，執行力較強，勤勞付出。需要注意的是，會因為過於結果而讓自己缺乏更多思考的空間。可以在行動前，多思考幾天，或者找長者聊聊。",
+        "zh-Hans": "你追求可量化的成果，执行力较强，勤劳付出。需要注意的是，会因为过于结果而让自己缺乏更多思考的空间。可以在行动前，多思考几天，或者找长者聊聊。",
+        "en": "You pursue measurable results with strong execution and diligence. However, focusing excessively on outcomes may limit reflective thinking. Ponder deeply before acting or consult elders.",
+        "ja": "定量化できる成果を追求し、実行力と勤勉さがあります。ただし結果に偏ると思考の余地が減ります。行動前によく考えたり年長者に相談しましょう。",
+        "ko": "계량 가능한 결과를 추구하며 실행력과 부지런함이 있습니다. 그러나 결과에 치우치면 사고의 여지가 줄어듭니다. 행동 전 숙고하거나 연장자와 상담하세요."
+      },
+      "content_low": {
+        "zh-Hant": "多思少動，注意所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "多思少动，注意所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "Overthinking and underacting—recognize that thoughts preventing action are obstacles.",
+        "ja": "考えすぎて行動しないこと—行動を阻む思考は障害であると認識しましょう。",
+        "ko": "생각은 많고 행동은 적음—행동을 막는 생각은 장애물임을 인식하세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "水",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你有擔當，又有靈活處理問題的能力。是團隊中商機的發現者，對機會敏感。情緒容易大起大落。",
+        "zh-Hans": "你有担当，又有灵活处理问题的能力。是团队中商机的发现者，对机会敏感。情绪容易大起大落。",
+        "en": "You are responsible and adept at solving problems flexibly. You are a keen spotter of business opportunities in teams but prone to emotional volatility.",
+        "ja": "責任感があり柔軟な問題解決能力を持ちます。チームのビジネスチャンス発見者ですが、感情の起伏が激しいです。",
+        "ko": "책임감 있고 유연한 문제 해결 능력을 지녔습니다. 팀의 비즈니스 기회 발견자이지만 감정 기복이 큽니다."
+      },
+      "content_low": {
+        "zh-Hant": "思維比較直接，試試和人溝通的時候，換到對方的角度。",
+        "zh-Hans": "思维比较直接，试试和人沟通的时候，换到对方的角度。",
+        "en": "Your thinking tends to be direct. Try shifting to others' perspectives during communication.",
+        "ja": "思考が直接的です。コミュニケーションでは相手の視点に立ってみましょう。",
+        "ko": "생각이 직선적입니다. 의사소통 시 상대방의 관점으로 전환해보세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "水",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你是紀律的守護者，遵守規則，又能利用好規則；因為能關注到別人不會注意的細節，所以學習能力很強，並且學習得比較有深度；對朋友很有篩選",
+        "zh-Hans": "你是纪律的守护者，遵守规则，又能利用好规则；因为能关注到别人不会注意的细节，所以学习能力很强，并且学习得比较有深度；对朋友很有筛选",
+        "en": "You are a guardian of discipline, adhering to rules while leveraging them effectively. Your attention to overlooked details makes you a deep learner. You are selective with friendships.",
+        "ja": "あなたは規律の守護者で、ルールを遵守しつつ活用します。他人が気付かない細部に注目するため、深く学ぶ能力があります。友人関係は厳選されます。",
+        "ko": "당신은 규율의 수호자로 규칙을 준수하면서 효과적으로 활용합니다. 다른 사람이 놓친 세부 사항에 주목해 깊이 있게 학습합니다. 친구 관계는 엄격하게 선별됩니다."
+      },
+      "content_low": {
+        "zh-Hant": "風險意識較差，朋友帶給你一些損失。",
+        "zh-Hans": "风险意识较差，朋友带给你一些损失。",
+        "en": "You have weak risk awareness, and friends may cause you some losses.",
+        "ja": "リスク意識が低く、友人から損失を受ける可能性があります。",
+        "ko": "위험 인식이 약해 친구로 인해 손실을 입을 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "水",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你通常是團隊中的擔當者，不怕苦累的付出者；有時也過於固執，不喜歡聽取意見。或者聽了也還是按自己的想法做。堅信人力定勝天，不撞南牆不回頭。",
+        "zh-Hans": "你通常是团队中的担当者，不怕苦累的付出者；有时也过于固执，不喜欢听取意见。或者听了也还是按自己的想法做。坚信人力定胜天，不撞南墙不回头。",
+        "en": "You are typically a responsible contributor in teams, unafraid of hard work. However, you can be stubborn, disliking others' opinions or persisting in your own ways. You firmly believe in overcoming challenges through effort, refusing to yield until hitting a wall.",
+        "ja": "あなたはチームの責任ある貢献者で、苦労を厭いません。しかし頑固で他人の意見を聞かず、自分の方法に固執することがあります。努力で困難を乗り越えると信じ、壁にぶつかるまで諦めません。",
+        "ko": "당신은 팀의 책임감 있는 기여자로 고생을 두려워하지 않습니다. 하지만 고집스럽고 타인의 의견을 듣지 않거나 자신의 방식에 집착할 수 있습니다. 노력으로 어려움을 극복한다고 믿으며 벽에 부딪힐 때까지 포기하지 않습니다."
+      },
+      "content_low": {
+        "zh-Hant": "在別人看不見的地方，自己會覺得有點沒自信。",
+        "zh-Hans": "在别人看不见的地方，自己会觉得有点没自信。",
+        "en": "In situations where others cannot see, you may feel a lack of confidence.",
+        "ja": "他人から見えない場面では自信が足りないと感じることがあります。",
+        "ko": "타인이 보지 못하는 상황에서는 자신감이 부족하다고 느낄 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "水",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "信守傳統的價值觀，講邏輯，思考問題會比較理性。很難被說服，經常因為他人不符合自己的認可的邏輯或者規則而苦惱。想得多，做得少。記住，所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "信守传统的价值观，讲逻辑，思考问题会比较理性。很难被说服，经常因为他人不符合自己的认可的逻辑或者规则而苦恼。想得多，做得少。记住，所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "You adhere to traditional values and think rationally with logic. You are hard to persuade and often frustrated when others deviate from your accepted logic or rules. Overthinking leads to inaction—remember that thoughts preventing action are obstacles.",
+        "ja": "伝統的価値観を守り、論理的に理性的に考えます。説得されにくく、他人が自分の論理やルールに合わないと悩みがちです。考えすぎて行動しない—行動を阻む思考は障害です。",
+        "ko": "전통적 가치관을 지키며 논리적으로 이성적으로 사고합니다. 설득하기 어렵고 타인이 자신의 논리나 규칙에서 벗어나면 고민합니다. 생각은 많고 행동은 적음—행동을 막는 생각은 장애물입니다."
+      },
+      "content_low": {
+        "zh-Hant": "不是很擅長分析拆解一些複雜的項目。看書也有些困難。這時候可以求助於朋友。",
+        "zh-Hans": "不是很擅长分析拆解一些复杂的项目。看书也有些困难。这时候可以求助于朋友。",
+        "en": "You are not adept at analyzing complex projects and may struggle with studying. In such cases, seek help from friends.",
+        "ja": "複雑なプロジェクトの分析が苦手で、勉強にも困難を感じます。その場合は友人に助けを求めましょう。",
+        "ko": "복잡한 프로젝트 분석에 능숙하지 못하고 공부에도 어려움을 느낍니다. 이럴 땐 친구에게 도움을 요청하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "火",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，目標感較強，方法比較直接；心裡有個大目標，但差點力氣去實現。當有個較大的項目在眼前時，記得多團隊協作，團隊共享利益。",
+        "zh-Hans": "你追求可量化的成果，目标感较强，方法比较直接；心里有个大目标，但差点力气去实现。当有个较大的项目在眼前时，记得多团队协作，团队共享利益。",
+        "en": "You pursue measurable results with strong goal orientation and direct methods. Though ambitious, you may lack the energy to achieve major objectives. Prioritize teamwork and shared benefits for large projects.",
+        "ja": "測定可能な結果を明確な目標意識と直接的な方法で追求します。大きな目標があっても実現するエネルギーが不足しがちです。大規模プロジェクトではチームワークと利益共有を優先しましょう。",
+        "ko": "측정 가능한 결과를 명확한 목표 의식과 직접적인 방법으로 추구합니다. 큰 목표가 있어도 실현할 에너지가 부족할 수 있습니다. 대형 프로젝트에선 팀워크와 이익 공유를 우선시하세요."
+      },
+      "content_low": {
+        "zh-Hant": "身上有點仙氣，要相信不那麼操心也是一種福氣。可以多學習一些宗教、哲學類智慧。少說話，多關注自己內心的成長。",
+        "zh-Hans": "身上有点仙气，要相信不那么操心也是一种福气。可以多学习一些宗教、哲学类智慧。少说话，多关注自己内心的成长。",
+        "en": "Your mystical aura suggests that less worry brings peace. Study religious or philosophical wisdom. Focus inward through quiet contemplation.",
+        "ja": "神秘的なオーラは心配を減らすことが平穏をもたらすことを示唆しています。宗教や哲学の知恵を学び、静かな内省で内面に集中しましょう。",
+        "ko": "신비로운 기운은 걱정을 줄이는 것이 평화를 가져온다는 것을 시사합니다. 종교나 철학적 지혜를 배우고, 조용한 성찰로 내면에 집중하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "火",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你是靈動的精靈，是團隊中商機的發現者，對機會敏感，能靈活應變處理難題，有時有過於情緒化的問題，也會太多沉浸於想象。",
+        "zh-Hans": "你是灵动的精灵，是团队中商机的发现者，对机会敏感，能灵活应变处理难题，有时有过于情绪化的问题，也会太多沉浸于想象。",
+        "en": "A perceptive spirit, you excel at identifying business opportunities and adapting to challenges, though may become overly emotional or absorbed in imagination.",
+        "ja": "鋭い感覚でビジネスチャンスを発見し課題に適応しますが、感情的になりすぎたり空想に没頭しがちです。",
+        "ko": "예리한 감각으로 비즈니스 기회를 발견하고 도전에 적응하지만, 감정적이 되거나 상상에 몰두할 수 있습니다."
+      },
+      "content_low": {
+        "zh-Hant": "有時候對他人情緒感知不是太敏感，鈍感力也是一種福氣。可以讓自己更舒服一點，和朋友聊天，春天的時候出去走走。",
+        "zh-Hans": "有时候对他人情绪感知不是太敏感，钝感力也是一种福气。可以让自己更舒服一点，和朋友聊天，春天的时候出去走走。",
+        "en": "Insensitivity to others' emotions can be advantageous. Relax through social interactions and seasonal activities.",
+        "ja": "他人の感情への鈍感さは有利に働きます。社会的交流や季節のアクティビティでリラックスしましょう。",
+        "ko": "타인의 감정에 둔감한 것은 이점이 될 수 있습니다. 사회적 교류나 계절별 활동으로 편안해지세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "火",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你常常謹慎小心，溫婉體貼，需要注意的是，有時候會把問題想得過於複雜，或者對外界環境過於悲觀，有時還有點記仇，和朋友也一直有距離，可能沒什麼真正的朋友。你的擔憂是你心的感受，不是這個世界本來的樣子。多看看其他朋友的角度，會有更多機會。",
+        "zh-Hans": "你常常谨慎小心，温婉体贴，需要注意的是，有时候会把问题想得过于复杂，或者对外界环境过于悲观，有时还有点记仇，和朋友也一直有距离，可能没什么真正的朋友。你的担忧是你心的感受，不是这个世界本来的样子。多看看其他朋友的角度，会有更多机会。",
+        "en": "Cautious and considerate, you may overcomplicate issues or view the world negatively. Holding grudges creates distance—true friendships are rare. Recognize that fears are perceptions, and embracing others' viewpoints unlocks opportunities.",
+        "ja": "慎重で思いやりがありますが、問題を複雑化したり世界を否定的に見がちです。恨みは距離を生み、真の友情は稀です。恐れは認識であることを理解し、他者の視点を受け入れることで機会が広がります。",
+        "ko": "조심스럽고 배려심이 있지만, 문제를 복잡하게 만들거나 세상을 부정적으로 볼 수 있습니다. 원한은 거리를 만들고 진정한 우정은 드뭅니다. 두려움은 인식임을 이해하고 타인의 시각을 받아들이면 기회가 열립니다."
+      },
+      "content_low": {
+        "zh-Hant": "天生挺樂觀，也總能逢凶化吉。但是有時候風險意識較弱，會帶來一些沒必要的麻煩。",
+        "zh-Hans": "天生挺乐观，也总能逢凶化吉。但是有时候风险意识较弱，会带来一些没必要的麻烦。",
+        "en": "Naturally optimistic and resilient, yet weak risk awareness may lead to avoidable complications.",
+        "ja": "生来の楽観主義者で困難を乗り越えますが、リスク意識の低さが避けられる複雑化を招くことがあります。",
+        "ko": "타고난 낙관주의자로 어려움을 극복하지만, 위험意識이 약해 피할 수 있는 복잡화를 초래할 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "火",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你身上有靈動的力量，通常是團隊中的擔當者、粘合劑，不怕苦累的付出者；朋友多，也通常能為你帶來很好的支持。",
+        "zh-Hans": "你身上有灵动的力量，通常是团队中的担当者、粘合剂，不怕苦累的付出者；朋友多，也通常能为你带来很好的支持。",
+        "en": "You radiate dynamic energy as the responsible leader and cohesive force in teams, tirelessly contributing. Your numerous friends provide steadfast support.",
+        "ja": "チームの責任者や結束役として活発なエネルギーを放ち、友人からは揺るぎないサポートを得られます。",
+        "ko": "팀의 책임자이자 결속력 있는 존재로 활기찬 에너지를 발산하며, 수많은 친구로부터 확고한 지원을 받습니다."
+      },
+      "content_low": {
+        "zh-Hant": "你需要朋友，但是很少有人能真正走進你的內心。你對事情的關注度大於對人的關注，自己也有點缺乏信心，但不輕易展示出來。嘗試去勇敢在團隊中承擔事務，比如一些公益組織裡當個志願者。也可以多關注打扮自己，讓自己的內心裡開心起來。",
+        "zh-Hans": "你需要朋友，但是很少有人能真正走进你的内心。你对事情的关注度大于对人的关注，自己也有点缺乏信心，但不轻易展示出来。尝试去勇敢在团队中承担事务，比如一些公益组织里当个志愿者。也可以多关注打扮自己，让自己的内心里开心起来。",
+        "en": "Though desiring friends, few truly connect with you. Task-oriented focus masks inner insecurities. Take bold roles in teams, such as volunteering, and enhance self-care to nurture confidence.",
+        "ja": "友人を欲していますが、真のつながりは稀です。課題中心の姿勢が内面の不安を隠します。ボランティアなどで大胆な役割を引き受け、自信を育む自己ケアを心がけましょう。",
+        "ko": "친구를 원하지만, 진정한 연결은 드뭅니다. 과제 중심의 자세가 내면의 불안을 숨깁니다. 자원봉사 등에서 대담한 역할을 맡고, 자신감을 키우는 자기 관리를 하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "火",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你很敏銳，又有很好的擔當能力，較少與人爭論短長，但是內心自有主張。",
+        "zh-Hans": "你很敏锐，又有很好的担当能力，较少与人争论短长，但是内心自有主张。",
+        "en": "Perceptive and responsible, you avoid petty conflicts but hold firm convictions internally.",
+        "ja": "洞察力があり責任感が強く、つまらない争いを避けますが、内心では確固たる信念を持っています。",
+        "ko": "통찰력이 있고 책임감이 강해 하찮은 다툼을 피하지만, 내면엔 확고한 신념이 있습니다."
+      },
+      "content_low": {
+        "zh-Hant": "看書學習有點困難，有時候也過於隨性。可以試試每天、每週做好規劃，結束了再來對計劃。長久養成這個習慣。",
+        "zh-Hans": "看书学习有点困难，有时候也过于随性。可以试试每天、每周做好规划，结束了再来对计划。长久养成这个习惯。",
+        "en": "Struggling with structured learning? Implement consistent daily/weekly planning and reviews to build discipline.",
+        "ja": "体系的な学習に苦戦中ですか？一貫した日次・週次の計画と振り返りで規律を築きましょう。",
+        "ko": "체계적인 학습에 어려움을 겪고 있나요? 꾸준한 일일/주간 계획과 검토로 규율을 키우세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "火",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，執行力較強，勤勞付出。",
+        "zh-Hans": "你追求可量化的成果，执行力较强，勤劳付出。",
+        "en": "You pursue measurable outcomes with strong execution and diligent effort.",
+        "ja": "測定可能な成果を追求し、実行力があり勤勉です。",
+        "ko": "측정 가능한 결과를 추구하며 실행력이 강하고 부지런합니다."
+      },
+      "content_low": {
+        "zh-Hant": "多思少動，注意所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "多思少动，注意所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "Overthinking without action creates barriers. Address mental blocks hindering progress.",
+        "ja": "行動を伴わない過剰な思考は障害を生みます。進捗を阻む思考の壁に対処しましょう。",
+        "ko": "행동 없이 과도하게 생각하는 것은 장벽을 만듭니다. 진전을 방해하는 사고의 벽을 다루세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "火",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你有擔當，又有靈活處理問題的能力。是團隊中商機的發現者，對機會敏感。情緒容易大起大落。",
+        "zh-Hans": "你有担当，又有灵活处理问题的能力。是团队中商机的发现者，对机会敏感。情绪容易大起大落。",
+        "en": "Responsible and adaptable, you identify business opportunities but experience significant emotional volatility.",
+        "ja": "責任感と適応力がありビジネスチャンスを発見しますが、感情の起伏が激しいです。",
+        "ko": "책임감 있고 적응력이 뛰어나 비즈니스 기회를 발견하지만 감정 기복이 큽니다."
+      },
+      "content_low": {
+        "zh-Hant": "思維比較直接，試試和人溝通的時候，換到對方的角度。",
+        "zh-Hans": "思维比较直接，试试和人沟通的时候，换到对方的角度。",
+        "en": "Your linear thinking may need adjustment. Practice perspective-taking in communication.",
+        "ja": "直線的な思考を調整する必要があります。コミュニケーションで相手の視点を取り入れてみましょう。",
+        "ko": "직선적인 사고를 조정해야 합니다. 소통 시 상대방의 시각을 수용해 보세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "火",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你是紀律的守護者，遵守規則，又能利用好規則；因為能關注到別人不會注意的細節，所以學習能力很強，並且學習得比較有深度；對朋友很有篩選。",
+        "zh-Hans": "你是纪律的守护者，遵守规则，又能利用好规则；因为能关注到别人不会注意的细节，所以学习能力很强，并且学习得比较有深度；对朋友很有筛选。",
+        "en": "A guardian of discipline, you master systems through meticulous attention to detail. Selective in friendships, your deep learning capabilities are unmatched.",
+        "ja": "規律の守護者として細部への注目でシステムを習得します。友情は厳選され、深い学習能力は比類ありません。",
+        "ko": "규율의 수호자로서 세부 사항에 대한 주의로 시스템을 숙달합니다. 우정은 엄선되며, 깊은 학습 능력은 비할 데 없습니다."
+      },
+      "content_low": {
+        "zh-Hant": "風險意識較差，朋友帶給你一些損失。",
+        "zh-Hans": "风险意识较差，朋友带给你一些损失。",
+        "en": "Weak risk awareness may result in losses through friendships.",
+        "ja": "リスク意識の低さが友人関係を通じた損失につながることがあります。",
+        "ko": "위험意識이 약해 우정을 통한 손실을 초래할 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "火",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你通常是團隊中的擔當者，不怕苦累的付出者；有時也過於固執，不喜歡聽取意見。或者聽了也還是按自己的想法做。堅信人力定勝天，不撞南牆不回頭。",
+        "zh-Hans": "你通常是团队中的担当者，不怕苦累的付出者；有时也过于固执，不喜欢听取意见。或者听了也还是按自己的想法做。坚信人力定胜天，不撞南墙不回头。",
+        "en": "The tireless contributor in teams, your stubbornness may disregard others' input. Unwavering in believing that effort conquers fate, you persist relentlessly.",
+        "ja": "チームの疲れ知らずの貢献者ですが、頑固さが他人の意見を無視させます。努力が運命を克服するとの信念でひたむきに続けます。",
+        "ko": "팀의 지치지 않는 기여자이지만, 고집이 타인의 의견을 무시하게 할 수 있습니다. 노력이 운명을 극복한다는 믿음으로 끈질기게 나아갑니다."
+      },
+      "content_low": {
+        "zh-Hant": "在別人看不見的地方，自己會覺得有點沒自信。",
+        "zh-Hans": "在别人看不见的地方，自己会觉得有点没自信。",
+        "en": "In private moments, self-doubt may emerge.",
+        "ja": "他人の目に触れないところでは自信喪失を感じることがあります。",
+        "ko": "타인이 보지 않는 곳에서 자신감 상실을 느낄 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "火",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "信守傳統的價值觀，講邏輯，思考問題會比較理性。很難被說服，經常因為他人不符合自己的認可的邏輯或者規則而苦惱。想得多，做得少。記住，所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "信守传统的价值观，讲逻辑，思考问题会比较理性。很难被说服，经常因为他人不符合自己的认可的逻辑或者规则而苦恼。想得多，做得少。记住，所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "You uphold traditional values and logical reasoning, resisting conflicting viewpoints. Overthinking hinders action—break through mental barriers to progress.",
+        "ja": "伝統的価値観と論理的思考を守り、相反する視点に抵抗します。考えすぎが行動を妨げます—進歩のため心の壁を打ち破りましょう。",
+        "ko": "전통적 가치관과 논리적 사고를 지키며 상충하는 시각에 저항합니다. 과도한 생각이 행동을 방해합니다—진보를 위해 마음의 벽을 극복하세요."
+      },
+      "content_low": {
+        "zh-Hant": "不是很擅長分析拆解一些複雜的項目。看書也有些困難。這時候可以求助於朋友。",
+        "zh-Hans": "不是很擅长分析拆解一些复杂的项目。看书也有些困难。这时候可以求助于朋友。",
+        "en": "Struggling with complex analysis or studying? Seek friends' expertise to overcome challenges.",
+        "ja": "複雑な分析や学習に苦戦中ですか？友人の専門知識を活用して課題を乗り越えましょう。",
+        "ko": "복잡한 분석이나 학습에 어려움을 겪고 있나요? 친구의 전문 지식을 활용해 도전을 극복하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "土",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，目標感較強，方法比較直接；心裡有個大目標，但差點力氣去實現。當有個較大的項目在眼前時，記得多團隊協作，團隊共享利益。",
+        "zh-Hans": "你追求可量化的成果，目标感较强，方法比较直接；心里有个大目标，但差点力气去实现。当有个较大的项目在眼前时，记得多团队协作，团队共享利益。",
+        "en": "You pursue measurable outcomes with strong goal orientation and direct approaches. Though ambitious, you may lack the momentum to achieve major objectives. Emphasize teamwork and shared benefits for large-scale projects.",
+        "ja": "測定可能な成果を明確な目標意識と直接的なアプローチで追求します。大きな目標があっても実現する勢いが不足しがちです。大規模プロジェクトではチームワークと共有利益を重視しましょう。",
+        "ko": "측정 가능한 결과를 명확한 목표 의식과 직접적인 접근으로 추구합니다. 큰 목표가 있어도 실현할 탄력이 부족할 수 있습니다. 대규모 프로젝트에선 팀워크와 공유 이익을 중시하세요."
+      },
+      "content_low": {
+        "zh-Hant": "身上有點仙氣，要相信不那麼操心也是一種福氣。可以多學習一些宗教、哲學類智慧。少說話，多關注自己內心的成長。",
+        "zh-Hans": "身上有点仙气，要相信不那么操心也是一种福气。可以多学习一些宗教、哲学类智慧。少说话，多关注自己内心的成长。",
+        "en": "Your mystical aura suggests that reducing worries brings peace. Explore religious or philosophical wisdom. Cultivate inner growth through mindful reflection.",
+        "ja": "神秘的なオーラは心配を減らすことが平穏をもたらすことを示唆しています。宗教や哲学の知恵を探求し、内省を通じて内面の成長を育みましょう。",
+        "ko": "신비로운 기운은 걱정을 줄이는 것이 평화를 가져온다는 것을 시사합니다. 종교나 철학적 지혜를 탐구하고, 성찰을 통해 내면 성장을 키우세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "土",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你是靈動的精靈，是團隊中商機的發現者，對機會敏感，能靈活應變處理難題，有時有過於情緒化的問題，也會太多沉浸於想象。",
+        "zh-Hans": "你是灵动的精灵，是团队中商机的发现者，对机会敏感，能灵活应变处理难题，有时有过于情绪化的问题，也会太多沉浸于想象。",
+        "en": "A perceptive spirit, you excel at identifying business opportunities and adapting to challenges, though may become overly emotional or lost in imagination.",
+        "ja": "鋭い感覚でビジネスチャンスを発見し課題に適応しますが、感情的になりすぎたり空想にふけりがちです。",
+        "ko": "예리한 감각으로 비즈니스 기회를 발견하고 도전에 적응하지만, 감정적이 되거나 상상에 빠질 수 있습니다."
+      },
+      "content_low": {
+        "zh-Hant": "有時候對他人情緒感知不是太敏感，鈍感力也是一種福氣。可以讓自己更舒服一點，和朋友聊天，春天的時候出去走走。",
+        "zh-Hans": "有时候对他人情绪感知不是太敏感，钝感力也是一种福气。可以让自己更舒服一点，和朋友聊天，春天的时候出去走走。",
+        "en": "Insensitivity to others' emotions can be beneficial. Relax through social interactions and seasonal outings.",
+        "ja": "他人の感情への鈍感さは有益です。社会的交流や季節の外出でリラックスしましょう。",
+        "ko": "타인의 감정에 둔감한 것은 이점이 될 수 있습니다. 사회적 교류나 계절별 외출로 편안해지세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "土",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你常常謹慎小心，溫婉體貼，需要注意的是，有時候會把問題想得過於複雜，或者對外界環境過於悲觀，有時還有點記仇，和朋友也一直有距離，可能沒什麼真正的朋友。你的擔憂是你心的感受，不是這個世界本來的樣子。多看看其他朋友的角度，會有更多機會。",
+        "zh-Hans": "你常常谨慎小心，温婉体贴，需要注意的是，有时候会把问题想得过于复杂，或者对外界环境过于悲观，有时还有点记仇，和朋友也一直有距离，可能没什么真正的朋友。你的担忧是你心的感受，不是这个世界本来的样子。多看看其他朋友的角度，会有更多机会。",
+        "en": "Cautious and gentle, you may overcomplicate issues or view the world pessimistically. Holding grudges creates distance—true friendships are rare. Recognize that fears are perceptions, and embracing others' perspectives unlocks opportunities.",
+        "ja": "慎重で優しいですが、問題を複雑化したり世界を悲観的に見がちです。恨みは距離を生み、真の友情は稀です。恐れは認識であることを理解し、他者の視点を受け入れることで機会が広がります。",
+        "ko": "조심스럽고 상냥하지만, 문제를 복잡하게 만들거나 세상을 비관적으로 볼 수 있습니다. 원한은 거리를 만들고 진정한 우정은 드뭅니다. 두려움은 인식임을 이해하고 타인의 시각을 받아들이면 기회가 열립니다."
+      },
+      "content_low": {
+        "zh-Hant": "天生挺樂觀，也總能逢凶化吉。但是有時候風險意識較弱，會帶來一些沒必要的麻煩。",
+        "zh-Hans": "天生挺乐观，也总能逢凶化吉。但是有时候风险意识较弱，会带来一些没必要的麻烦。",
+        "en": "Naturally optimistic and resilient, yet weak risk awareness may invite avoidable complications.",
+        "ja": "生来の楽観主義者で困難を乗り越えますが、リスク意識の低さが避けられる複雑化を招くことがあります。",
+        "ko": "타고난 낙관주의자로 어려움을 극복하지만, 위험意識이 약해 피할 수 있는 복잡화를 초대할 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "土",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你身上有靈動的力量，通常是團隊中的擔當者、粘合劑，不怕苦累的付出者；朋友多，也通常能為你帶來很好的支持。",
+        "zh-Hans": "你身上有灵动的力量，通常是团队中的担当者、粘合剂，不怕苦累的付出者；朋友多，也通常能为你带来很好的支持。",
+        "en": "You radiate dynamic energy as the responsible leader and cohesive force in teams, tirelessly contributing. Your numerous friends provide steadfast support.",
+        "ja": "チームの責任者や結束役として活発なエネルギーを放ち、友人からは揺るぎないサポートを得られます。",
+        "ko": "팀의 책임자이자 결속력 있는 존재로 활기찬 에너지를 발산하며, 수많은 친구로부터 확고한 지원을 받습니다."
+      },
+      "content_low": {
+        "zh-Hant": "你需要朋友，但是很少有人能真正走進你的內心。你對事情的關注度大於對人的關注，自己也有點缺乏信心，但不輕易展示出來。嘗試去勇敢在團隊中承擔事務，比如一些公益組織裡當個志願者。也可以多關注打扮自己，讓自己的內心裡開心起來。",
+        "zh-Hans": "你需要朋友，但是很少有人能真正走进你的内心。你对事情的关注度大于对人的关注，自己也有点缺乏信心，但不轻易展示出来。尝试去勇敢在团队中承担事务，比如一些公益组织里当个志愿者。也可以多关注打扮自己，让自己的内心里开心起来。",
+        "en": "Though desiring friends, few truly connect with you. Task-focused priorities mask inner insecurities. Take bold roles in teams, such as volunteering, and enhance self-care to build confidence.",
+        "ja": "友人を欲していますが、真のつながりは稀です。課題中心の姿勢が内面の不安を隠します。ボランティアなどで大胆な役割を引き受け、自信を築く自己ケアを心がけましょう。",
+        "ko": "친구를 원하지만, 진정한 연결은 드뭅니다. 과제 중심의 자세가 내면의 불안을 숨깁니다. 자원봉사 등에서 대담한 역할을 맡고, 자신감을 키우는 자기 관리를 하세요."
+      }
+    },
+    {
+      "pattern": ["煞重局", "伤官局", "财旺局"],
+      "day_dry": "土",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "你很敏銳，又有很好的擔當能力，較少與人爭論短長，但是內心自有主張。",
+        "zh-Hans": "你很敏锐，又有很好的担当能力，较少与人争论短长，但是内心自有主张。",
+        "en": "Perceptive and responsible, you avoid petty conflicts but maintain strong internal convictions.",
+        "ja": "洞察力があり責任感が強く、つまらない争いを避けますが、確固たる信念を持っています。",
+        "ko": "통찰력이 있고 책임감이 강해 하찮은 다툼을 피하지만, 확고한 신념을 유지합니다."
+      },
+      "content_low": {
+        "zh-Hant": "看書學習有點困難，有時候也過於隨性。可以試試每天、每週做好規劃，結束了再來對計劃。長久養成這個習慣。",
+        "zh-Hans": "看书学习有点困难，有时候也过于随性。可以试试每天、每周做好规划，结束了再来对计划。长久养成这个习惯。",
+        "en": "Struggling with structured learning? Implement consistent daily/weekly planning and reviews to build discipline.",
+        "ja": "体系的な学習に苦戦中ですか？一貫した日次・週次の計画と振り返りで規律を築きましょう。",
+        "ko": "체계적인 학습에 어려움을 겪고 있나요? 꾸준한 일일/주간 계획과 검토로 규율을 키우세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "土",
+      "element": "水",
+      "content_high": {
+        "zh-Hant": "你追求可量化的成果，執行力較強，勤勞付出。",
+        "zh-Hans": "你追求可量化的成果，执行力较强，勤劳付出。",
+        "en": "You pursue measurable results with strong execution and diligent effort.",
+        "ja": "測定可能な成果を追求し、実行力があり勤勉です。",
+        "ko": "측정 가능한 결과를 추구하며 실행력이 강하고 부지런합니다."
+      },
+      "content_low": {
+        "zh-Hant": "多思少動，注意所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "多思少动，注意所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "Overthinking without action creates obstacles. Address mental blocks hindering progress.",
+        "ja": "行動を伴わない過剰な思考は障害を生みます。進捗を阻む思考の壁に対処しましょう。",
+        "ko": "행동 없이 과도하게 생각하는 것은 장애물을 만듭니다. 진전을 방해하는 사고의 벽을 다루세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "土",
+      "element": "金",
+      "content_high": {
+        "zh-Hant": "你有擔當，又有靈活處理問題的能力。是團隊中商機的發現者，對機會敏感。情緒容易大起大落。",
+        "zh-Hans": "你有担当，又有灵活处理问题的能力。是团队中商机的发现者，对机会敏感。情绪容易大起大落。",
+        "en": "Responsible and adaptable, you identify business opportunities but experience significant emotional fluctuations.",
+        "ja": "責任感と適応力がありビジネスチャンスを発見しますが、感情の起伏が激しいです。",
+        "ko": "책임감 있고 적응력이 뛰어나 비즈니스 기회를 발견하지만 감정 기복이 큽니다."
+      },
+      "content_low": {
+        "zh-Hant": "思維比較直接，試試和人溝通的時候，換到對方的角度。",
+        "zh-Hans": "思维比较直接，试试和人沟通的时候，换到对方的角度。",
+        "en": "Your linear thinking may need adjustment. Practice perspective-taking in communication.",
+        "ja": "直線的な思考を調整する必要があります。コミュニケーションで相手の視点を取り入れてみましょう。",
+        "ko": "직선적인 사고를 조정해야 합니다. 소통 시 상대방의 시각을 수용해 보세요."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "土",
+      "element": "木",
+      "content_high": {
+        "zh-Hant": "你是紀律的守護者，遵守規則，又能利用好規則；因為能關注到別人不會注意的細節，所以學習能力很強，並且學習得比較有深度；對朋友很有篩選。",
+        "zh-Hans": "你是纪律的守护者，遵守规则，又能利用好规则；因为能关注到别人不会注意的细节，所以学习能力很强，并且学习得比较有深度；对朋友很有筛选。",
+        "en": "A guardian of discipline, you master systems through meticulous attention to detail. Selective in friendships, your deep learning capabilities are unmatched.",
+        "ja": "規律の守護者として細部への注目でシステムを習得します。友情は厳選され、深い学習能力は比類ありません。",
+        "ko": "규율의 수호자로서 세부 사항에 대한 주의로 시스템을 숙달합니다. 우정은 엄선되며, 깊은 학습 능력은 비할 데 없습니다."
+      },
+      "content_low": {
+        "zh-Hant": "風險意識較差，朋友帶給你一些損失。",
+        "zh-Hans": "风险意识较差，朋友带给你一些损失。",
+        "en": "Weak risk awareness may lead to losses through friendships.",
+        "ja": "リスク意識の低さが友人関係を通じた損失につながることがあります。",
+        "ko": "위험意識이 약해 우정을 통한 손실을 초래할 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "土",
+      "element": "土",
+      "content_high": {
+        "zh-Hant": "你通常是團隊中的擔當者，不怕苦累的付出者；有時也過於固執，不喜歡聽取意見。或者聽了也還是按自己的想法做。堅信人力定勝天，不撞南牆不回頭。",
+        "zh-Hans": "你通常是团队中的担当者，不怕苦累的付出者；有时也过于固执，不喜欢听取意见。或者听了也还是按自己的想法做。坚信人力定胜天，不撞南墙不回头。",
+        "en": "The tireless contributor in teams, your stubbornness may disregard others' input. Unwavering in believing that effort conquers fate, you persist relentlessly.",
+        "ja": "チームの疲れ知らずの貢献者ですが、頑固さが他人の意見を無視させます。努力が運命を克服するとの信念でひたむきに続けます。",
+        "ko": "팀의 지치지 않는 기여자이지만, 고집이 타인의 의견을 무시하게 할 수 있습니다. 노력이 운명을 극복한다는 믿음으로 끈질기게 나아갑니다."
+      },
+      "content_low": {
+        "zh-Hant": "在別人看不見的地方，自己會覺得有點沒自信。",
+        "zh-Hans": "在别人看不见的地方，自己会觉得有点没自信。",
+        "en": "In private moments, self-doubt may surface.",
+        "ja": "他人の目に触れないところでは自信喪失を感じることがあります。",
+        "ko": "타인이 보지 않는 곳에서 자신감 상실을 느낄 수 있습니다."
+      }
+    },
+    {
+      "pattern": ["印重局", "命旺局"],
+      "day_dry": "土",
+      "element": "火",
+      "content_high": {
+        "zh-Hant": "信守傳統的價值觀，講邏輯，思考問題會比較理性。很難被說服，經常因為他人不符合自己的認可的邏輯或者規則而苦惱。想得多，做得少。記住，所有讓你現在不能行動起來的思考，都是障礙。",
+        "zh-Hans": "信守传统的价值观，讲逻辑，思考问题会比较理性。很难被说服，经常因为他人不符合自己的认可的逻辑或者规则而苦恼。想得多，做得少。记住，所有让你现在不能行动起来的思考，都是障碍。",
+        "en": "You uphold traditional values and logical reasoning, resisting conflicting viewpoints. Overthinking hinders action—break through mental barriers to progress.",
+        "ja": "伝統的価値観と論理的思考を守り、相反する視点に抵抗します。考えすぎが行動を妨げます—進歩のため心の壁を打ち破りましょう。",
+        "ko": "전통적 가치관과 논리적 사고를 지키며 상충하는 시각에 저항합니다. 과도한 생각이 행동을 방해합니다—진보를 위해 마음의 벽을 극복하세요."
+      },
+      "content_low": {
+        "zh-Hant": "不是很擅長分析拆解一些複雜的項目。看書也有些困難。這時候可以求助於朋友。",
+        "zh-Hans": "不是很擅长分析拆解一些复杂的项目。看书也有些困难。这时候可以求助于朋友。",
+        "en": "Struggling with complex analysis or studying? Seek friends' expertise to overcome challenges.",
+        "ja": "複雑な分析や学習に苦戦中ですか？友人の専門知識を活用して課題を乗り越えましょう。",
+        "ko": "복잡한 분석이나 학습에 어려움을 겪고 있나요? 친구의 전문 지식을 활용해 도전을 극복하세요."
+      }
+    }
+  ]
+}

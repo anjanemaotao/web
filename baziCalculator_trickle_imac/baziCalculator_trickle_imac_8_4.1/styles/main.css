@@ -1,0 +1,821 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Serif:wght@400;500;600;700&display=swap');
+@import 'themes.css';
+@import 'animations.css';
+@import 'navbar.css';
+@import 'banner.css';
+@import 'birth-info.css';
+@import 'tabs.css';
+@import 'section-icons.css';
+@import 'dayun.css';
+
+:root {
+    --primary-bg: #f5f0e8;
+    --secondary-bg: #e8d8c3;
+    --primary-text: #4a3933;
+    --secondary-text: #7d6b5d;
+    --accent-color: #c8553d;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: #d3b88c;
+    --input-bg: #fff;
+    --input-border: #d3b88c;
+    --button-bg: #c8553d;
+    --button-hover: #a83e29;
+    --button-text: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    
+    /* 五行颜色变量 */
+    --wood-color: #2e7d32; /* 更深的绿色 */
+    --fire-color: #d32f2f; /* 更鲜艳的红色 */
+    --earth-color: #e65100; /* 更深的橙色/土色 */
+    --metal-color: #bf9b30; /* 金黄色 */
+    --water-color: #1565c0; /* 更深的蓝色 */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Serif TC', 'Noto Serif JP', 'Noto Serif KR', 'Noto Serif', serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    background-image: url('https://images.unsplash.com/photo-1582112483872-3d82c8bf012a?q=80&w=1920&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex: 1;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: var(--secondary-text);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--primary-text);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: 0.25rem;
+    background-color: var(--input-bg);
+    color: var(--primary-text);
+    transition: border-color var(--transition-speed);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+}
+
+.btn:hover {
+    background-color: var(--button-hover);
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(200, 85, 61, 0.3);
+}
+
+.result-section {
+    margin-top: 2rem;
+}
+
+.result-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.bazi-display {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.bazi-pillar {
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.pillar-name {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    margin-bottom: 0.5rem;
+}
+
+.pillar-content {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.analysis-item {
+    margin-bottom: 1.5rem;
+}
+
+.analysis-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-text);
+    margin-bottom: 0.5rem;
+}
+
+.analysis-content {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    line-height: 1.6;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* 五行角标样式 */
+.wuxing-notation {
+    font-size: 0.6em;
+    position: relative;
+    top: -0.6em;
+    margin-left: 0.1em;
+    color: inherit;
+    font-weight: normal;
+}
+
+/* 阴阳属性标签样式 */
+.yinyang-tag {
+    display: block;
+    font-size: 0.6em;
+    color: var(--secondary-text);
+    margin-top: -0.2em;
+    font-weight: normal;
+}
+
+/* 藏干显示样式 */
+.cang-gan-display {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color: var(--secondary-text);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.cang-gan-label {
+    font-weight: normal;
+    margin-right: 0.25rem;
+}
+
+.cang-gan-item {
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.2rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    font-weight: 500;
+}
+
+.gan-zhi-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* 五行颜色样式 - 更新为更鲜明的颜色 */
+.wuxing-wood {
+    color: var(--wood-color); /* 木 - 绿色 */
+}
+
+.wuxing-fire {
+    color: var(--fire-color); /* 火 - 红色 */
+}
+
+.wuxing-earth {
+    color: var(--earth-color); /* 土 - 黄色/橙色 */
+}
+
+.wuxing-metal {
+    color: var(--metal-color); /* 金 - 金黄色 */
+}
+
+.wuxing-water {
+    color: var(--water-color); /* 水 - 蓝色 */
+}
+
+/* 柱子底部边框颜色 */
+.pillar-year {
+    border-bottom: 3px solid var(--wood-color);
+}
+
+.pillar-month {
+    border-bottom: 3px solid var(--fire-color);
+}
+
+.pillar-day {
+    border-bottom: 3px solid var(--earth-color);
+}
+
+.pillar-hour {
+    border-bottom: 3px solid var(--water-color);
+}
+
+.pattern-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.pattern-shangguan {
+    background-color: rgba(76, 175, 80, 0.2);
+    border: 1px solid #4caf50;
+    color: #2e7d32;
+}
+
+.pattern-yinzhong {
+    background-color: rgba(33, 150, 243, 0.2);
+    border: 1px solid #2196f3;
+    color: #1565c0;
+}
+
+.pattern-bijian {
+    background-color: rgba(156, 39, 176, 0.2);
+    border: 1px solid #9c27b0;
+    color: #7b1fa2;
+}
+
+.pattern-shazhong {
+    background-color: rgba(244, 67, 54, 0.2);
+    border: 1px solid #f44336;
+    color: #c62828;
+}
+
+.pattern-caiwang {
+    background-color: rgba(255, 152, 0, 0.2);
+    border: 1px solid #ff9800;
+    color: #ef6c00;
+}
+
+.celestial-symbol {
+    font-size: 1.2em;
+    margin-right: 0.25rem;
+}
+
+.shier-gong-state {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-right: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.state-strong {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #2e7d32;
+}
+
+.state-weak {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #c62828;
+}
+
+.state-neutral {
+    background-color: rgba(33, 150, 243, 0.2);
+    color: #1565c0;
+}
+
+/* 流年大运样式 */
+.liuyun-timeline {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.liuyun-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    height: 100%;
+    width: 2px;
+    background-color: var(--card-border);
+}
+
+.liuyun-item {
+    position: relative;
+    padding-left: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.liuyun-item::before {
+    content: '';
+    position: absolute;
+    left: 1.75rem;
+    top: 0.75rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+}
+
+.liuyun-year {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(200, 85, 61, 0.1);
+    border-radius: 0.25rem;
+}
+
+.liuyun-content {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.liuyun-ganzhi {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.liuyun-description {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.liuyun-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.liuyun-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.liuyun-card-year {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.liuyun-card-ganzhi {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+/* 日历类型选择器样式 */
+.calendar-type-selector {
+    margin-bottom: 1.5rem;
+}
+
+.calendar-type-btn {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: var(--card-bg);
+    border: none;
+    transition: all var(--transition-speed);
+    color: var(--primary-text); /* 确保文字颜色始终为黑色 */
+    cursor: pointer;
+}
+
+.calendar-type-btn.active {
+    background-color: var(--accent-color);
+    color: #000; /* 选中状态也保持黑色文字 */
+    font-weight: 600;
+}
+
+.calendar-type-btn:hover:not(.active) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 联系我们横幅样式 */
+.contact-banner {
+    margin: 2rem 0;
+    background: linear-gradient(135deg, #8a5e3b, #c8553d);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+    animation: glow 3s infinite alternate;
+}
+
+.contact-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://app.trickle.so/storage/public/images/usr_0d1d18c478000001/ffcc695a-155a-4f52-acc6-c8113853a5de.png') no-repeat center center;
+    background-size: cover;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.contact-banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-banner-text {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+}
+
+.contact-banner-icon {
+    margin: 0 0.75rem;
+    animation: pulse 2s infinite;
+}
+
+.contact-banner-button {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--accent-color);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.contact-banner-button:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-banner-button i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.contact-banner-button:hover i {
+    transform: translateX(3px);
+}
+
+/* 出生信息显示样式 */
+.birth-info-section {
+    margin-top: 2rem;
+    border-top: 1px dashed var(--card-border);
+    padding-top: 1.5rem;
+}
+
+.info-card {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.info-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.info-card-content {
+    font-size: 0.95rem;
+}
+
+.info-item {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+
+.info-label {
+    font-weight: 500;
+    color: var(--primary-text);
+}
+
+.info-value {
+    color: var(--secondary-text);
+}
+
+.info-divider {
+    margin: 0 0.5rem;
+    color: var(--card-border);
+}
+
+/* 格局分析板块样式 */
+.pattern-section {
+    margin-bottom: 1.5rem;
+}
+
+.pattern-section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.pattern-section-line {
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent-color), transparent);
+    margin-left: 0.75rem;
+}
+
+.pattern-badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.pattern-badge-enhanced {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pattern-badge-enhanced:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pattern-orientation {
+    position: relative;
+    padding-left: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.pattern-main-name {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pattern-highlight {
+    position: relative;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: rgba(200, 85, 61, 0.1);
+    box-shadow: 0 2px 4px rgba(200, 85, 61, 0.2);
+}
+
+.pattern-nickname {
+    margin-left: 0.5rem;
+    opacity: 0.8;
+}
+
+.pattern-description {
+    line-height: 1.7;
+    color: var(--primary-text);
+    padding-left: 0.5rem;
+    border-left: 3px solid rgba(200, 85, 61, 0.3);
+}
+
+/* 格局详细分析样式 */
+.pattern-details {
+    margin-top: 1rem;
+    border-left: 3px solid var(--accent-color);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pattern-details:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pattern-details-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    position: relative;
+}
+
+.pattern-details-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(200, 85, 61, 0.1);
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.pattern-details-line {
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent-color), transparent);
+    margin-left: 0.75rem;
+}
+
+.pattern-details h5 {
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.pattern-feature-card,
+.pattern-advantages-card,
+.pattern-disadvantages-card {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.2s;
+}
+
+.pattern-feature-card:hover,
+.pattern-advantages-card:hover,
+.pattern-disadvantages-card:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.pattern-feature-text {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.pattern-advantages-text,
+.pattern-disadvantages-text {
+    line-height: 1.7;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 命主分析样式 */
+.mingzhu-header {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.5rem;
+}
+
+.mingzhu-symbol {
+    font-size: 2rem;
+    font-weight: bold;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mingzhu-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--secondary-text);
+}
+
+.mingzhu-interpretation {
+    color: var(--secondary-text);
+    line-height: 1.8;
+}
+
+.mingzhu-details {
+    border-left: 3px solid var(--accent-color);
+    padding-left: 1rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .bazi-display {
+        flex-direction: column;
+    }
+    
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .liuyun-timeline::before {
+        left: 1.5rem;
+    }
+    
+    .liuyun-item {
+        padding-left: 2.5rem;
+    }
+    
+    .liuyun-item::before {
+        left: 1.25rem;
+    }
+    
+    .contact-banner-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .contact-banner-text {
+        font-size: 1.1rem;
+        justify-content: center;
+    }
+}

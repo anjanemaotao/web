@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KE3R05MDHF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KE3R05MDHF');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="八字格局推算應用 - 根據陰曆出生日期推算八字、格局、五行、十神和十二宮">
+    <meta name="keywords" content="八字,生辰八字,命理,五行,十神,十二宮,格局,占卜,風水,算命">
+    <meta property="og:title" content="墨衍字八字 - 八字格局推算應用">
+    <meta property="og:description" content="根據陰曆出生日期推算八字、格局、五行、十神和十二宮">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="墨衍字八字 - 八字格局推算應用">
+    <meta name="twitter:description" content="根據陰曆出生日期推算八字、格局、五行、十神和十二宮">
+    <title>墨衍字八字 - 八字格局推算應用</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.6.2/lunar.min.js"></script>
+    <link href="styles/main.css" rel="stylesheet">
+    <link href="styles/animations.css" rel="stylesheet">
+    <link href="styles/themes.css" rel="stylesheet">
+    <link href="styles/navbar.css" rel="stylesheet">
+    <link href="styles/banner.css" rel="stylesheet">
+    <link href="styles/birth-info.css" rel="stylesheet">
+    <link href="styles/section-icons.css" rel="stylesheet">
+    <link href="styles/tabs.css" rel="stylesheet">
+<!-- 百度统计代码 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?898eaf5b91bdc55eb5a1095b625738cb";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>  
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Utility Scripts -->
+    <script type="text/babel" src="utils/i18n.js"></script>
+    <script type="text/babel" src="utils/baziCalculator.js"></script>
+    <script type="text/babel" src="utils/patternAnalyzer.js"></script>
+    <script type="text/babel" src="utils/wuxingAnalyzer.js"></script>
+    <script type="text/babel" src="utils/shishenAnalyzer.js"></script>
+    <script type="text/babel" src="utils/shierGongAnalyzer.js"></script>
+    
+    <!-- Components -->
+    <script type="text/babel" src="components/Navbar.js"></script>
+    <script type="text/babel" src="components/Banner.js"></script>
+    <script type="text/babel" src="components/ContactBanner.js"></script>
+    <script type="text/babel" src="components/LanguageSwitcher.js"></script>
+    <script type="text/babel" src="components/DatePicker.js"></script>
+    <script type="text/babel" src="components/BaziDisplay.js"></script>
+    <script type="text/babel" src="components/BirthInfo.js"></script>
+    <script type="text/babel" src="components/PatternAnalysis.js"></script>
+    <script type="text/babel" src="components/MingzhuAnalysis.js"></script>
+    <script type="text/babel" src="components/WuxingAnalysis.js"></script>
+    <script type="text/babel" src="components/ShishenAnalysis.js"></script>
+    <script type="text/babel" src="components/ShierGongAnalysis.js"></script>
+    <script type="text/babel" src="components/DaYunAnalysis.js"></script>
+    <script type="text/babel" src="components/LiuNianAnalysis.js"></script>
+    <script type="text/babel" src="components/TabsContainer.js"></script>
+    <script type="text/babel" src="components/ResultCard.js"></script>
+    
+    <!-- Main App -->
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>

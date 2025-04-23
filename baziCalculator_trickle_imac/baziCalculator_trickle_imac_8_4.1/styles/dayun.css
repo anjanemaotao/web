@@ -1,0 +1,84 @@
+.dayun-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.dayun-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.dayun-item.current-dayun {
+  background-color: #e8f4ff;
+  border-color: #90caf9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dayun-year {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2196f3;
+  margin-bottom: 0.5rem;
+}
+
+.dayun-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dayun-ganzhi {
+  font-size: 1rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dayun-ganzhi span {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.dayun-description {
+  color: #555;
+  line-height: 1.5;
+}
+
+.dayun-description p {
+  margin: 0.25rem 0;
+}
+
+/* 五行颜色样式 */
+.wuxing-wood {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.wuxing-fire {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+.wuxing-earth {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.wuxing-metal {
+  background-color: #fafafa;
+  color: #616161;
+}
+
+.wuxing-water {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
